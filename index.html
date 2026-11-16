@@ -147,6 +147,29 @@
     @media(max-width:720px){.container{width:calc(100% - 34px)}.header-inner{height:67px}.brand{font-size:16px}.header-label{display:none}.nav{gap:14px}.nav a{font-size:10px}.hero{padding:55px 0 65px}.hero-grid{grid-template-columns:1fr;gap:35px}.hero h1{font-size:clamp(70px,20vw,115px);margin:24px 0}.hero-side{height:400px;max-width:510px;width:100%;margin:auto}.hero-composition{inset:0 8% 0 8%}.hero-sticker{right:4%;width:120px;height:120px;font-size:18px}.section{padding:67px 0 80px}.section-head{align-items:start;flex-direction:column;gap:17px;margin-bottom:28px}.section-head h2{font-size:clamp(54px,12vw,78px)}.project-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 12px}.project-meta h3{font-size:14px}.videos-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}.three-grid{grid-template-columns:1fr 1fr;gap:18px 12px}.footer-inner{align-items:start;flex-direction:column}.gallery{gap:10px}.modal-content{padding-top:42px}.modal-heading{font-size:clamp(48px,12vw,75px)}}
     @media(max-width:430px){.nav{gap:10px}.nav a{font-size:9px}.hero-side{height:310px}.hero-form{border-width:22px}.hero h1{font-size:74px}.project-grid{gap:20px 10px}.art .art-word{font-size:23px}.project-meta p{font-size:11px}.videos-grid{gap:22px 10px}.three-grid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.gallery-card,.gallery-card:first-child{grid-column:auto;aspect-ratio:1.05}.footer-line{flex-direction:column}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+    /* New floral hero: put portfolio_header_flower.webp next to index.html. */
+    .hero.hero-floral{
+      min-height:clamp(420px,36vw,620px);
+      display:flex;align-items:center;overflow:hidden;
+      background-color:#f6dce2;
+      background-image:linear-gradient(90deg,rgba(252,235,240,.31) 0%,rgba(252,235,240,.15) 39%,rgba(252,235,240,0) 62%),url("portfolio_header_flower.webp");
+      background-repeat:no-repeat;
+      background-size:cover;
+      background-position:center center;
+      padding:64px 0 80px;
+    }
+    .hero.hero-floral .hero-grid{display:block}
+    .hero.hero-floral .hero-copy{max-width:600px}
+    .hero.hero-floral h1{font-family:Arial,Helvetica,sans-serif;font-size:clamp(72px,7.4vw,122px);font-weight:300;letter-spacing:-.07em;line-height:.97;margin:20px 0 21px}
+    .hero.hero-floral .hero-desc{color:#382a2e;font-size:20px;line-height:1.45;font-weight:400;max-width:none}
+    .hero.hero-floral .hero-bottom{margin-top:30px}
+    @media(max-width:720px){
+      .hero.hero-floral{min-height:540px;padding:60px 0;background-position:61% center;background-image:linear-gradient(90deg,rgba(251,231,236,.84),rgba(251,231,236,.28) 75%),url("portfolio_header_flower.webp")}
+      .hero.hero-floral h1{font-size:clamp(58px,12vw,86px)}
+      .hero.hero-floral .hero-desc{font-size:15px;max-width:320px}
+      .hero.hero-floral .hero-copy{max-width:100%}
+      .hero.hero-floral .hero-bottom{gap:14px;flex-wrap:wrap}
+    }
   </style>
 </head>
 <body>
@@ -162,20 +185,16 @@
     </div>
   </header>
   <main id="top">
-    <section class="hero" aria-label="Вступ">
+    <section class="hero hero-floral" aria-label="Головна сторінка портфоліо">
       <div class="container hero-grid">
-        <div>
+        <div class="hero-copy">
           <div class="eyebrow">Visual artist • Creative portfolio</div>
-          <h1>Make<br>it <em>feel.</em></h1>
-          <p class="hero-desc">Графічний дизайн, історії, створені за допомогою AI, та 3D-візуалізації. Один простір для робіт, у яких ідеї стають візуальними образами.</p>
+          <h1>Creative<br>Portfolio</h1>
+          <p class="hero-desc">Graphic Design · AI Video · Blender 3D</p>
           <div class="hero-bottom">
             <a class="oval-link" href="#graphic">Дивитись <span aria-hidden="true">↗</span></a>
             <span class="eyebrow">Scroll to explore ↓</span>
           </div>
-        </div>
-        <div class="hero-side" aria-hidden="true">
-          <div class="hero-composition"><span class="hero-num">CREATIVE WORLD / 01</span><div class="hero-form"></div></div>
-          <div class="hero-sticker">Made<br>with love ♥</div>
         </div>
       </div>
     </section>
