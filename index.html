@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f7dddd">
   <meta name="description" content="Креативне портфоліо: графічний дизайн, AI-відео та 3D-рендери у Blender.">
-  <title>Creative Portfolio — Graphic / AI / 3D</title>
+  <title>Creative Portfolio — Оксана Ковальчук</title>
   <style>
     :root { --pink:#f7dddd; --pink-light:#fceeee; --pink-dark:#c27788; --white:#fffdfa; --ink:#282224; --muted:#73666a; --border:rgba(48,28,34,.13); --radius:6px; --max:1420px; }
     *{box-sizing:border-box}
@@ -163,10 +163,15 @@
     .hero.hero-floral h1{font-family:Arial,Helvetica,sans-serif;font-size:clamp(72px,7.4vw,122px);font-weight:300;letter-spacing:-.07em;line-height:.97;margin:20px 0 21px}
     .hero.hero-floral .hero-desc{color:#382a2e;font-size:20px;line-height:1.45;font-weight:400;max-width:none}
     .hero.hero-floral .hero-bottom{margin-top:30px}
+    .site-header .header-inner{display:grid;grid-template-columns:1fr auto 1fr}
+    .site-header .nav{grid-column:2;justify-content:center}
+    .site-header .header-label{grid-column:3;justify-self:end}
+    .hero.hero-floral .hero-name{display:block;font-size:clamp(29px,3.1vw,46px);font-weight:400;letter-spacing:-.04em;line-height:1.15;margin-top:13px}
     @media(max-width:720px){
       .hero.hero-floral{min-height:540px;padding:60px 0;background-position:61% center;background-image:linear-gradient(90deg,rgba(251,231,236,.84),rgba(251,231,236,.28) 75%),url("portfolio_header_flower.webp")}
       .hero.hero-floral h1{font-size:clamp(58px,12vw,86px)}
       .hero.hero-floral .hero-desc{font-size:15px;max-width:320px}
+      .hero.hero-floral .hero-name{font-size:clamp(26px,5.7vw,39px);margin-top:12px}
       .hero.hero-floral .hero-copy{max-width:100%}
       .hero.hero-floral .hero-bottom{gap:14px;flex-wrap:wrap}
     }
@@ -175,7 +180,7 @@
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="На головну">YOUR<span>★</span>PORTFOLIO</a>
+      
       <nav class="nav" aria-label="Основна навігація">
         <a href="#graphic">Графіка</a>
         <a href="#ai">AI-відео</a>
@@ -189,11 +194,11 @@
       <div class="container hero-grid">
         <div class="hero-copy">
           <div class="eyebrow">Visual artist • Creative portfolio</div>
-          <h1>Creative<br>Portfolio</h1>
+          <h1>Creative<br>Portfolio<span class="hero-name">Оксана Ковальчук</span></h1>
           <p class="hero-desc">Graphic Design · AI Video · Blender 3D</p>
           <div class="hero-bottom">
             <a class="oval-link" href="#graphic">Дивитись <span aria-hidden="true">↗</span></a>
-            <span class="eyebrow">Scroll to explore ↓</span>
+            
           </div>
         </div>
       </div>
