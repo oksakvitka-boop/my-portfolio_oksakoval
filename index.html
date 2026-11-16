@@ -48,8 +48,8 @@
     .section-head h2 em{font-weight:400;color:#b76d80}
     .section-summary{max-width:310px;line-height:1.65;color:var(--muted);font-size:14px;margin:0 0 5px}
     .section-index{display:inline-block;margin-left:16px;vertical-align:top;font:12px Arial,sans-serif;letter-spacing:0}
-    .project-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 20px}
-    .project-card{padding:0;display:block;width:100%;text-align:left;border:0;background:none;color:inherit}
+    .project-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 20px;align-items:start}
+    .project-card{padding:0;display:block;width:100%;text-align:left;border:0;background:none;color:inherit;align-self:start}
     .art-wrap{overflow:hidden;position:relative;aspect-ratio:1/1.05;background:#f2c6cc}
     .project-card .art,.three-card .art,.gallery-card .art{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
     .project-card .art-wrap{aspect-ratio:1}
@@ -263,7 +263,7 @@
     /* ЗМІНА ВМІСТУ: у майбутньому тут будуть реальні роботи та посилання на файли.
        Усі поточні композиції — оригінальні CSS-макети, жодних запозичених зображень. */
     const projects=[
-      {name:"Машинна вишивка",category:"",label:"",type:"photo",image:"assets/machine-embroidery.webp",hideCaption:true,gallery:["assets/embroidery-gallery-01.webp","assets/embroidery-gallery-02.webp","assets/embroidery-gallery-03.webp","assets/embroidery-gallery-04.webp","assets/embroidery-gallery-05.webp"]},
+      {name:"Машинна вишивка",category:"Розробка дизайнів",label:"",type:"photo",image:"assets/machine-embroidery.webp",hideCaption:false,gallery:["assets/embroidery-gallery-01.webp","assets/embroidery-gallery-02.webp","assets/embroidery-gallery-03.webp","assets/embroidery-gallery-04.webp","assets/embroidery-gallery-05.webp"]},
       {name:"Fine jewelry",category:"Ювелірна реклама",label:"Precious",type:"ring",a:"#ecc9c8",b:"#fce6cf",text:"#7d4b59"},
       {name:"Floral campaign",category:"Креативна кампанія",label:"Bloom",type:"flower",a:"#e9a4b5",b:"#ffdce2",text:"#762f4e"},
       {name:"Skin rituals",category:"Косметичний брендинг",label:"Soft Skin",type:"tube",a:"#f5ddca",b:"#dbb8bd",text:"#785d56"},
