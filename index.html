@@ -52,6 +52,10 @@
     .project-card{padding:0;display:block;width:100%;text-align:left;border:0;background:none;color:inherit}
     .art-wrap{overflow:hidden;position:relative;aspect-ratio:1/1.05;background:#f2c6cc}
     .project-card .art,.three-card .art,.gallery-card .art{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+    .project-card .art-wrap{aspect-ratio:1}
+    .art.photo-art{background:#fff}
+    .art.photo-art:before{display:none}
+    .art.photo-art img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
     .project-card:hover .art,.three-card:hover .art{transform:scale(1.055)}
     .project-meta{display:flex;justify-content:space-between;align-items:start;gap:15px;margin-top:15px}
     .project-meta h3{font-size:17px;font-weight:500;letter-spacing:-.025em;margin:0 0 5px}
@@ -126,6 +130,10 @@
     .gallery{display:grid;grid-template-columns:1fr 1fr;gap:20px}
     .gallery-card{aspect-ratio:1.12;overflow:hidden}
     .gallery-card:first-child{grid-column:1/-1;aspect-ratio:1.85}
+    .photo-gallery{grid-template-columns:1fr;max-width:800px;margin:0 auto}
+    .photo-gallery .gallery-card:first-child{grid-column:auto;aspect-ratio:1}
+    .photo-gallery img{width:100%;height:100%;object-fit:cover;display:block}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .gallery-card .art-word{font-size:clamp(30px,5vw,76px)}
     .gallery-card:first-child .art .object{scale:1.12}
     .modal-tag{display:inline-flex;border:1px solid var(--border);border-radius:99px;padding:9px 16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
@@ -249,7 +257,7 @@
     /* ЗМІНА ВМІСТУ: у майбутньому тут будуть реальні роботи та посилання на файли.
        Усі поточні композиції — оригінальні CSS-макети, жодних запозичених зображень. */
     const projects=[
-      {name:"Botanical care",category:"Б'юті та wellness",label:"Pure Nature",type:"bottle",a:"#d9e0cd",b:"#f8d5d6",text:"#38544b"},
+      {name:"Машинна вишивка",category:"",label:"",type:"photo",image:"assets/machine-embroidery.webp",hideCaption:true},
       {name:"Fine jewelry",category:"Ювелірна реклама",label:"Precious",type:"ring",a:"#ecc9c8",b:"#fce6cf",text:"#7d4b59"},
       {name:"Floral campaign",category:"Креативна кампанія",label:"Bloom",type:"flower",a:"#e9a4b5",b:"#ffdce2",text:"#762f4e"},
       {name:"Skin rituals",category:"Косметичний брендинг",label:"Soft Skin",type:"tube",a:"#f5ddca",b:"#dbb8bd",text:"#785d56"},
@@ -275,13 +283,14 @@
     ];
     function esc(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;")}
     function artHTML(item,variant=0){
+      if(item.image)return '<div class="art photo-art"><img src="'+esc(item.image)+'" alt="" loading="lazy" decoding="async"></div>';
       return '<div class="art '+item.type+' variant-'+variant+'" style="--a:'+item.a+';--b:'+item.b+';--txt:'+item.text+'"><div class="shine"></div><div class="art-word">'+esc(item.label)+'</div><div class="object"></div><div class="art-sub">A creative visual study / '+String(variant+1).padStart(2,'0')+'</div></div>';
     }
     const projectGrid=document.getElementById("projectGrid"),videoGrid=document.getElementById("videoGrid"),threeGrid=document.getElementById("threeGrid");
     projects.forEach((item,i)=>{
       const b=document.createElement("button");b.className="project-card reveal";b.type="button";
       b.setAttribute("aria-label","Відкрити проєкт "+item.name);
-      b.innerHTML='<div class="art-wrap">'+artHTML(item)+'</div><div class="project-meta"><div><h3>'+esc(item.name)+'</h3><p>'+esc(item.category)+'</p></div><span class="arrow" aria-hidden="true">↗</span></div>';
+      b.innerHTML='<div class="art-wrap">'+artHTML(item)+'</div>'+(item.hideCaption?'':'<div class="project-meta"><div><h3>'+esc(item.name)+'</h3><p>'+esc(item.category)+'</p></div><span class="arrow" aria-hidden="true">↗</span></div>');
       b.addEventListener("click",()=>openProject(item,"graphic",i));projectGrid.appendChild(b);
     });
     function videoArtHTML(item,i){
@@ -307,6 +316,7 @@
       if(previousFocus&&previousFocus.focus)previousFocus.focus();
     }
     function openProject(item,group,i){
+      if(item.image){modalContent.innerHTML='<h2 class="sr-only" id="modalTitle">'+esc(item.name)+'</h2><div class="gallery photo-gallery"><div class="gallery-card"><img src="'+esc(item.image)+'" alt="Приклад машинної вишивки" decoding="async"></div></div>';showModal();return;}
       let gallery="";
       for(let j=0;j<4;j++){gallery+='<div class="gallery-card">'+artHTML(item,j)+'</div>'}
       modalContent.innerHTML='<div class="eyebrow">'+(group==="graphic"?"GRAPHIC DESIGN":"BLENDER 3D")+' / CASE '+String(i+1).padStart(2,"0")+'</div><h2 class="modal-heading" id="modalTitle">'+esc(item.name)+'</h2><p class="modal-lead">Повна тематична добірка в стилі Behance. Тут буде опис проєкту, головний банер, серія адаптацій, деталі дизайну та інші матеріали з цього кейсу.</p><span class="modal-tag">'+esc(item.category)+'</span><div class="gallery" style="margin-top:30px">'+gallery+'</div><p class="modal-footer">DEMO PROJECT — ці зображення створені засобами CSS лише для демонстрації макета. Додамо твої роботи й реальні описи.</p>';
