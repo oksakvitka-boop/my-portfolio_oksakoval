@@ -122,6 +122,10 @@
     .modal-bar{position:sticky;z-index:8;top:0;background:#fffdfbee;backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
     .modal-bar-in{height:75px;display:flex;align-items:center;justify-content:space-between;gap:15px}
     .close-btn{border:1px solid #dfc9ce;background:none;width:42px;height:42px;border-radius:50%;font-size:23px;display:grid;place-items:center}
+    .modal-back{display:inline-flex;align-items:center;gap:9px;background:var(--pink);color:var(--ink);border:1px solid #e4b9c0;border-radius:100px;padding:12px 19px;font-size:13px;font-weight:700;transition:background .2s,transform .2s}
+    .modal-back:hover{background:#efbcc8;transform:translateX(-2px)}
+    .modal-back .back-arrow{font-size:23px;line-height:0.75}
+    @media(max-width:430px){.modal-back{font-size:12px;padding:11px 13px}.modal-bar-in{height:66px}}
     .modal-content{padding-top:62px;padding-bottom:100px}
     .modal-heading{font:400 clamp(53px,8vw,105px)/.98 Georgia,serif;letter-spacing:-.07em;margin:16px 0 24px}
     .modal-lead{font-size:15px;color:var(--muted);max-width:650px;line-height:1.75;margin:0 0 38px}
@@ -221,7 +225,7 @@
   </footer>
 
   <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
-    <div class="modal-bar"><div class="container modal-bar-in"><span class="eyebrow">PORTFOLIO / PROJECT VIEW</span><button id="closeModal" class="close-btn" type="button" aria-label="Закрити">×</button></div></div>
+    <div class="modal-bar"><div class="container modal-bar-in"><button id="backToPortfolio" class="modal-back" type="button"><span class="back-arrow" aria-hidden="true">←</span> Назад до портфоліо</button><button id="closeModal" class="close-btn" type="button" aria-label="Закрити">×</button></div></div>
     <div class="container modal-content" id="modalContent"></div>
   </div>
 
@@ -277,10 +281,10 @@
       b.innerHTML='<div class="art-wrap">'+artHTML(item)+'</div><div class="project-meta"><div><h3>'+esc(item.name)+'</h3><p>'+esc(item.category)+'</p></div><span class="arrow" aria-hidden="true">↗</span></div>';
       b.addEventListener("click",()=>openProject(item,"blender",i));threeGrid.appendChild(b);
     });
-    const modal=document.getElementById("modal"),modalContent=document.getElementById("modalContent"),closeBtn=document.getElementById("closeModal");
+    const modal=document.getElementById("modal"),modalContent=document.getElementById("modalContent"),closeBtn=document.getElementById("closeModal"),backBtn=document.getElementById("backToPortfolio");
     let previousFocus=null;
     function showModal(){
-      previousFocus=document.activeElement;modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";modal.scrollTop=0;closeBtn.focus();
+      previousFocus=document.activeElement;modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";modal.scrollTop=0;backBtn.focus();
     }
     function closeModal(){
       modal.setAttribute("aria-hidden","true");document.body.style.overflow="";modalContent.innerHTML="";
@@ -297,6 +301,7 @@
       showModal();
     }
     closeBtn.addEventListener("click",closeModal);
+    backBtn.addEventListener("click",closeModal);
     document.addEventListener("keydown",(e)=>{if(e.key==="Escape"&&modal.getAttribute("aria-hidden")==="false")closeModal();if(e.key==="Tab"&&modal.getAttribute("aria-hidden")==="false"){const focusables=[...modal.querySelectorAll('button,a,[tabindex]:not([tabindex="-1"])')].filter(el=>!el.disabled);if(focusables.length){const first=focusables[0],last=focusables[focusables.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}}});
     const observer=("IntersectionObserver" in window)?new IntersectionObserver((entries)=>{entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add("show");observer.unobserve(en.target)}})},{threshold:.06}):null;
     document.querySelectorAll(".reveal").forEach(el=>observer?observer.observe(el):el.classList.add("show"));
