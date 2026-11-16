@@ -111,12 +111,6 @@
     .three-card{border:0;padding:0;background:none;color:inherit;text-align:left}
     .three-card .art-wrap{aspect-ratio:1.23}
     .three-card .art-word{font-size:clamp(20px,3vw,38px)}
-    .footer{background:var(--white);padding:68px 0 38px}
-    .footer-inner{display:flex;align-items:end;justify-content:space-between;gap:25px}
-    .footer-big{font:400 clamp(54px,8vw,112px)/.95 Georgia,serif;letter-spacing:-.075em}
-    .footer-big em{color:var(--pink-dark)}
-    .footer-copy{font-size:12px;line-height:1.7;color:var(--muted);max-width:300px}
-    .footer-line{margin-top:60px;border-top:1px solid var(--border);padding-top:18px;display:flex;justify-content:space-between;gap:15px;font-size:11px;color:var(--muted)}
     .modal{position:fixed;z-index:50;inset:0;display:none;background:#fffdfb;overflow-y:auto}
     .modal[aria-hidden="false"]{display:block}
     .modal-bar{position:sticky;z-index:8;top:0;background:#fffdfbee;backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
@@ -144,8 +138,8 @@
     .reveal{opacity:0;transform:translateY(20px);transition:opacity .65s,transform .65s}
     .reveal.show{opacity:1;transform:none}
     @media(max-width:1100px){.container{width:min(calc(100% - 56px),var(--max))}.project-grid{grid-template-columns:repeat(3,1fr)}.videos-grid{grid-template-columns:repeat(3,1fr)}.hero-side{height:465px}}
-    @media(max-width:720px){.container{width:calc(100% - 34px)}.header-inner{height:67px}.brand{font-size:16px}.header-label{display:none}.nav{gap:14px}.nav a{font-size:10px}.hero{padding:55px 0 65px}.hero-grid{grid-template-columns:1fr;gap:35px}.hero h1{font-size:clamp(70px,20vw,115px);margin:24px 0}.hero-side{height:400px;max-width:510px;width:100%;margin:auto}.hero-composition{inset:0 8% 0 8%}.hero-sticker{right:4%;width:120px;height:120px;font-size:18px}.section{padding:67px 0 80px}.section-head{align-items:start;flex-direction:column;gap:17px;margin-bottom:28px}.section-head h2{font-size:clamp(54px,12vw,78px)}.project-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 12px}.project-meta h3{font-size:14px}.videos-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}.three-grid{grid-template-columns:1fr 1fr;gap:18px 12px}.footer-inner{align-items:start;flex-direction:column}.gallery{gap:10px}.modal-content{padding-top:42px}.modal-heading{font-size:clamp(48px,12vw,75px)}}
-    @media(max-width:430px){.nav{gap:10px}.nav a{font-size:9px}.hero-side{height:310px}.hero-form{border-width:22px}.hero h1{font-size:74px}.project-grid{gap:20px 10px}.art .art-word{font-size:23px}.project-meta p{font-size:11px}.videos-grid{gap:22px 10px}.three-grid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.gallery-card,.gallery-card:first-child{grid-column:auto;aspect-ratio:1.05}.footer-line{flex-direction:column}}
+    @media(max-width:720px){.container{width:calc(100% - 34px)}.header-inner{height:67px}.brand{font-size:16px}.header-label{display:none}.nav{gap:14px}.nav a{font-size:10px}.hero{padding:55px 0 65px}.hero-grid{grid-template-columns:1fr;gap:35px}.hero h1{font-size:clamp(70px,20vw,115px);margin:24px 0}.hero-side{height:400px;max-width:510px;width:100%;margin:auto}.hero-composition{inset:0 8% 0 8%}.hero-sticker{right:4%;width:120px;height:120px;font-size:18px}.section{padding:67px 0 80px}.section-head{align-items:start;flex-direction:column;gap:17px;margin-bottom:28px}.section-head h2{font-size:clamp(54px,12vw,78px)}.project-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 12px}.project-meta h3{font-size:14px}.videos-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}.three-grid{grid-template-columns:1fr 1fr;gap:18px 12px}.gallery{gap:10px}.modal-content{padding-top:42px}.modal-heading{font-size:clamp(48px,12vw,75px)}}
+    @media(max-width:430px){.nav{gap:10px}.nav a{font-size:9px}.hero-side{height:310px}.hero-form{border-width:22px}.hero h1{font-size:74px}.project-grid{gap:20px 10px}.art .art-word{font-size:23px}.project-meta p{font-size:11px}.videos-grid{gap:22px 10px}.three-grid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.gallery-card,.gallery-card:first-child{grid-column:auto;aspect-ratio:1.05}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
     /* New floral hero: put portfolio_header_flower.webp next to index.html. */
     .hero.hero-floral{
