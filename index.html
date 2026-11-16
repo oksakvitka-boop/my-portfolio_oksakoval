@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7dddd">
+  <meta name="description" content="Креативне портфоліо: графічний дизайн, AI-відео та 3D-рендери у Blender.">
+  <title>Creative Portfolio — Graphic / AI / 3D</title>
+  <style>
+    :root { --pink:#f7dddd; --pink-light:#fceeee; --pink-dark:#c27788; --white:#fffdfa; --ink:#282224; --muted:#73666a; --border:rgba(48,28,34,.13); --radius:6px; --max:1420px; }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{margin:0;color:var(--ink);background:var(--pink);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;cursor:pointer}
+    button:focus-visible,a:focus-visible{outline:3px solid var(--pink-dark);outline-offset:4px}
+    ::selection{background:#e9acb6}
+    .container{width:min(calc(100% - 100px),var(--max));margin:auto}
+    .eyebrow{font-size:11px;letter-spacing:.21em;font-weight:700;text-transform:uppercase}
+    .site-header{z-index:20;position:sticky;top:0;background:rgba(252,238,238,.91);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+    .header-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+    .brand{font-weight:800;font-size:19px;letter-spacing:-.065em;white-space:nowrap}
+    .brand span{color:#b76d80}
+    .nav{display:flex;align-items:center;gap:34px}
+    .nav a{font-size:12px;text-transform:uppercase;letter-spacing:.08em;transition:opacity .2s}
+    .nav a:hover{opacity:.55}
+    .header-label{font-size:10px;text-transform:uppercase;letter-spacing:.12em;border:1px solid var(--ink);border-radius:99px;padding:9px 13px}
+    .hero{padding:80px 0 92px;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1fr .9fr;align-items:center;gap:7vw}
+    .hero h1{font-family:Georgia, 'Times New Roman',serif;font-weight:400;font-size:clamp(76px,10vw,162px);line-height:.79;letter-spacing:-.09em;margin:27px 0 35px}
+    .hero h1 em{font-weight:400;font-style:italic;color:#ad6679}
+    .hero-desc{max-width:410px;font-size:16px;line-height:1.75;color:#594950}
+    .hero-bottom{display:flex;align-items:center;gap:35px;margin-top:38px}
+    .oval-link{width:122px;height:54px;border:1px solid var(--ink);border-radius:100px;display:inline-flex;align-items:center;justify-content:center;gap:12px;font-size:12px;transition:background .2s}
+    .oval-link:hover{background:#fff8f6}
+    .hero-side{position:relative;height:575px}
+    .hero-composition{position:absolute;inset:5% 0 5% 10%;border-radius:280px 280px 10px 10px;background:#ecc4cb;overflow:hidden}
+    .hero-composition::before{content:'';position:absolute;width:75%;aspect-ratio:1;border-radius:50%;left:13%;top:12%;background:radial-gradient(circle at 35% 30%,#fff8f8,#e69eb0 56%,#a34d71 85%,#efaebc);box-shadow:inset -28px -42px 65px #97486255,0 30px 80px #a14e6577}
+    .hero-composition::after{content:'';position:absolute;width:80%;height:21%;bottom:8%;left:10%;border-radius:50%;background:rgba(133,53,79,.19);filter:blur(23px)}
+    .hero-form{position:absolute;z-index:2;left:27%;top:23%;width:52%;aspect-ratio:1;border:37px solid #d995a8;border-radius:50%;transform:rotate(-26deg) skew(-8deg);box-shadow:inset 12px 15px 20px #fff8,19px 20px 20px #ad5c7777,-12px -12px 19px #fff8;border-top-color:#ffe1e6;border-right-color:#d78da2;border-bottom-color:#a64c73}
+    .hero-sticker{z-index:3;position:absolute;right:-17px;bottom:22px;width:150px;height:150px;background:#fff8f8;border-radius:50%;display:grid;place-content:center;text-align:center;transform:rotate(12deg);font:italic 23px Georgia,serif;box-shadow:0 12px 50px #a94d6e22}
+    .hero-num{position:absolute;top:28px;left:25px;z-index:4;color:#fff;font-size:11px;letter-spacing:.18em}
+    .section{padding:104px 0 116px}
+    .section-white{background:var(--white)}
+    .section-blush{background:var(--pink)}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:45px}
+    .section-head h2{font-family:Georgia,serif;font-weight:400;font-size:clamp(51px,6vw,94px);letter-spacing:-.075em;line-height:.95;margin:16px 0 0}
+    .section-head h2 em{font-weight:400;color:#b76d80}
+    .section-summary{max-width:310px;line-height:1.65;color:var(--muted);font-size:14px;margin:0 0 5px}
+    .section-index{display:inline-block;margin-left:16px;vertical-align:top;font:12px Arial,sans-serif;letter-spacing:0}
+    .project-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 20px}
+    .project-card{padding:0;display:block;width:100%;text-align:left;border:0;background:none;color:inherit}
+    .art-wrap{overflow:hidden;position:relative;aspect-ratio:1/1.05;background:#f2c6cc}
+    .project-card .art,.three-card .art,.gallery-card .art{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+    .project-card:hover .art,.three-card:hover .art{transform:scale(1.055)}
+    .project-meta{display:flex;justify-content:space-between;align-items:start;gap:15px;margin-top:15px}
+    .project-meta h3{font-size:17px;font-weight:500;letter-spacing:-.025em;margin:0 0 5px}
+    .project-meta p{font-size:12px;color:var(--muted);margin:0}
+    .arrow{font-size:22px;font-weight:300;line-height:1}
+    .art{height:100%;width:100%;position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;background:linear-gradient(140deg,var(--a),var(--b));}
+    .art:before{content:'';position:absolute;inset:-25%;background:radial-gradient(circle at 25% 20%,#ffffff88,transparent 30%),radial-gradient(circle at 80% 85%,#fff7,transparent 38%);mix-blend-mode:screen}
+    .art .art-word{position:absolute;z-index:4;top:10%;left:9%;right:9%;font:italic clamp(22px,3vw,36px) Georgia,serif;letter-spacing:-.04em;line-height:1;color:var(--txt,#4b2e39)}
+    .art .art-sub{position:absolute;bottom:8%;left:9%;z-index:4;font-size:9px;letter-spacing:.19em;text-transform:uppercase;color:var(--txt,#4b2e39)}
+    .art .shine{position:absolute;z-index:1;width:80%;height:85%;background:radial-gradient(ellipse,#fff9,transparent 65%);transform:rotate(-27deg)}
+    .art .object{position:relative;z-index:3}
+    .art .object::before,.art .object::after{content:'';position:absolute}
+    .art.bottle .object{width:28%;height:52%;margin-top:12%;border-radius:18% 18% 11% 11%;background:linear-gradient(90deg,#ffffff85 0%,#fff7 22%,#fffdfb 45%,#ecc3b8 74%,#fff6);box-shadow:14px 20px 24px #67425233,inset -8px 0 14px #c8848377}
+    .art.bottle .object::before{width:42%;height:17%;top:-16%;left:29%;border-radius:5px;background:linear-gradient(90deg,#9d605f,#efbbb3,#8c4b57)}
+    .art.bottle .object::after{width:96%;height:33%;top:35%;left:2%;background:#fcf6e9;border-radius:3px;box-shadow:0 0 2px #b48686}
+    .art.orb .object{width:58%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 32% 26%,#fff,#e7aac0 24%,#a24b78 64%,#612e57);box-shadow:25px 30px 38px #4b224855}
+    .art.orb .object::after{inset:14%;border:2px solid #fff7;border-radius:50%;filter:blur(1px)}
+    .art.flower .object{width:48%;aspect-ratio:1;background:radial-gradient(circle,#f9e399 0 14%,#cc627d 15% 22%,transparent 24%);filter:drop-shadow(15px 18px 14px #6b425344)}
+    .art.flower .object::before{inset:-36%;background:repeating-conic-gradient(from 8deg,#f4a8bd 0 16deg,#ef7798 17deg 29deg,#ffd0d9 30deg 38deg,transparent 39deg 45deg);border-radius:50%;z-index:-1;clip-path:circle(48%)}
+    .art.flower .object::after{height:130%;width:4%;left:50%;top:60%;background:#5f8865;transform:rotate(19deg);z-index:-2}
+    .art.ring .object{width:47%;aspect-ratio:1;border:25px solid transparent;border-radius:50%;background:linear-gradient(#e9c4ba,#d99f9e) padding-box,conic-gradient(#fff,#ac6f5a,#fff5d7,#956763,#fff) border-box;transform:rotateX(28deg) rotate(-24deg);box-shadow:15px 18px 22px #60352b33}
+    .art.ring .object::before{width:32%;aspect-ratio:1;top:-57%;left:32%;background:linear-gradient(135deg,#fff,#b9dfef,#fff,#b3a6c3);transform:rotate(45deg);box-shadow:0 8px 22px #675d7577}
+    .art.ring .object::after{width:51%;height:5px;top:-35%;left:23%;background:#fff}
+    .art.ribbon .object{width:60%;height:53%;border:31px solid #e78e9e;border-radius:44% 56% 42% 58%;transform:rotate(35deg);box-shadow:inset 12px 15px 12px #fff8,18px 20px 25px #a8546b55;border-top-color:#ffe4e8;border-bottom-color:#a74e70}
+    .art.tube .object{width:34%;height:54%;border-radius:11% 11% 24% 24%;background:linear-gradient(90deg,#d7b59c,#fff4e1 27%,#edd3bd 55%,#bf9c88);transform:rotate(13deg);box-shadow:16px 20px 20px #5b445244}
+    .art.tube .object::before{width:100%;height:9%;bottom:-5%;background:linear-gradient(90deg,#aa8674,#e0cab2,#98776a);border-radius:3px}
+    .art.tube .object::after{width:75%;height:1px;top:30%;left:12%;background:#a78375;box-shadow:0 12px #a78375}
+    .art.arch .object{height:67%;width:45%;border-radius:46% 46% 2% 2%;background:linear-gradient(105deg,#ffe8da,#e4a78e 58%,#9a6365);box-shadow:17px 19px 22px #74485344}
+    .art.arch .object::before{width:70%;height:70%;bottom:0;left:15%;border-radius:50% 50% 0 0;background:linear-gradient(90deg,#b9807d,#f7cdbe);box-shadow:inset 12px 0 18px #9a5e6766}
+    .art.arch .object::after{width:50%;aspect-ratio:1;top:20%;left:25%;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff,#a9a3bd 50%,#73617d)}
+    .art.can .object{height:50%;width:34%;border-radius:10% 10% 13% 13%;background:linear-gradient(90deg,#a9586c,#fff0e0 18%,#f2afb7 52%,#b86f7a 95%);box-shadow:17px 18px 22px #4e252f44}
+    .art.can .object::before{width:100%;height:9%;top:-3%;border-radius:50%;background:linear-gradient(#eee9e3,#b8a9a3)}
+    .art.can .object::after{width:100%;height:8%;bottom:-4%;border-radius:50%;background:#ccaaaa}
+    .art.variant-1 .object{transform:rotate(-17deg) scale(.94)}
+    .art.variant-2 .object{transform:translate(13%,-4%) rotate(13deg) scale(1.15)}
+    .art.variant-3 .object{transform:translate(-11%,6%) rotate(-9deg) scale(.82)}
+    .art.variant-1 .art-word{top:auto;bottom:18%}
+    .art.variant-2 .art-word{font-style:normal;text-transform:uppercase;font-size:27px;letter-spacing:-.06em}
+    .art.variant-3 .art-word{left:auto;right:8%;text-align:right}
+    .section-note{margin-top:30px;color:var(--muted);font-size:12px}
+    .videos-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:17px}
+    .video-card{border:0;padding:0;background:none;text-align:left;min-width:0;color:inherit}
+    .video-frame{position:relative;aspect-ratio:9/16;overflow:hidden;border-radius:3px;background:#b97d9f}
+    .video-art{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden;background:linear-gradient(165deg,var(--va),var(--vb))}
+    .video-art::before{content:'';width:115%;height:55%;border-radius:50%;position:absolute;top:7%;background:radial-gradient(circle at 42% 35%,#fff9,#e7c1df99 40%,transparent 70%);filter:blur(3px)}
+    .video-art .planet{position:absolute;top:22%;width:73%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 28% 26%,#fff9,var(--vc) 40%,#543b7c 95%);box-shadow:15px 25px 40px #47274766}
+    .video-art .horizon{position:absolute;bottom:-13%;width:180%;height:45%;border-radius:50% 50% 0 0;background:linear-gradient(0deg,var(--vd),#f5d8e2bb);transform:rotate(-12deg);box-shadow:0 -15px 44px #fffa}
+    .video-art .v-ornament{position:absolute;z-index:2;width:120%;aspect-ratio:1;border:1px solid #fff9;border-radius:50%;top:21%;left:-9%;transform:rotate(18deg) skew(30deg)}
+    .video-art .v-num{z-index:4;position:absolute;top:6%;left:8%;font-size:10px;letter-spacing:.2em;color:white}
+    .video-art .v-title{z-index:4;position:absolute;bottom:8%;left:9%;right:9%;font:italic clamp(20px,2.5vw,34px) Georgia,serif;line-height:1.03;color:#fff}
+    .play{position:absolute;z-index:5;top:48%;left:50%;transform:translate(-50%,-50%);width:51px;height:51px;border-radius:50%;background:#ffffffdf;display:grid;place-items:center;font-size:15px;transition:scale .25s}
+    .video-card:hover .play{scale:1.13}
+    .video-card .project-meta{margin-top:15px}
+    .video-card .project-meta h3{font-size:14px}
+    .format-pill{display:inline-block;margin-top:4px;color:#88626e;font-size:11px}
+    .three-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+    .three-card{border:0;padding:0;background:none;color:inherit;text-align:left}
+    .three-card .art-wrap{aspect-ratio:1.23}
+    .three-card .art-word{font-size:clamp(20px,3vw,38px)}
+    .footer{background:var(--white);padding:68px 0 38px}
+    .footer-inner{display:flex;align-items:end;justify-content:space-between;gap:25px}
+    .footer-big{font:400 clamp(54px,8vw,112px)/.95 Georgia,serif;letter-spacing:-.075em}
+    .footer-big em{color:var(--pink-dark)}
+    .footer-copy{font-size:12px;line-height:1.7;color:var(--muted);max-width:300px}
+    .footer-line{margin-top:60px;border-top:1px solid var(--border);padding-top:18px;display:flex;justify-content:space-between;gap:15px;font-size:11px;color:var(--muted)}
+    .modal{position:fixed;z-index:50;inset:0;display:none;background:#fffdfb;overflow-y:auto}
+    .modal[aria-hidden="false"]{display:block}
+    .modal-bar{position:sticky;z-index:8;top:0;background:#fffdfbee;backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+    .modal-bar-in{height:75px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+    .close-btn{border:1px solid #dfc9ce;background:none;width:42px;height:42px;border-radius:50%;font-size:23px;display:grid;place-items:center}
+    .modal-content{padding-top:62px;padding-bottom:100px}
+    .modal-heading{font:400 clamp(53px,8vw,105px)/.98 Georgia,serif;letter-spacing:-.07em;margin:16px 0 24px}
+    .modal-lead{font-size:15px;color:var(--muted);max-width:650px;line-height:1.75;margin:0 0 38px}
+    .gallery{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .gallery-card{aspect-ratio:1.12;overflow:hidden}
+    .gallery-card:first-child{grid-column:1/-1;aspect-ratio:1.85}
+    .gallery-card .art-word{font-size:clamp(30px,5vw,76px)}
+    .gallery-card:first-child .art .object{scale:1.12}
+    .modal-tag{display:inline-flex;border:1px solid var(--border);border-radius:99px;padding:9px 16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+    .modal-footer{border-top:1px solid var(--border);margin-top:34px;padding-top:26px;font-size:13px;color:var(--muted)}
+    .vertical-preview{max-width:390px;margin:0 auto}
+    .vertical-preview .video-frame{width:100%}
+    .video-placeholder-note{max-width:550px;text-align:center;margin:25px auto;color:var(--muted);line-height:1.7;font-size:14px}
+    .player{width:100%;aspect-ratio:9/16;background:#eee;display:none}
+    .demo-label{background:#fff5ef;border:1px solid #f0d4d3;border-radius:100px;padding:8px 13px;color:#8d6070;font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .65s,transform .65s}
+    .reveal.show{opacity:1;transform:none}
+    @media(max-width:1100px){.container{width:min(calc(100% - 56px),var(--max))}.project-grid{grid-template-columns:repeat(3,1fr)}.videos-grid{grid-template-columns:repeat(3,1fr)}.hero-side{height:465px}}
+    @media(max-width:720px){.container{width:calc(100% - 34px)}.header-inner{height:67px}.brand{font-size:16px}.header-label{display:none}.nav{gap:14px}.nav a{font-size:10px}.hero{padding:55px 0 65px}.hero-grid{grid-template-columns:1fr;gap:35px}.hero h1{font-size:clamp(70px,20vw,115px);margin:24px 0}.hero-side{height:400px;max-width:510px;width:100%;margin:auto}.hero-composition{inset:0 8% 0 8%}.hero-sticker{right:4%;width:120px;height:120px;font-size:18px}.section{padding:67px 0 80px}.section-head{align-items:start;flex-direction:column;gap:17px;margin-bottom:28px}.section-head h2{font-size:clamp(54px,12vw,78px)}.project-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 12px}.project-meta h3{font-size:14px}.videos-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}.three-grid{grid-template-columns:1fr 1fr;gap:18px 12px}.footer-inner{align-items:start;flex-direction:column}.gallery{gap:10px}.modal-content{padding-top:42px}.modal-heading{font-size:clamp(48px,12vw,75px)}}
+    @media(max-width:430px){.nav{gap:10px}.nav a{font-size:9px}.hero-side{height:310px}.hero-form{border-width:22px}.hero h1{font-size:74px}.project-grid{gap:20px 10px}.art .art-word{font-size:23px}.project-meta p{font-size:11px}.videos-grid{gap:22px 10px}.three-grid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.gallery-card,.gallery-card:first-child{grid-column:auto;aspect-ratio:1.05}.footer-line{flex-direction:column}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="На головну">YOUR<span>★</span>PORTFOLIO</a>
+      <nav class="nav" aria-label="Основна навігація">
+        <a href="#graphic">Графіка</a>
+        <a href="#ai">AI-відео</a>
+        <a href="#blender">Blender 3D</a>
+      </nav>
+      <span class="header-label">Selected works / 2026</span>
+    </div>
+  </header>
+  <main id="top">
+    <section class="hero" aria-label="Вступ">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Visual artist • Creative portfolio</div>
+          <h1>Make<br>it <em>feel.</em></h1>
+          <p class="hero-desc">Графічний дизайн, історії, створені за допомогою AI, та 3D-візуалізації. Один простір для робіт, у яких ідеї стають візуальними образами.</p>
+          <div class="hero-bottom">
+            <a class="oval-link" href="#graphic">Дивитись <span aria-hidden="true">↗</span></a>
+            <span class="eyebrow">Scroll to explore ↓</span>
+          </div>
+        </div>
+        <div class="hero-side" aria-hidden="true">
+          <div class="hero-composition"><span class="hero-num">CREATIVE WORLD / 01</span><div class="hero-form"></div></div>
+          <div class="hero-sticker">Made<br>with love ♥</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="graphic" class="section section-white">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><div class="eyebrow">01 / Selected projects</div><h2>Graphic <em>design.</em><span class="section-index">[ 08 ]</span></h2></div>
+          <p class="section-summary">Як на Behance: натисни на будь-який проєкт, щоб відкрити цілу тематичну добірку графічних робіт.</p>
+        </div>
+        <div id="projectGrid" class="project-grid"></div>
+        <p class="section-note">* Зараз у картках демонстраційні композиції. Замінимо їх твоїми банерами та реальними кейсами.</p>
+      </div>
+    </section>
+
+    <section id="ai" class="section section-blush">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><div class="eyebrow">02 / Vertical storytelling</div><h2>AI <em>video.</em><span class="section-index">[ 05 ]</span></h2></div>
+          <p class="section-summary">Твої AI-ролики у вертикальному форматі 9:16. Без обрізання під горизонтальні екрани: кожне відео показуємо в оригінальній пропорції.</p>
+        </div>
+        <div id="videoGrid" class="videos-grid"></div>
+        <p class="section-note">* Демонстраційні обкладинки: натискання відкриває картку. Коли додамо MP4 або посилання на відео, тут буде відтворення.</p>
+      </div>
+    </section>
+
+    <section id="blender" class="section section-white">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><div class="eyebrow">03 / Digital craftsmanship</div><h2>Blender <em>3D.</em><span class="section-index">[ 06 ]</span></h2></div>
+          <p class="section-summary">Предметна візуалізація, CGI, ювелірні рендери та 3D-експерименти. Тут можна показувати як фото, так і відео.</p>
+        </div>
+        <div id="threeGrid" class="three-grid"></div>
+        <p class="section-note">* Тимчасові візуальні приклади — не твої роботи. Пізніше підставимо справжні Blender-рендери.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div><div class="eyebrow">A little more magic</div><div class="footer-big">Let's <em>create.</em></div></div>
+        <p class="footer-copy">Це перша дизайнерська версія твого портфоліо. Тут згодом будуть твоє ім'я, коротке резюме, контакти та посилання на соцмережі.</p>
+      </div>
+      <div class="footer-line"><span>CREATIVE PORTFOLIO © 2026</span><span>GRAPHIC DESIGN / AI VIDEO / BLENDER 3D</span></div>
+    </div>
+  </footer>
+
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
+    <div class="modal-bar"><div class="container modal-bar-in"><span class="eyebrow">PORTFOLIO / PROJECT VIEW</span><button id="closeModal" class="close-btn" type="button" aria-label="Закрити">×</button></div></div>
+    <div class="container modal-content" id="modalContent"></div>
+  </div>
+
+  <script>
+    /* ЗМІНА ВМІСТУ: у майбутньому тут будуть реальні роботи та посилання на файли.
+       Усі поточні композиції — оригінальні CSS-макети, жодних запозичених зображень. */
+    const projects=[
+      {name:"Botanical care",category:"Б'юті та wellness",label:"Pure Nature",type:"bottle",a:"#d9e0cd",b:"#f8d5d6",text:"#38544b"},
+      {name:"Fine jewelry",category:"Ювелірна реклама",label:"Precious",type:"ring",a:"#ecc9c8",b:"#fce6cf",text:"#7d4b59"},
+      {name:"Floral campaign",category:"Креативна кампанія",label:"Bloom",type:"flower",a:"#e9a4b5",b:"#ffdce2",text:"#762f4e"},
+      {name:"Skin rituals",category:"Косметичний брендинг",label:"Soft Skin",type:"tube",a:"#f5ddca",b:"#dbb8bd",text:"#785d56"},
+      {name:"Mineral water",category:"Рекламні банери",label:"Flow",type:"orb",a:"#d0e5e4",b:"#e9ceea",text:"#2e6b73"},
+      {name:"Scent stories",category:"Рекламна серія",label:"Essence",type:"arch",a:"#f0d2cd",b:"#deb0a1",text:"#745157"},
+      {name:"Fashion editorial",category:"Digital editorial",label:"Forme",type:"ribbon",a:"#f4d9e4",b:"#c89ab7",text:"#6e3d58"},
+      {name:"Coffee / lifestyle",category:"Lifestyle campaign",label:"Slow Days",type:"can",a:"#ecc6a8",b:"#f4d9dc",text:"#784839"}
+    ];
+    const videos=[
+      {name:"Dreamscape",category:"AI cinematic",a:"#d8a8d3",b:"#414173",c:"#f7c9e8",d:"#482b61"},
+      {name:"Beyond nature",category:"AI nature",a:"#a9d3d3",b:"#558c9b",c:"#ccebdc",d:"#3d7e8e"},
+      {name:"Soft surrealism",category:"AI fashion",a:"#f3b9ba",b:"#b66a99",c:"#fff0d8",d:"#824268"},
+      {name:"Another world",category:"AI storytelling",a:"#e0b8cb",b:"#6c86ac",c:"#a7dcf3",d:"#585082"},
+      {name:"Golden hour",category:"AI commercial",a:"#f4cfac",b:"#ac728e",c:"#ffe29a",d:"#a85470"}
+    ];
+    const three=[
+      {name:"Jewelry / CGI",category:"Blender • Jewelry render",label:"Lumière",type:"ring",a:"#f5e7d9",b:"#deb8b5",text:"#6e4b55"},
+      {name:"Organic forms",category:"Blender • Material study",label:"Morph",type:"orb",a:"#e9d2ea",b:"#b8accf",text:"#554872"},
+      {name:"Product visualization",category:"Blender • Product render",label:"Atelier",type:"bottle",a:"#c8d8d4",b:"#f1ded2",text:"#526761"},
+      {name:"Glass & light",category:"Blender • Lighting",label:"Glass",type:"arch",a:"#d6e7ea",b:"#d2c0df",text:"#57717d"},
+      {name:"Chrome reflections",category:"Blender • Objects",label:"Reflect",type:"ribbon",a:"#dad5e5",b:"#b9cbda",text:"#4c5b75"},
+      {name:"Beauty objects",category:"Blender • CGI",label:"Studio 03",type:"tube",a:"#eacac4",b:"#f6e1e1",text:"#805866"}
+    ];
+    function esc(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;")}
+    function artHTML(item,variant=0){
+      return '<div class="art '+item.type+' variant-'+variant+'" style="--a:'+item.a+';--b:'+item.b+';--txt:'+item.text+'"><div class="shine"></div><div class="art-word">'+esc(item.label)+'</div><div class="object"></div><div class="art-sub">A creative visual study / '+String(variant+1).padStart(2,'0')+'</div></div>';
+    }
+    const projectGrid=document.getElementById("projectGrid"),videoGrid=document.getElementById("videoGrid"),threeGrid=document.getElementById("threeGrid");
+    projects.forEach((item,i)=>{
+      const b=document.createElement("button");b.className="project-card reveal";b.type="button";
+      b.setAttribute("aria-label","Відкрити проєкт "+item.name);
+      b.innerHTML='<div class="art-wrap">'+artHTML(item)+'</div><div class="project-meta"><div><h3>'+esc(item.name)+'</h3><p>'+esc(item.category)+'</p></div><span class="arrow" aria-hidden="true">↗</span></div>';
+      b.addEventListener("click",()=>openProject(item,"graphic",i));projectGrid.appendChild(b);
+    });
+    function videoArtHTML(item,i){
+      return '<div class="video-frame"><div class="video-art" style="--va:'+item.a+';--vb:'+item.b+';--vc:'+item.c+';--vd:'+item.d+'"><div class="v-ornament"></div><div class="planet"></div><div class="horizon"></div><span class="v-num">AI / '+String(i+1).padStart(2,'0')+'</span><span class="v-title">'+esc(item.name)+'</span></div><div class="play" aria-hidden="true">▶</div></div>';
+    }
+    videos.forEach((item,i)=>{
+      const b=document.createElement("button");b.className="video-card reveal";b.type="button";b.setAttribute("aria-label","Відкрити AI-відеопроєкт "+item.name);
+      b.innerHTML=videoArtHTML(item,i)+'<div class="project-meta"><div><h3>'+esc(item.name)+'</h3><p>'+esc(item.category)+'</p><span class="format-pill">9:16 · vertical</span></div><span class="arrow" aria-hidden="true">↗</span></div>';
+      b.addEventListener("click",()=>openVideo(item,i));videoGrid.appendChild(b);
+    });
+    three.forEach((item,i)=>{
+      const b=document.createElement("button");b.className="three-card reveal";b.type="button";b.setAttribute("aria-label","Відкрити Blender-проєкт "+item.name);
+      b.innerHTML='<div class="art-wrap">'+artHTML(item)+'</div><div class="project-meta"><div><h3>'+esc(item.name)+'</h3><p>'+esc(item.category)+'</p></div><span class="arrow" aria-hidden="true">↗</span></div>';
+      b.addEventListener("click",()=>openProject(item,"blender",i));threeGrid.appendChild(b);
+    });
+    const modal=document.getElementById("modal"),modalContent=document.getElementById("modalContent"),closeBtn=document.getElementById("closeModal");
+    let previousFocus=null;
+    function showModal(){
+      previousFocus=document.activeElement;modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";modal.scrollTop=0;closeBtn.focus();
+    }
+    function closeModal(){
+      modal.setAttribute("aria-hidden","true");document.body.style.overflow="";modalContent.innerHTML="";
+      if(previousFocus&&previousFocus.focus)previousFocus.focus();
+    }
+    function openProject(item,group,i){
+      let gallery="";
+      for(let j=0;j<4;j++){gallery+='<div class="gallery-card">'+artHTML(item,j)+'</div>'}
+      modalContent.innerHTML='<div class="eyebrow">'+(group==="graphic"?"GRAPHIC DESIGN":"BLENDER 3D")+' / CASE '+String(i+1).padStart(2,"0")+'</div><h2 class="modal-heading" id="modalTitle">'+esc(item.name)+'</h2><p class="modal-lead">Повна тематична добірка в стилі Behance. Тут буде опис проєкту, головний банер, серія адаптацій, деталі дизайну та інші матеріали з цього кейсу.</p><span class="modal-tag">'+esc(item.category)+'</span><div class="gallery" style="margin-top:30px">'+gallery+'</div><p class="modal-footer">DEMO PROJECT — ці зображення створені засобами CSS лише для демонстрації макета. Додамо твої роботи й реальні описи.</p>';
+      showModal();
+    }
+    function openVideo(item,i){
+      modalContent.innerHTML='<div class="eyebrow">AI VIDEO / VERTICAL 9:16</div><h2 class="modal-heading" id="modalTitle">'+esc(item.name)+'</h2><p class="modal-lead">Окрема сторінка AI-відео. Вертикальний формат збережеться без обрізання — готова зона для Instagram Reels та інших роликів 9:16.</p><div class="vertical-preview">'+videoArtHTML(item,i)+'</div><p class="video-placeholder-note"><span class="demo-label">Поки демо-обкладинка</span><br><br>Тут з’явиться справжній відеоплеєр, коли ти надішлеш свій MP4 або посилання на відео. Зараз відеофайл не підключений.</p>';
+      showModal();
+    }
+    closeBtn.addEventListener("click",closeModal);
+    document.addEventListener("keydown",(e)=>{if(e.key==="Escape"&&modal.getAttribute("aria-hidden")==="false")closeModal();if(e.key==="Tab"&&modal.getAttribute("aria-hidden")==="false"){const focusables=[...modal.querySelectorAll('button,a,[tabindex]:not([tabindex="-1"])')].filter(el=>!el.disabled);if(focusables.length){const first=focusables[0],last=focusables[focusables.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}}});
+    const observer=("IntersectionObserver" in window)?new IntersectionObserver((entries)=>{entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add("show");observer.unobserve(en.target)}})},{threshold:.06}):null;
+    document.querySelectorAll(".reveal").forEach(el=>observer?observer.observe(el):el.classList.add("show"));
+  </script>
+</body>
+</html>
