@@ -61,6 +61,16 @@
     .project-meta h3{font-size:17px;font-weight:500;letter-spacing:-.025em;margin:0 0 5px}
     .project-meta p{font-size:12px;color:var(--muted);margin:0}
     .arrow{font-size:22px;font-weight:300;line-height:1}
+    .art.beauty-placeholder{background:radial-gradient(circle at 28% 24%,#fffdf7 0,transparent 46%),linear-gradient(135deg,#f4e2dd,#ecc1cb 62%,#d59fac)}
+    .art.beauty-placeholder:before{display:none}
+    .beauty-placeholder .beauty-ring{position:absolute;width:70%;aspect-ratio:1;border:28px solid rgba(255,255,255,.42);border-radius:50%;top:20%;right:-6%;box-shadow:inset 12px 10px 30px #9a596433,14px 18px 32px #94576333}
+    .beauty-placeholder .beauty-float{position:absolute;left:13%;bottom:16%;width:23%;height:44%;transform:rotate(-18deg);border-radius:14px 14px 6px 6px;background:linear-gradient(100deg,#f5d0cf,#fffef5 42%,#d796ab 92%);box-shadow:12px 14px 25px #80516040}
+    .beauty-placeholder .beauty-float:before{position:absolute;content:"";top:-10%;left:25%;width:50%;height:12%;background:linear-gradient(90deg,#a76a81,#e2b5bf,#9d536b);border-radius:3px}
+    .beauty-placeholder .beauty-mark{position:absolute;top:12%;left:8%;font:italic clamp(26px,3vw,38px) Georgia,serif;letter-spacing:-.05em;color:#774153}
+    .beauty-placeholder .beauty-label{position:absolute;bottom:7%;right:8%;font-size:9px;letter-spacing:.12em;color:#77555f;text-transform:uppercase}
+    .beauty-source-note{padding:48px 28px;background:linear-gradient(135deg,#fceceb,#f8e0e3);border-radius:4px;text-align:center;margin-top:32px}
+    .beauty-source-note p{max-width:570px;margin:0 auto 20px;line-height:1.7;color:#634a55}
+    .beauty-source-note a{display:inline-block;padding:12px 18px;border-radius:100px;border:1px solid #b77b8a;font-size:13px}
     .art{height:100%;width:100%;position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;background:linear-gradient(140deg,var(--a),var(--b));}
     .art:before{content:'';position:absolute;inset:-25%;background:radial-gradient(circle at 25% 20%,#ffffff88,transparent 30%),radial-gradient(circle at 80% 85%,#fff7,transparent 38%);mix-blend-mode:screen}
     .art .art-word{position:absolute;z-index:4;top:10%;left:9%;right:9%;font:italic clamp(22px,3vw,36px) Georgia,serif;letter-spacing:-.04em;line-height:1;color:var(--txt,#4b2e39)}
@@ -264,7 +274,7 @@
        Усі поточні композиції — оригінальні CSS-макети, жодних запозичених зображень. */
     const projects=[
       {name:"Машинна вишивка",category:"Розробка дизайнів",label:"",type:"photo",image:"assets/machine-embroidery.webp",hideCaption:false,gallery:["assets/embroidery-gallery-01.webp","assets/embroidery-gallery-02.webp","assets/embroidery-gallery-03.webp","assets/embroidery-gallery-04.webp","assets/embroidery-gallery-05.webp"]},
-      {name:"Fine jewelry",category:"Ювелірна реклама",label:"Precious",type:"ring",a:"#ecc9c8",b:"#fce6cf",text:"#7d4b59"},
+      {name:"Beauty & Cosmetics",category:"Рекламні банери",label:"BEAUTY",type:"beauty",a:"#f5e1dd",b:"#e8b7c5",text:"#7d4b59",externalUrl:"https://www.behance.net/gallery/79648129/cosmetics-banner",gallery:[]},
       {name:"Floral campaign",category:"Креативна кампанія",label:"Bloom",type:"flower",a:"#e9a4b5",b:"#ffdce2",text:"#762f4e"},
       {name:"Skin rituals",category:"Косметичний брендинг",label:"Soft Skin",type:"tube",a:"#f5ddca",b:"#dbb8bd",text:"#785d56"},
       {name:"Mineral water",category:"Рекламні банери",label:"Flow",type:"orb",a:"#d0e5e4",b:"#e9ceea",text:"#2e6b73"},
@@ -289,6 +299,7 @@
     ];
     function esc(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;")}
     function artHTML(item,variant=0){
+      if(item.externalUrl)return '<div class="art beauty-placeholder"><span class="beauty-ring"></span><span class="beauty-float"></span><span class="beauty-mark">Beauty</span><span class="beauty-label">Cosmetics · Banner design</span></div>';
       if(item.image)return '<div class="art photo-art"><img src="'+esc(item.image)+'" alt="" loading="lazy" decoding="async"></div>';
       return '<div class="art '+item.type+' variant-'+variant+'" style="--a:'+item.a+';--b:'+item.b+';--txt:'+item.text+'"><div class="shine"></div><div class="art-word">'+esc(item.label)+'</div><div class="object"></div><div class="art-sub">A creative visual study / '+String(variant+1).padStart(2,'0')+'</div></div>';
     }
@@ -322,6 +333,11 @@
       if(previousFocus&&previousFocus.focus)previousFocus.focus();
     }
     function openProject(item,group,i){
+      if(item.externalUrl && !(item.gallery&&item.gallery.length)){
+        const src=esc(item.externalUrl);
+        modalContent.innerHTML='<div class="eyebrow">GRAPHIC DESIGN / CASE '+String(i+1).padStart(2,'0')+'</div><h2 class="modal-heading" id="modalTitle">'+esc(item.name)+'</h2><div class="beauty-source-note"><p>Місце для твоїх рекламних банерів. Зображення за посиланням Behance наразі недоступні для завантаження, тому галерею ще не заповнено.</p><a href="'+src+'" target="_blank" rel="noopener noreferrer">Відкрити вихідний проєкт на Behance ↗</a></div>';
+        showModal();return;
+      }
       if(item.gallery&&item.gallery.length){
         const photos=item.gallery.map((src,n)=>'<figure class="embroidery-photo"><img src="'+esc(src)+'" alt="Машинна вишивка — робота '+(n+1)+'" loading="'+(n===0?'eager':'lazy')+'" decoding="async"></figure>').join('');
         modalContent.innerHTML='<div class="eyebrow">GRAPHIC DESIGN / CASE '+String(i+1).padStart(2,'0')+'</div><h2 class="modal-heading" id="modalTitle">'+esc(item.name)+'</h2><div class="embroidery-gallery">'+photos+'</div>';
