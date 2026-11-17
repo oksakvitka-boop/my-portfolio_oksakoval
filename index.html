@@ -136,6 +136,7 @@
     @media(max-width:430px){.modal-back{font-size:12px;padding:11px 13px}.modal-bar-in{height:66px}}
     .modal-content{padding-top:62px;padding-bottom:100px}
     .modal-heading{font:400 clamp(53px,8vw,105px)/.98 Georgia,serif;letter-spacing:-.07em;margin:16px 0 24px}
+    .modal-heading-small{font:700 11px/1.5 Arial,Helvetica,sans-serif;letter-spacing:.21em;text-transform:uppercase;margin:14px 0 24px}
     .modal-lead{font-size:15px;color:var(--muted);max-width:650px;line-height:1.75;margin:0 0 38px}
     .gallery{display:grid;grid-template-columns:1fr 1fr;gap:20px}
     .gallery-card{aspect-ratio:1.12;overflow:hidden}
@@ -340,7 +341,7 @@
       }
       if(item.gallery&&item.gallery.length){
         const photos=item.gallery.map((src,n)=>'<figure class="embroidery-photo"><img src="'+esc(src)+'" alt="Машинна вишивка — робота '+(n+1)+'" loading="'+(n===0?'eager':'lazy')+'" decoding="async"></figure>').join('');
-        modalContent.innerHTML='<div class="eyebrow">GRAPHIC DESIGN / CASE '+String(i+1).padStart(2,'0')+'</div><h2 class="modal-heading" id="modalTitle">'+esc(item.name)+'</h2><div class="embroidery-gallery">'+photos+'</div>';
+        modalContent.innerHTML='<div class="eyebrow">GRAPHIC DESIGN / CASE '+String(i+1).padStart(2,'0')+'</div><h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+'</h2><div class="embroidery-gallery">'+photos+'</div>';
         showModal();return;
       }
       if(item.image){modalContent.innerHTML='<h2 class="sr-only" id="modalTitle">'+esc(item.name)+'</h2><div class="gallery photo-gallery"><div class="gallery-card"><img src="'+esc(item.image)+'" alt="Приклад машинної вишивки" decoding="async"></div></div>';showModal();return;}
