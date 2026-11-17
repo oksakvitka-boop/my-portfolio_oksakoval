@@ -297,7 +297,7 @@
       {name:"Floral campaign",category:"Креативна кампанія",label:"Bloom",type:"flower",a:"#e9a4b5",b:"#ffdce2",text:"#762f4e"},
       {name:"Skin rituals",category:"Косметичний брендинг",label:"Soft Skin",type:"tube",a:"#f5ddca",b:"#dbb8bd",text:"#785d56"},
       {name:"Mineral water",category:"Рекламні банери",label:"Flow",type:"orb",a:"#d0e5e4",b:"#e9ceea",text:"#2e6b73"},
-      {name:"Scent stories",category:"Рекламна серія",label:"Essence",type:"arch",a:"#f0d2cd",b:"#deb0a1",text:"#745157"},
+      {name:"Лого Natural Farm",category:"Логотип · брендинг",type:"photo",image:"assets/natural-farm/natural-farm-tshirt.jpg",coverContain:true,naturalFarmGallery:[{src:"assets/natural-farm/natural-farm-logo.jpg",alt:"Логотип Natural Farm"},{src:"assets/natural-farm/natural-farm-tshirt.jpg",alt:"Футболка та коробочка з логотипом Natural Farm"},{src:"assets/natural-farm/natural-farm-bag.jpg",alt:"Жінка з пакетом Natural Farm"}]},
       {name:"Print Design",category:"Поліграфія · листівки та буклети",image:"assets/print-design/print-design-cover.webp",label:"Forme",type:"ribbon",a:"#f4d9e4",b:"#c89ab7",text:"#6e3d58",printGallery:[{src:"assets/print-design/impulse-flyers.webp",alt:"Impulse — рекламні листівки магазинів електроніки"},{src:"assets/print-design/green-lighthouse.webp",alt:"Зелений Ліхтарик — природничо-пізнавальна листівка"},{src:"assets/print-design/electrocaprizam-trifold.webp",alt:"Інформаційний тристулковий буклет про стабілізатори"},{src:"assets/print-design/evolution-center.webp",alt:"Evolution Center — рекламна листівка освітнього центру"}]},
       {name:"Beauty & Cosmetics",category:"Рекламні банери · косметика",image:"assets/cosmetics-banners/beauty-cover.jpg",label:"Slow Days",type:"can",a:"#ecc6a8",b:"#f4d9dc",text:"#784839",vimeoId:"339643732",vimeoHash:"ffca300aad",beautyBanners:["assets/cosmetics-banners/ahava.webp","assets/cosmetics-banners/biotherm.webp","assets/cosmetics-banners/hair-cosmetics.webp","assets/cosmetics-banners/justin-parfums.webp","assets/cosmetics-banners/basic-care.webp","assets/cosmetics-banners/luxury-cosmetics.webp","assets/cosmetics-banners/mens-grooming.webp","assets/cosmetics-banners/newborn-care.webp","assets/cosmetics-banners/spring-perfumes.webp","assets/cosmetics-banners/clean-week.webp"]},
       {name:"Машинна вишивка",category:"Розробка дизайнів",label:"",type:"photo",image:"assets/machine-embroidery.webp?v=cover-20261117",hideCaption:false,gallery:["assets/embroidery-gallery-01.webp","assets/embroidery-gallery-02.webp","assets/embroidery-gallery-03.webp","assets/embroidery-gallery-04.webp","assets/embroidery-gallery-05.webp"]}
@@ -320,7 +320,7 @@
     function esc(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;")}
     function artHTML(item,variant=0){
       if(item.externalUrl)return '<div class="art beauty-placeholder"><span class="beauty-ring"></span><span class="beauty-float"></span><span class="beauty-mark">Beauty</span><span class="beauty-label">Cosmetics · Banner design</span></div>';
-      if(item.image)return '<div class="art photo-art"><img src="'+esc(item.image)+'" alt="" loading="lazy" decoding="async"></div>';
+      if(item.image)return '<div class="art photo-art"><img src="'+esc(item.image)+'" alt="" loading="lazy" decoding="async"'+(item.coverContain?' style="object-fit:contain;background:#dedbda"':'')+'></div>';
       return '<div class="art '+item.type+' variant-'+variant+'" style="--a:'+item.a+';--b:'+item.b+';--txt:'+item.text+'"><div class="shine"></div><div class="art-word">'+esc(item.label)+'</div><div class="object"></div><div class="art-sub">A creative visual study / '+String(variant+1).padStart(2,'0')+'</div></div>';
     }
     const projectGrid=document.getElementById("projectGrid"),videoGrid=document.getElementById("videoGrid"),threeGrid=document.getElementById("threeGrid");
@@ -356,6 +356,11 @@
       if(previousFocus&&previousFocus.focus)previousFocus.focus();
     }
     function openProject(item,group,i){
+      if(item.naturalFarmGallery&&item.naturalFarmGallery.length){
+        const photos=item.naturalFarmGallery.map((work,n)=>'<figure class="print-case-photo"><img src="'+esc(work.src)+'" alt="'+esc(work.alt)+'" loading="'+(n===0?'eager':'lazy')+'" decoding="async"></figure>').join('');
+        modalContent.innerHTML='<div class="eyebrow">GRAPHIC DESIGN / CASE '+String(i+1).padStart(2,'0')+'</div><h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+'</h2><div class="print-case-gallery">'+photos+'</div>';
+        showModal();return;
+      }
       if(item.printGallery&&item.printGallery.length){
         const prints=item.printGallery.map((work,n)=>'<figure class="print-case-photo"><img src="'+esc(work.src)+'" alt="'+esc(work.alt)+'" loading="'+(n===0?'eager':'lazy')+'" decoding="async"></figure>').join('');
         modalContent.innerHTML='<div class="eyebrow">GRAPHIC DESIGN / CASE '+String(i+1).padStart(2,'0')+'</div><h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+'</h2><p class="print-case-lead">Поліграфічний дизайн · Листівки, рекламні флаєри та буклети</p><div class="print-case-gallery">'+prints+'</div>';
