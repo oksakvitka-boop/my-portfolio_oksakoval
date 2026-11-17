@@ -144,6 +144,8 @@
     .photo-gallery{grid-template-columns:1fr;max-width:800px;margin:0 auto}
     .photo-gallery .gallery-card:first-child{grid-column:auto;aspect-ratio:1}
     .photo-gallery img{width:100%;height:100%;object-fit:cover;display:block}
+    .landing-page-showcase{width:min(100%,720px);margin:28px auto 0}
+    .landing-page-showcase img{display:block;width:100%;height:auto;object-fit:contain}
     .embroidery-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:38px;align-items:start}
     .embroidery-gallery .embroidery-photo{margin:0;min-width:0;background:#f8f5f4}
     .embroidery-gallery .embroidery-photo:first-child{grid-column:1/-1;max-width:790px;justify-self:center;width:100%}
@@ -275,7 +277,7 @@
        Усі поточні композиції — оригінальні CSS-макети, жодних запозичених зображень. */
     const projects=[
       {name:"Машинна вишивка",category:"Розробка дизайнів",label:"",type:"photo",image:"assets/machine-embroidery.webp?v=cover-20261117",hideCaption:false,gallery:["assets/embroidery-gallery-01.webp","assets/embroidery-gallery-02.webp","assets/embroidery-gallery-03.webp","assets/embroidery-gallery-04.webp","assets/embroidery-gallery-05.webp"]},
-      {name:"Beauty & Cosmetics",category:"Рекламні банери",label:"BEAUTY",type:"beauty",a:"#f5e1dd",b:"#e8b7c5",text:"#7d4b59",externalUrl:"https://www.behance.net/gallery/79648129/cosmetics-banner",gallery:[]},
+      {name:"Zlato Epic Sale",category:"Landing Page Design",label:"",type:"photo",image:"assets/zlato-epic-sale-cover.jpg",fullPage:"assets/zlato-epic-sale-full.png",hideCaption:false},
       {name:"Floral campaign",category:"Креативна кампанія",label:"Bloom",type:"flower",a:"#e9a4b5",b:"#ffdce2",text:"#762f4e"},
       {name:"Skin rituals",category:"Косметичний брендинг",label:"Soft Skin",type:"tube",a:"#f5ddca",b:"#dbb8bd",text:"#785d56"},
       {name:"Mineral water",category:"Рекламні банери",label:"Flow",type:"orb",a:"#d0e5e4",b:"#e9ceea",text:"#2e6b73"},
@@ -334,6 +336,10 @@
       if(previousFocus&&previousFocus.focus)previousFocus.focus();
     }
     function openProject(item,group,i){
+      if(item.fullPage){
+        modalContent.innerHTML='<div class="eyebrow">GRAPHIC DESIGN / CASE '+String(i+1).padStart(2,'0')+'</div><h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+' — '+esc(item.category)+'</h2><div class="landing-page-showcase"><img src="'+esc(item.fullPage)+'" alt="Повна сторінка лендингу Zlato Epic Sale" decoding="async"></div>';
+        showModal();return;
+      }
       if(item.externalUrl && !(item.gallery&&item.gallery.length)){
         const src=esc(item.externalUrl);
         modalContent.innerHTML='<div class="eyebrow">GRAPHIC DESIGN / CASE '+String(i+1).padStart(2,'0')+'</div><h2 class="modal-heading" id="modalTitle">'+esc(item.name)+'</h2><div class="beauty-source-note"><p>Місце для твоїх рекламних банерів. Зображення за посиланням Behance наразі недоступні для завантаження, тому галерею ще не заповнено.</p><a href="'+src+'" target="_blank" rel="noopener noreferrer">Відкрити вихідний проєкт на Behance ↗</a></div>';
