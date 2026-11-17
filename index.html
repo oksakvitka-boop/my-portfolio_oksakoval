@@ -144,8 +144,9 @@
     .photo-gallery{grid-template-columns:1fr;max-width:800px;margin:0 auto}
     .photo-gallery .gallery-card:first-child{grid-column:auto;aspect-ratio:1}
     .photo-gallery img{width:100%;height:100%;object-fit:cover;display:block}
-    .landing-page-showcase{width:min(100%,720px);margin:28px auto 0}
+    .landing-page-showcase{width:min(100%,1400px);margin:28px auto 0}
     .landing-page-showcase img{display:block;width:100%;height:auto;object-fit:contain}
+    .landing-loading{min-height:160px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;text-align:center}
     .embroidery-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:38px;align-items:start}
     .embroidery-gallery .embroidery-photo{margin:0;min-width:0;background:#f8f5f4}
     .embroidery-gallery .embroidery-photo:first-child{grid-column:1/-1;max-width:790px;justify-self:center;width:100%}
@@ -277,7 +278,7 @@
        Усі поточні композиції — оригінальні CSS-макети, жодних запозичених зображень. */
     const projects=[
       {name:"Машинна вишивка",category:"Розробка дизайнів",label:"",type:"photo",image:"assets/machine-embroidery.webp?v=cover-20261117",hideCaption:false,gallery:["assets/embroidery-gallery-01.webp","assets/embroidery-gallery-02.webp","assets/embroidery-gallery-03.webp","assets/embroidery-gallery-04.webp","assets/embroidery-gallery-05.webp"]},
-      {name:"Zlato Epic Sale",category:"Landing Page Design",label:"",type:"photo",image:"assets/zlato-epic-sale-cover.jpg",fullPage:"assets/zlato-epic-sale-full.png",hideCaption:false},
+      {name:"Zlato Epic Sale",category:"Landing Page Design",label:"",type:"photo",image:"assets/zlato-epic-sale-cover.jpg",fullPageParts:["assets/zlato-parts/part-01.bin","assets/zlato-parts/part-02.bin","assets/zlato-parts/part-03.bin","assets/zlato-parts/part-04.bin","assets/zlato-parts/part-05.bin","assets/zlato-parts/part-06.bin","assets/zlato-parts/part-07.bin","assets/zlato-parts/part-08.bin","assets/zlato-parts/part-09.bin","assets/zlato-parts/part-10.bin"],hideCaption:false},
       {name:"Floral campaign",category:"Креативна кампанія",label:"Bloom",type:"flower",a:"#e9a4b5",b:"#ffdce2",text:"#762f4e"},
       {name:"Skin rituals",category:"Косметичний брендинг",label:"Soft Skin",type:"tube",a:"#f5ddca",b:"#dbb8bd",text:"#785d56"},
       {name:"Mineral water",category:"Рекламні банери",label:"Flow",type:"orb",a:"#d0e5e4",b:"#e9ceea",text:"#2e6b73"},
@@ -328,17 +329,41 @@
     });
     const modal=document.getElementById("modal"),modalContent=document.getElementById("modalContent"),closeBtn=document.getElementById("closeModal"),backBtn=document.getElementById("backToPortfolio");
     let previousFocus=null;
+    let landingRequestId=0,landingBlobUrl=null;
     function showModal(){
       previousFocus=document.activeElement;modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";modal.scrollTop=0;backBtn.focus();
     }
     function closeModal(){
+      landingRequestId++;
+      if(landingBlobUrl){URL.revokeObjectURL(landingBlobUrl);landingBlobUrl=null;}
       modal.setAttribute("aria-hidden","true");document.body.style.overflow="";modalContent.innerHTML="";
       if(previousFocus&&previousFocus.focus)previousFocus.focus();
     }
     function openProject(item,group,i){
-      if(item.fullPage){
-        modalContent.innerHTML='<div class="eyebrow">GRAPHIC DESIGN / CASE '+String(i+1).padStart(2,'0')+'</div><h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+' — '+esc(item.category)+'</h2><div class="landing-page-showcase"><img src="'+esc(item.fullPage)+'" alt="Повна сторінка лендингу Zlato Epic Sale" decoding="async"></div>';
-        showModal();return;
+      if(item.fullPageParts){
+        modalContent.innerHTML='<div class="eyebrow">GRAPHIC DESIGN / CASE '+String(i+1).padStart(2,'0')+'</div><h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+' — '+esc(item.category)+'</h2><div class="landing-page-showcase"><p class="landing-loading" id="zlatoLoading" role="status">Завантаження повного дизайну в оригінальній якості…</p><img id="zlatoFullImage" width="1400" height="7982" alt="Повний дизайн лендингу Zlato Epic Sale" decoding="async" style="display:none"></div>';
+        showModal();
+        const requestId=++landingRequestId;
+        Promise.all(item.fullPageParts.map(path=>fetch(path).then(response=>{
+          if(!response.ok)throw new Error('HTTP '+response.status);
+          return response.arrayBuffer();
+        }))).then(buffers=>{
+          if(requestId!==landingRequestId)return;
+          const original=new Blob(buffers,{type:'image/jpeg'});
+          if(original.size!==4895407)throw new Error('Incomplete original');
+          landingBlobUrl=URL.createObjectURL(original);
+          const photo=modalContent.querySelector('#zlatoFullImage');
+          const status=modalContent.querySelector('#zlatoLoading');
+          if(!photo)return;
+          photo.onload=()=>{if(status)status.remove();photo.style.display='block';};
+          photo.onerror=()=>{if(status)status.textContent='Не вдалося відобразити зображення. Онови сторінку.';};
+          photo.src=landingBlobUrl;
+        }).catch(()=>{
+          if(requestId!==landingRequestId)return;
+          const status=modalContent.querySelector('#zlatoLoading');
+          if(status)status.textContent='Не вдалося завантажити оригінал. Перевір з’єднання та онови сторінку.';
+        });
+        return;
       }
       if(item.externalUrl && !(item.gallery&&item.gallery.length)){
         const src=esc(item.externalUrl);
