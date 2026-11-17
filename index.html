@@ -206,6 +206,13 @@
     .beauty-banner{margin:0;padding:0;width:100%;background:transparent}
     .beauty-banner img{display:block;width:100%;height:auto;object-fit:contain}
     @media(max-width:650px){.beauty-showcase{gap:12px}.beauty-intro{margin-bottom:19px}}
+
+    /* Print Design case: preserve each mock-up and present each at equal width. */
+    .print-case-lead{font-size:14px;color:var(--muted);line-height:1.65;margin:0 0 27px}
+    .print-case-gallery{display:flex;flex-direction:column;gap:30px;width:min(100%,1100px);margin:0 auto}
+    .print-case-photo{width:100%;padding:0;margin:0}
+    .print-case-photo img{display:block;width:100%;height:auto;object-fit:contain}
+    @media(max-width:650px){.print-case-gallery{gap:16px}.print-case-lead{margin-bottom:20px}}
   </style>
 </head>
 <body>
@@ -291,7 +298,7 @@
       {name:"Skin rituals",category:"Косметичний брендинг",label:"Soft Skin",type:"tube",a:"#f5ddca",b:"#dbb8bd",text:"#785d56"},
       {name:"Mineral water",category:"Рекламні банери",label:"Flow",type:"orb",a:"#d0e5e4",b:"#e9ceea",text:"#2e6b73"},
       {name:"Scent stories",category:"Рекламна серія",label:"Essence",type:"arch",a:"#f0d2cd",b:"#deb0a1",text:"#745157"},
-      {name:"Fashion editorial",category:"Digital editorial",label:"Forme",type:"ribbon",a:"#f4d9e4",b:"#c89ab7",text:"#6e3d58"},
+      {name:"Print Design",category:"Поліграфія · листівки та буклети",label:"Forme",type:"ribbon",a:"#f4d9e4",b:"#c89ab7",text:"#6e3d58",printGallery:[{src:"assets/print-design/impulse-flyers.webp",alt:"Impulse — рекламні листівки магазинів електроніки"},{src:"assets/print-design/green-lighthouse.webp",alt:"Зелений Ліхтарик — природничо-пізнавальна листівка"},{src:"assets/print-design/electrocaprizam-trifold.webp",alt:"Інформаційний тристулковий буклет про стабілізатори"},{src:"assets/print-design/evolution-center.webp",alt:"Evolution Center — рекламна листівка освітнього центру"}]},
       {name:"Beauty & Cosmetics",category:"Рекламні банери · косметика",image:"assets/cosmetics-banners/beauty-cover.jpg",label:"Slow Days",type:"can",a:"#ecc6a8",b:"#f4d9dc",text:"#784839",vimeoId:"339643732",vimeoHash:"ffca300aad",beautyBanners:["assets/cosmetics-banners/ahava.webp","assets/cosmetics-banners/biotherm.webp","assets/cosmetics-banners/hair-cosmetics.webp","assets/cosmetics-banners/justin-parfums.webp","assets/cosmetics-banners/basic-care.webp","assets/cosmetics-banners/luxury-cosmetics.webp","assets/cosmetics-banners/mens-grooming.webp","assets/cosmetics-banners/newborn-care.webp","assets/cosmetics-banners/spring-perfumes.webp","assets/cosmetics-banners/clean-week.webp"]},
       {name:"Машинна вишивка",category:"Розробка дизайнів",label:"",type:"photo",image:"assets/machine-embroidery.webp?v=cover-20261117",hideCaption:false,gallery:["assets/embroidery-gallery-01.webp","assets/embroidery-gallery-02.webp","assets/embroidery-gallery-03.webp","assets/embroidery-gallery-04.webp","assets/embroidery-gallery-05.webp"]}
     ];
@@ -349,6 +356,11 @@
       if(previousFocus&&previousFocus.focus)previousFocus.focus();
     }
     function openProject(item,group,i){
+      if(item.printGallery&&item.printGallery.length){
+        const prints=item.printGallery.map((work,n)=>'<figure class="print-case-photo"><img src="'+esc(work.src)+'" alt="'+esc(work.alt)+'" loading="'+(n===0?'eager':'lazy')+'" decoding="async"></figure>').join('');
+        modalContent.innerHTML='<div class="eyebrow">GRAPHIC DESIGN / CASE '+String(i+1).padStart(2,'0')+'</div><h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+'</h2><p class="print-case-lead">Поліграфічний дизайн · Листівки, рекламні флаєри та буклети</p><div class="print-case-gallery">'+prints+'</div>';
+        showModal();return;
+      }
 
       if(item.beautyBanners&&item.beautyBanners.length){
         const player='https://player.vimeo.com/video/'+encodeURIComponent(item.vimeoId)+'?h='+encodeURIComponent(item.vimeoHash)+'&title=0&byline=0&portrait=0';
