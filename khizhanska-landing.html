@@ -81,9 +81,10 @@ h1,h2,h3,p{margin-top:0}h1,h2{font-family:var(--serif);font-weight:600;letter-sp
 .factory-image-wrap{position:relative;min-height:495px;overflow:hidden;border-radius:0 0 0 22px}
 .factory-image-wrap img{height:100%;width:100%;object-fit:cover;object-position:center}
 .photo-label{display:none}
-.water-product-section{display:grid;grid-template-columns:39% 61%;min-height:630px}
+.water-product-section{display:grid;grid-template-columns:minmax(0,39%) minmax(0,61%);min-height:630px}
+.mineral-panel,.products-panel{min-width:0}
 .mineral-panel{background:linear-gradient(126deg,#ebf0e7 0%,#f4f6f0 68%);position:relative}
-.mineral-content{max-width:555px;margin-left:auto;padding:67px 52px 65px max(44px,calc((100vw - 1440px)/2));}
+.mineral-content{width:100%;max-width:640px;margin-left:auto;padding:67px clamp(28px,2.6vw,56px) 65px clamp(32px,3.3vw,72px)}
 .mineral-content h2{font-size:clamp(34px,3.2vw,54px);line-height:1}
 .composition-name{font-family:var(--serif);font-size:21px;font-weight:700;line-height:1.2;margin:25px 0 0}
 .composition-label{font-size:12px;font-weight:800;margin:15px 0 17px}
@@ -1001,7 +1002,7 @@ body.modal-open{overflow:hidden}
   if(!ctx) return;
   const photo=new Image();
   const bg=getComputedStyle(hero).backgroundImage;
-  const match=bg.match(/url\(["']?(data:image\/(?:jpeg|jpg|png);base64,[^"')]+)["']?\)/);
+  const match=bg.match(/url\(\s*["']?([^"')]+)["']?\s*\)/);
   if(!match) return;
   photo.src=match[1];
   const creekMask=new Image();
@@ -1024,11 +1025,11 @@ body.modal-open{overflow:hidden}
   let seed=32719;
   const rand=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
   // Tiny dissolved carbon dioxide bubbles in the transparent liquid ABOVE the label.
-  const bubblesN=reducedData?33:67;
+  const bubblesN=reducedData?38:82;
   for(let i=0;i<bubblesN;i++) bubbles.push({
     x:rand()*1.8-0.9, start:180+rand()*209, speed:13+rand()*18,
-    phase:rand()*12, r:.45+rand()*1.35, wobble:2+rand()*3.5,
-    a:.30+rand()*.35,period:5+rand()*8
+    phase:rand()*12, r:.72+rand()*1.38, wobble:2+rand()*3.5,
+    a:.44+rand()*.33,period:5+rand()*8
   });
   // Water sparkle paths: each source/destination lies on the running water, not on rocks.
   const lanes=[
@@ -1139,15 +1140,16 @@ body.modal-open{overflow:hidden}
     last=t;
     ctx.setTransform(1,0,0,1,0,0);
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    if(!photo.complete || !photo.naturalWidth || !creekMask.complete || !creekMask.naturalWidth) return;
+    if(!photo.complete || !photo.naturalWidth) return;
     ctx.setTransform(dpr*scale,0,0,dpr*scale,dpr*ox,dpr*oy);
-    movingCreek(t);
-    // Photo-derived opacity mask means moving pixels appear on running water,
-    // not on the still rocks, foliage, landscape or bottle label.
-    ctx.save();
-    ctx.globalCompositeOperation='destination-in';
-    ctx.drawImage(creekMask,0,0,SRC_W,SRC_H);
-    ctx.restore();
+    if(creekMask.complete && creekMask.naturalWidth){
+      movingCreek(t);
+      // Mask only creek motion, never the bubbles inside the bottle.
+      ctx.save();
+      ctx.globalCompositeOperation='destination-in';
+      ctx.drawImage(creekMask,0,0,SRC_W,SRC_H);
+      ctx.restore();
+    }
     carbonation(t);
   }
   function start(){if(!raf && !motion.matches && !document.hidden && seen)raf=requestAnimationFrame(draw);}
