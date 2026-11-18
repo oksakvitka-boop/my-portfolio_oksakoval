@@ -119,8 +119,8 @@
     .art.variant-2 .art-word{font-style:normal;text-transform:uppercase;font-size:27px;letter-spacing:-.06em}
     .art.variant-3 .art-word{left:auto;right:8%;text-align:right}
     .section-note{margin-top:30px;color:var(--muted);font-size:12px}
-    .videos-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:17px}
-    .video-card{border:0;padding:0;background:none;text-align:left;min-width:0;color:inherit}
+    .videos-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:17px;align-items:start}
+    .video-card{display:block;align-self:start;width:100%;border:0;padding:0;background:none;text-align:left;min-width:0;color:inherit}
     .video-frame{position:relative;aspect-ratio:9/16;overflow:hidden;border-radius:3px;background:#b97d9f}
     .video-art{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden;background:linear-gradient(165deg,var(--va),var(--vb))}
     .video-art::before{content:'';width:115%;height:55%;border-radius:50%;position:absolute;top:7%;background:radial-gradient(circle at 42% 35%,#fff9,#e7c1df99 40%,transparent 70%);filter:blur(3px)}
@@ -408,8 +408,8 @@
       b.addEventListener("click",()=>openProject(item,"graphic",i));projectGrid.appendChild(b);
     });
     function videoArtHTML(item,i){
-      if(item.page==="golden-orchard.html" || item.poster){
-        return '<div class="video-frame"><div class="video-art" style="--va:#d9b6a3;--vb:#7a5a54;--vc:#fff4e0;--vd:#543d47"><div class="planet"></div><div class="horizon"></div><span class="v-title">'+esc(item.name)+'</span></div>'+(item.poster?'<img class="ai-video-poster" src="'+esc(item.poster)+'" alt="" loading="lazy" decoding="async">':'')+'<div class="play" aria-hidden="true">▶</div></div>';
+      if(item.poster){
+        return '<div class="video-frame"><img class="ai-video-poster" src="'+esc(item.poster)+'" alt="" loading="lazy" decoding="async"><div class="play" aria-hidden="true">▶</div></div>';
       }
       return '<div class="video-frame"><div class="video-art" style="--va:'+item.a+';--vb:'+item.b+';--vc:'+item.c+';--vd:'+item.d+'"><div class="v-ornament"></div><div class="planet"></div><div class="horizon"></div><span class="v-num">AI / '+String(i+1).padStart(2,'0')+'</span><span class="v-title">'+esc(item.name)+'</span></div><div class="play" aria-hidden="true">▶</div></div>';
     }
