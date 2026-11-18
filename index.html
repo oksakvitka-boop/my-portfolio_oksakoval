@@ -131,6 +131,7 @@
     .video-art .v-title{z-index:4;position:absolute;bottom:8%;left:9%;right:9%;font:italic clamp(20px,2.5vw,34px) Georgia,serif;line-height:1.03;color:#fff}
     .play{position:absolute;z-index:5;top:48%;left:50%;transform:translate(-50%,-50%);width:51px;height:51px;border-radius:50%;background:#ffffffdf;display:grid;place-items:center;font-size:15px;transition:scale .25s}
     .video-card:hover .play{scale:1.13}
+    .ai-video-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:2}
     .video-card .project-meta{margin-top:15px}
     .video-card .project-meta h3{font-size:14px}
     .format-pill{display:inline-block;margin-top:4px;color:#88626e;font-size:11px}
@@ -342,7 +343,7 @@
     <div class="container modal-content" id="modalContent"></div>
   </div>
 
-  <div id="blenderVideoModal" class="blender-video-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Перегляд відео Blender 3D">
+  <div id="blenderVideoModal" class="blender-video-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Перегляд вертикального відео">
     <button id="closeBlenderVideo" class="blender-video-close" type="button" aria-label="Закрити відео">×</button>
     <div class="blender-video-stage">
       <video id="blenderVideoPlayer" controls playsinline preload="metadata" hidden></video>
@@ -372,6 +373,7 @@
       {name:"Машинна вишивка",category:"Розробка дизайнів",label:"",type:"photo",image:"assets/machine-embroidery.webp?v=cover-20261117",hideCaption:false,gallery:["assets/embroidery-gallery-01.webp","assets/embroidery-gallery-02.webp","assets/embroidery-gallery-03.webp","assets/embroidery-gallery-04.webp","assets/embroidery-gallery-05.webp"]}
     ];
     const videos=[
+      {name:"Golden Orchard",category:"AI Jewelry · Product film",poster:"assets/ai-video/golden-orchard.jpg",video:"assets/ai-video/golden-orchard.mp4"},
       {name:"Dreamscape",category:"AI cinematic",a:"#d8a8d3",b:"#414173",c:"#f7c9e8",d:"#482b61"},
       {name:"Beyond nature",category:"AI nature",a:"#a9d3d3",b:"#558c9b",c:"#ccebdc",d:"#3d7e8e"},
       {name:"Soft surrealism",category:"AI fashion",a:"#f3b9ba",b:"#b66a99",c:"#fff0d8",d:"#824268"},
@@ -406,12 +408,16 @@
       b.addEventListener("click",()=>openProject(item,"graphic",i));projectGrid.appendChild(b);
     });
     function videoArtHTML(item,i){
+      if(item.poster){
+        return '<div class="video-frame"><div class="video-art" style="--va:#d9b6a3;--vb:#7a5a54;--vc:#fff4e0;--vd:#543d47"><div class="planet"></div><div class="horizon"></div><span class="v-title">'+esc(item.name)+'</span></div><img class="ai-video-poster" src="'+esc(item.poster)+'" alt="" loading="lazy" decoding="async"><div class="play" aria-hidden="true">▶</div></div>';
+      }
       return '<div class="video-frame"><div class="video-art" style="--va:'+item.a+';--vb:'+item.b+';--vc:'+item.c+';--vd:'+item.d+'"><div class="v-ornament"></div><div class="planet"></div><div class="horizon"></div><span class="v-num">AI / '+String(i+1).padStart(2,'0')+'</span><span class="v-title">'+esc(item.name)+'</span></div><div class="play" aria-hidden="true">▶</div></div>';
     }
     videos.forEach((item,i)=>{
       const b=document.createElement("button");b.className="video-card reveal";b.type="button";b.setAttribute("aria-label","Відкрити AI-відеопроєкт "+item.name);
       b.innerHTML=videoArtHTML(item,i)+'<div class="project-meta"><div><h3>'+esc(item.name)+'</h3><p>'+esc(item.category)+'</p><span class="format-pill">9:16 · vertical</span></div><span class="arrow" aria-hidden="true">↗</span></div>';
-      b.addEventListener("click",()=>openVideo(item,i));videoGrid.appendChild(b);
+      const poster=b.querySelector(".ai-video-poster");if(poster)poster.addEventListener("error",()=>poster.remove());
+      b.addEventListener("click",()=>item.video?openBlenderVideo(item,i):openVideo(item,i));videoGrid.appendChild(b);
     });
     // Set item.video to an MP4/WebM URL (and optionally item.poster) when files are added.
     function blenderVideoCoverHTML(item,i){
