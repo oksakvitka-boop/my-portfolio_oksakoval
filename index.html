@@ -373,7 +373,7 @@
       {name:"Машинна вишивка",category:"Розробка дизайнів",label:"",type:"photo",image:"assets/machine-embroidery.webp?v=cover-20261117",hideCaption:false,gallery:["assets/embroidery-gallery-01.webp","assets/embroidery-gallery-02.webp","assets/embroidery-gallery-03.webp","assets/embroidery-gallery-04.webp","assets/embroidery-gallery-05.webp"]}
     ];
     const videos=[
-      {name:"Golden Orchard",category:"AI Jewelry · Product film",video:"assets/ai-video/golden-orchard.mp4",page:"golden-orchard.html"},
+      {name:"Jewelry visualization",category:"",poster:"assets/ai-video/jewelry-visualization-cover.jpg",video:"assets/ai-video/golden-orchard.mp4",page:"golden-orchard.html"},
       {name:"Dreamscape",category:"AI cinematic",a:"#d8a8d3",b:"#414173",c:"#f7c9e8",d:"#482b61"},
       {name:"Beyond nature",category:"AI nature",a:"#a9d3d3",b:"#558c9b",c:"#ccebdc",d:"#3d7e8e"},
       {name:"Soft surrealism",category:"AI fashion",a:"#f3b9ba",b:"#b66a99",c:"#fff0d8",d:"#824268"},
@@ -415,7 +415,7 @@
     }
     videos.forEach((item,i)=>{
       const b=document.createElement("button");b.className="video-card reveal";b.type="button";b.setAttribute("aria-label","Відкрити AI-відеопроєкт "+item.name);
-      b.innerHTML=videoArtHTML(item,i)+'<div class="project-meta"><div><h3>'+esc(item.name)+'</h3><p>'+esc(item.category)+'</p><span class="format-pill">9:16 · vertical</span></div><span class="arrow" aria-hidden="true">↗</span></div>';
+      b.innerHTML=videoArtHTML(item,i)+'<div class="project-meta"><div><h3>'+esc(item.name)+'</h3>'+(item.category?'<p>'+esc(item.category)+'</p>':'')+(item.page==="golden-orchard.html"?'':'<span class="format-pill">9:16 · vertical</span>')+'</div><span class="arrow" aria-hidden="true">↗</span></div>';
       const poster=b.querySelector(".ai-video-poster");if(poster)poster.addEventListener("error",()=>poster.remove());
       b.addEventListener("click",()=>item.page?window.location.assign(item.page):(item.video?openBlenderVideo(item,i):openVideo(item,i)));videoGrid.appendChild(b);
     });
