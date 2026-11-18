@@ -221,6 +221,13 @@
       .hero.hero-floral .hero-bottom{gap:14px;flex-wrap:wrap}
     }
 
+    /* Move only the author's name, specialties and CTA left, leaving Portfolio in place. */
+    @media(min-width:721px){
+      .hero.hero-floral .hero-name,
+      .hero.hero-floral .hero-desc,
+      .hero.hero-floral .hero-bottom{transform:translateX(-44px)}
+    }
+
     /* Beauty & Cosmetics: 1-column case, consistent width without cropping banners. */
     .beauty-intro{font-size:14px;color:var(--muted);line-height:1.65;margin:0 0 26px}
     .beauty-showcase{display:flex;flex-direction:column;gap:22px;width:min(100%,1200px);margin:0 auto}
