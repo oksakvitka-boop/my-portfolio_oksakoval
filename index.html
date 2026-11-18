@@ -310,7 +310,7 @@
     const projects=[
       {name:"Хижанська — лендінг",category:"Дизайн сайту · Landing Page",type:"photo",image:"assets/khizhanska/cover.webp",landingPageUrl:"khizhanska-landing.html"},
       {name:"Graphic drawings",category:"",type:"photo",image:"assets/graphic-drawings/illustration-01.webp",illustrations:["assets/graphic-drawings/illustration-01.webp","assets/graphic-drawings/illustration-02.webp","assets/graphic-drawings/illustration-03.webp","assets/graphic-drawings/illustration-04.webp"]},
-      {name:"Новий проєкт 02",category:"Місце для нового кейсу",slot:"empty",coverTitle:"Проєкт 02",coverCaption:"COMING NEXT",pendingSlot:true},
+      {name:"Blender 3D Renders",category:"",type:"photo",image:"assets/blender-3d/ring.webp",renderGallery:["assets/blender-3d/ring.webp"]},
       {name:"Новий проєкт 03",category:"Місце для нового кейсу",slot:"empty",coverTitle:"Проєкт 03",coverCaption:"COMING NEXT",pendingSlot:true},
       {name:"Zlato Epic Sale",category:"Landing Page Design",label:"",type:"photo",image:"assets/zlato-epic-sale-cover.jpg",fullPageParts:["assets/zlato-parts/part-01.bin","assets/zlato-parts/part-02.bin","assets/zlato-parts/part-03.bin","assets/zlato-parts/part-04.bin","assets/zlato-parts/part-05.bin","assets/zlato-parts/part-06.bin","assets/zlato-parts/part-07.bin","assets/zlato-parts/part-08.bin","assets/zlato-parts/part-09.bin","assets/zlato-parts/part-10.bin"],hideCaption:false},
       {name:"Предметна фотографія",category:"Парфумерія · Косметика",type:"photo",image:"assets/product-photography/cover-square.jpg?v=20261117-photos",photographyGallery:[{"src":"assets/product-photography/01.jpg","alt":"Antonio Banderas Her Secret — предметна фотографія парфумів на рожевому фоні"},{"src":"assets/product-photography/02.jpg","alt":"Pomellato NUDO — предметна фотографія парфумів у ніжній композиції"},{"src":"assets/product-photography/03.jpg","alt":"Beauty photography — косметичні пензлі та аксесуари"},{"src":"assets/product-photography/04.jpg","alt":"Lancôme La Vie Est Belle — рекламна предметна фотографія парфумів"},{"src":"assets/product-photography/05.jpg","alt":"Beauty flat lay — добірка косметичних і доглядових засобів"},{"src":"assets/product-photography/06.jpg","alt":"Tony Moly Banana Hand Milk — яскрава предметна фотографія косметики"},{"src":"assets/product-photography/07.jpg","alt":"Ungaro — рекламна предметна фотографія чоловічої парфумерії"}]},
@@ -387,6 +387,11 @@
       if(item.illustrations&&item.illustrations.length){
         const drawings=item.illustrations.map((src,n)=>'<figure class="print-case-photo"><img src="'+esc(src)+'" alt="Graphic drawing '+(n+1)+'" loading="'+(n===0?'eager':'lazy')+'" decoding="async"></figure>').join('');
         modalContent.innerHTML='<h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+'</h2><div class="print-case-gallery">'+drawings+'</div>';
+        showModal();return;
+      }
+      if(item.renderGallery&&item.renderGallery.length){
+        const renders=item.renderGallery.map((src,n)=>'<figure class="print-case-photo" style="max-width:800px;margin:0 auto"><img src="'+esc(src)+'" alt="Blender 3D render '+(n+1)+'" loading="'+(n===0?'eager':'lazy')+'" decoding="async"></figure>').join('');
+        modalContent.innerHTML='<h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+'</h2><div class="print-case-gallery">'+renders+'</div>';
         showModal();return;
       }
       if(item.pendingSlot){
