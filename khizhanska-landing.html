@@ -1,0 +1,1166 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6b7d70">
+  <meta name="description" content="Хижанська — мінеральна столова вода. Демонстраційна версія лендінгу за наданим макетом.">
+  <title>Хижанська — чиста сила Закарпаття</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+/* v5: Exact AGBengalyC typeface for the subtitle.
+   Loads a user's locally installed font, or a legitimately licensed AGBengalyC.otf
+   stored alongside this HTML. If neither is present, uses a serif fallback. */
+@font-face{
+  font-family:'AGBengalyC';
+  src:local('AGBengalyC'),local('AGBengalyC Regular'),url('./AGBengalyC.otf') format('opentype');
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+}
+:root{--deep:#567257;--deeper:#8e9491;--ink:#465047;--muted:#7b837d;--cream:#f2f5ee;--soft:#e5ecdf;--border:#c5cdc6;--serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;--sans:'Manrope',Arial,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:86px}
+body{margin:0;color:var(--ink);font:15px/1.6 var(--sans);background:var(--cream);-webkit-font-smoothing:antialiased}
+button,select,input,textarea{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.icon-defs{position:absolute;width:0;height:0;overflow:hidden}
+.shell{width:min(100% - 88px,1440px);margin-inline:auto}
+.overline{display:block;color:#6f8572;font-size:11px;font-weight:800;letter-spacing:.2em;line-height:1.3;margin-bottom:22px}
+.overline-light{color:#c7cfca}
+h1,h2,h3,p{margin-top:0}h1,h2{font-family:var(--serif);font-weight:600;letter-spacing:-.03em;line-height:.95}h2{font-size:clamp(34px,3.3vw,60px)}
+.copy{font-size:15px;line-height:1.85;max-width:530px;color:#67736b}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:17px;border:1px solid transparent;border-radius:5px;padding:15px 22px;min-height:53px;font-size:13px;font-weight:800;line-height:1.15;white-space:nowrap;transition:background .2s,color .2s,transform .25s,box-shadow .25s}
+.btn svg{width:18px;height:18px;stroke-width:2.2}
+.btn:hover{transform:translateY(-2px);box-shadow:0 7px 20px #002e201a}
+.btn:focus-visible,a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #c8d0ca;outline-offset:3px}
+.btn-green,.btn-dark{background:linear-gradient(180deg,#6f8d69,#567257);color:#fff}.btn-green:hover,.btn-dark:hover{background:linear-gradient(180deg,#7f9a79,#5e795f)}
+.btn-white{background:#fff;color:#4e6650}.btn-white:hover{background:#edf1eb}
+.btn-outline{background:linear-gradient(180deg,#f8faf6,#e9eeea);border:1px solid #b7bfbb;color:#5f7660}.btn-outline:hover{background:linear-gradient(180deg,#6f8d69,#567257);color:#fff;border-color:#6f8d69}
+.site-header{height:88px;position:absolute;z-index:40;top:0;left:0;right:0;background:linear-gradient(180deg, rgba(247,248,244,.96), rgba(237,241,235,.92));border-bottom:1px solid #ffffff96;backdrop-filter:blur(15px);box-shadow:0 4px 24px rgba(112,122,116,.16)}
+.header-inner{height:100%;display:flex;align-items:center;gap:28px;justify-content:space-between}
+.brand{display:inline-flex;align-items:center;gap:10px;color:#5b735a;flex-shrink:0;line-height:1}
+.brand-mark{width:58px;height:50px;stroke-width:1.6}
+.brand-text{display:flex;flex-direction:column;gap:5px}
+.brand-text strong{font:600 clamp(22px,2.3vw,35px)/.9 var(--serif);letter-spacing:.025em}
+.brand-text small{font:800 8px/1.4 var(--sans);letter-spacing:.14em}
+.nav{display:flex;align-items:center;gap:clamp(12px,1.65vw,28px);margin-left:auto}
+.nav a{font-size:12px;font-weight:800;color:#4b544d;white-space:nowrap;transition:color .2s}
+.nav a:hover{color:#6f8f6b}
+.header-actions{display:flex;gap:15px;align-items:center;flex-shrink:0}
+.language-button{border:0;background:transparent;font-weight:800;color:#4b544d;font-size:12px;padding:10px 4px}.language-button span{font-size:18px;margin-left:3px}
+.btn-header{min-height:38px;padding:10px 15px;font-size:11px;border-radius:5px}
+.menu-toggle{display:none;border:0;background:transparent;padding:8px;color:var(--deep)}
+.hero{min-height:min(790px,68vw);height:760px;position:relative;background-image:url('assets/khizhanska/visual-01.webp'),linear-gradient(90deg,#42683b,#548a64 50%,#376345);background-position:center bottom;background-size:cover;background-color:#516456;color:#fff;isolation:isolate;overflow:hidden}
+.hero-scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#062e29 0%,rgba(4,43,37,.985) 27%,rgba(6,43,36,.86) 38%,rgba(5,37,31,.31) 52%,rgba(4,35,30,.04) 68%,rgba(5,34,29,.47) 80%,rgba(4,36,30,.96) 91%,#062e29 100%)}
+.hero:after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,#7d857f99,transparent 20%,transparent 80%,#8088831f);z-index:-1}
+.hero-layout{position:relative;height:100%;display:flex;align-items:center;justify-content:space-between;padding-top:125px;padding-bottom:40px}
+.hero-copy{width:min(49%,590px);position:relative;z-index:2;padding:0 0 14px 0}
+.hero h1{font-size:clamp(53px,5.5vw,91px);line-height:.88;text-transform:uppercase;color:#fff;margin:0 0 27px;text-shadow:0 2px 16px #7c847e4d}
+.hero-copy p{font-size:clamp(16px,1.5vw,21px);line-height:1.6;max-width:340px;color:#e6ede4;margin-bottom:27px}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:12px}
+.play-small{width:25px;height:25px;border-radius:100px;background:#6a8668;color:#fff;display:grid;place-items:center}
+.play-small svg{width:15px;height:15px;stroke:none}
+.hero-benefits{display:flex;flex-direction:column;gap:33px;width:210px;align-self:center;margin-top:40px;position:relative;z-index:2}
+.hero-benefit{display:flex;align-items:center;gap:14px;font-size:13px;line-height:1.4;font-weight:700;color:#f5f7f2}
+.circle-icon{border:1.5px solid #ffffffd9;width:53px;height:53px;border-radius:50%;display:grid;place-items:center;flex-shrink:0}.circle-icon svg{width:25px;height:25px}
+.hero-bottom-line{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:9px;font-size:9px;letter-spacing:.2em;font-weight:800;color:#e7ebe6b3}
+.hero-bottom-line .line{height:25px;width:1px;background:#e7ebe6a6}
+.factory-section{background:#f5f7f2}
+.factory-wrap{display:grid;grid-template-columns:45% 55%;min-height:495px;align-items:stretch}
+.factory-copy{padding:78px 42px 65px 0;align-self:center}
+.factory-copy h2{margin-bottom:26px}
+.factory-features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:42px}
+.factory-features>div{display:flex;flex-direction:column;gap:10px;max-width:145px;font-weight:750;font-size:12px;line-height:1.4}
+.feature-icon svg{width:37px;height:37px;stroke-width:1.25}
+.factory-image-wrap{position:relative;min-height:495px;overflow:hidden;border-radius:0 0 0 22px}
+.factory-image-wrap img{height:100%;width:100%;object-fit:cover;object-position:center}
+.photo-label{display:none}
+.water-product-section{display:grid;grid-template-columns:39% 61%;min-height:630px}
+.mineral-panel{background:linear-gradient(126deg,#ebf0e7 0%,#f4f6f0 68%);position:relative}
+.mineral-content{max-width:555px;margin-left:auto;padding:67px 52px 65px max(44px,calc((100vw - 1440px)/2));}
+.mineral-content h2{font-size:clamp(34px,3.2vw,54px);line-height:1}
+.composition-name{font-family:var(--serif);font-size:21px;font-weight:700;line-height:1.2;margin:25px 0 0}
+.composition-label{font-size:12px;font-weight:800;margin:15px 0 17px}
+.mineral-table{width:100%;max-width:385px}
+.mineral-table>div{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:6px 0;border-bottom:1px solid #bcc3be55;font-size:12px}
+.mineral-table b{font-weight:800;white-space:nowrap}
+.sample-note{max-width:385px;margin:13px 0 19px;color:#7b847f;font-size:10px;line-height:1.55}
+.products-panel{background:linear-gradient(180deg,#ecf1e8 0%,#f3f6f0 66%,#e9efe6 100%);position:relative;overflow:hidden}
+.products-panel::before{content:'';background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDAwIDQwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2FkYzliYSIgc3RvcC1vcGFjaXR5PSIuNjUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlM2VlZTciIHN0b3Atb3BhY2l0eT0iMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxwYXRoIGZpbGw9InVybCgjYSkiIGQ9Ik0wIDMyMCAxOTAgMTU1IDI5MCAyMzQgNDY4IDMwIDY0MCAyNDggNzk1IDk1IDEwMzUgMzAxIDExODIgMTA1IDE0MDAgMjg1djExNUgwWiIvPjxwYXRoIGZpbGw9IiNiN2Q3YzkiIG9wYWNpdHk9Ii40MiIgZD0iTTAgMzkwIDIzMCAyNDcgMzk3IDMzMCA1NjAgMjA0IDc3MCAzMzkgOTE1IDIxOCAxMjA1IDM2MSAxNDAwIDI0OHYxNTJIMFoiLz48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiM4NWFhOWQiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iLjI2IiBkPSJNMCAzMjIgMTkwIDE1NyAyOTAgMjM2IDQ2OCAzMCA2NDAgMjQ3IDc5NSA5OCAxMDM1IDMwMSAxMTgyIDEwNSAxNDAwIDI4NSIvPjwvc3ZnPg==') center 5%/120% auto no-repeat;position:absolute;inset:0;opacity:.6;pointer-events:none}
+.products-content{position:relative;padding:67px clamp(40px,5vw,95px) 60px 55px;max-width:960px}
+.products-content h2{max-width:630px}
+.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:end;gap:15px;margin:35px 0 30px}
+.product-item{border:0;background:transparent;color:var(--ink);min-width:0;padding:0 0 8px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .25s}
+.product-item:hover{transform:translateY(-8px)}
+.product-item:hover .product-image img{filter:drop-shadow(0 12px 11px #7f887f35)}
+.product-image{display:flex;align-items:flex-end;justify-content:center;width:100%;height:250px}
+.product-image img{height:100%;width:auto;max-width:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 6px 7px #7f887f20);transition:filter .3s}
+.product-item strong{font-size:20px;margin:11px 0 1px;line-height:1.1}.product-item>span:last-child{color:#677069;font-size:12px;line-height:1.5;min-height:39px}
+.products-button{min-width:197px}
+.partner-section{background:#fff;padding:77px 0 75px}
+.partner-grid{display:grid;grid-template-columns:37% 63%;gap:28px}
+.partner-copy{padding-right:20px}
+.partner-copy h2{font-size:clamp(36px,3.4vw,56px);margin-bottom:24px}
+.partner-copy .copy{max-width:425px}
+.checklist{margin:24px 0 31px;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:13px;font-weight:700}
+.checklist li{display:flex;align-items:center;gap:11px}.checklist svg{width:17px;height:17px;border:1px solid #6d7f70;border-radius:50%;padding:2px;stroke-width:2.1}
+.distributors>.overline{margin-bottom:20px}
+.distributor-layout{display:grid;grid-template-columns:1.3fr .8fr;gap:25px;align-items:center}
+.map-wrap{position:relative;min-height:282px;display:grid;place-items:center;overflow:hidden}
+.map-wrap img{width:100%;max-height:315px;object-fit:contain;mix-blend-mode:multiply}
+.map-tag{position:absolute;bottom:5px;left:8px;display:flex;align-items:center;gap:6px;color:#707872;font-size:11px;font-weight:650;background:#ffffffd9;padding:4px 7px;border-radius:3px}
+.pin-dot{width:9px;height:9px;border-radius:50%;background:#789073}
+.distributor-card{border:1px solid #d6ddd7;border-radius:7px;box-shadow:0 10px 25px #8188830a;padding:24px;background:#fff}
+.distributor-card label{display:block;font-size:12px;font-weight:800;margin-bottom:8px}.distributor-card select{width:100%;background:#f7f8f4;border:1px solid #d3dad3;padding:11px 10px;border-radius:5px;color:#5a665d;font-size:12px}
+.region-result{min-height:122px;border-bottom:1px solid #dde3dd;margin:20px 0 19px}.region-result strong{font-size:12px}.region-result p{font-size:12px;color:var(--muted);line-height:1.65;margin-top:7px}
+.btn-full{width:100%}
+.benefits-section{background:#eef1e8;padding:65px 0 70px}
+.benefits-grid{display:grid;grid-template-columns:28% 72%;gap:22px;align-items:center}
+.benefits-intro{padding-right:30px}.benefits-intro h2{font-size:clamp(35px,3.3vw,54px);line-height:.99;margin-bottom:20px}.benefits-intro .copy{font-size:13px;line-height:1.8;margin-bottom:23px}.benefits-intro .btn{font-size:12px;padding-inline:14px}
+.benefit-photo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}
+.photo-benefit{height:245px;border:0;border-radius:8px;padding:0;overflow:hidden;position:relative;text-align:left;color:#fff;background:#6b7f6d;transition:transform .25s}
+.photo-benefit:hover{transform:translateY(-6px)}.photo-benefit img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.photo-benefit:hover img{transform:scale(1.06)}
+.photo-benefit:after{content:'';position:absolute;inset:35% 0 0;background:linear-gradient(0deg,#555b58e9,transparent);pointer-events:none}
+.photo-benefit span{position:absolute;bottom:16px;left:14px;right:12px;z-index:1;font-size:13px;font-weight:800;line-height:1.35;text-shadow:0 1px 4px #0008}
+.footer{background:#567257;color:#e7ebe6;padding:65px 0 20px;position:relative;overflow:hidden}
+.footer:before{content:'';position:absolute;inset:auto -10% -100px 30%;height:230px;background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDAwIDQwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2FkYzliYSIgc3RvcC1vcGFjaXR5PSIuNjUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlM2VlZTciIHN0b3Atb3BhY2l0eT0iMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxwYXRoIGZpbGw9InVybCgjYSkiIGQ9Ik0wIDMyMCAxOTAgMTU1IDI5MCAyMzQgNDY4IDMwIDY0MCAyNDggNzk1IDk1IDEwMzUgMzAxIDExODIgMTA1IDE0MDAgMjg1djExNUgwWiIvPjxwYXRoIGZpbGw9IiNiN2Q3YzkiIG9wYWNpdHk9Ii40MiIgZD0iTTAgMzkwIDIzMCAyNDcgMzk3IDMzMCA1NjAgMjA0IDc3MCAzMzkgOTE1IDIxOCAxMjA1IDM2MSAxNDAwIDI0OHYxNTJIMFoiLz48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiM4NWFhOWQiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iLjI2IiBkPSJNMCAzMjIgMTkwIDE1NyAyOTAgMjM2IDQ2OCAzMCA2NDAgMjQ3IDc5NSA5OCAxMDM1IDMwMSAxMTgyIDEwNSAxNDAwIDI4NSIvPjwvc3ZnPg==') center bottom/cover no-repeat;opacity:.19;filter:grayscale(1);pointer-events:none}
+.footer-grid{display:grid;position:relative;grid-template-columns:2.1fr 1fr 1fr 1.55fr;gap:50px;padding-bottom:60px}
+.footer-brand{color:white}.footer-brand .brand-mark{width:65px;height:58px}.footer-brand .brand-text strong{font-size:35px}.footer-brand-col p{font-size:13px;color:#c4ccc6;margin-top:24px}
+.footer h3{font-size:13px;font-weight:800;margin:0 0 16px;color:#fff}
+.footer-links{display:flex;flex-direction:column;gap:8px}.footer-links h3{margin-bottom:8px}.footer-links a,.footer-contact p{font-size:12px;color:#c7cfca}.footer-links a:hover{color:white}
+.footer-contact p{line-height:1.8;max-width:230px;margin-bottom:18px}.btn-footer{background:transparent;color:#fff;border-color:#b6beb8;font-size:11px;min-height:40px;padding:9px 12px}
+.footer-base{position:relative;display:flex;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid #ffffff3d;padding-top:18px;font-size:11px;color:#c3cbc5}
+.footer-base a:hover{color:white}
+.modal-backdrop{position:fixed;inset:0;background:#666c69cc;z-index:100;display:flex;align-items:center;justify-content:center;padding:22px;visibility:hidden;opacity:0;transition:opacity .2s,visibility .2s;backdrop-filter:blur(6px)}
+.modal-backdrop.open{visibility:visible;opacity:1}
+.modal-dialog{max-width:600px;width:100%;max-height:min(89vh,850px);overflow:auto;background:#f7f8f4;box-shadow:0 24px 100px #0006;border-radius:13px;padding:38px;position:relative}
+.modal-dialog h2{font-size:49px;line-height:1.03;margin-bottom:20px}.modal-dialog p,.modal-dialog li{font-size:14px;color:#69716b;line-height:1.8}
+.modal-close{position:absolute;top:17px;right:17px;display:grid;place-items:center;background:#e7ebe6;border:0;width:38px;height:38px;border-radius:50%;color:#6e8470}
+.modal-close svg{width:20px;height:20px}
+.modal-form{display:grid;gap:15px;margin-top:23px}.modal-form label{display:grid;gap:7px;font-size:12px;font-weight:800;color:#6c7d70}.modal-form input,.modal-form textarea{width:100%;padding:13px;border-radius:5px;border:1px solid #c8d0ca;background:#fff;font-size:14px;resize:vertical;outline-color:#6d8a69}
+.form-notice{background:#eaf0e8;border-left:3px solid #7f9478;border-radius:4px;color:#3e6052;padding:14px;margin-top:15px;font-size:12px;line-height:1.7}
+.modal-product{display:flex;gap:26px;align-items:center}.modal-product img{height:255px;width:180px;object-fit:contain}.modal-product p{margin-top:0}
+.modal-table{width:100%;border-collapse:collapse;margin:12px 0}.modal-table td{padding:9px 0;border-bottom:1px solid #dce7dd;font-size:13px}.modal-table td:last-child{text-align:right;font-weight:700}
+body.modal-open{overflow:hidden}
+.reveal{transition:opacity .6s ease,translate .6s ease}
+@media(max-width:1250px){.shell{width:min(100% - 56px,1440px)}.nav{gap:11px}.nav a{font-size:10px}.brand-mark{width:46px}.brand-text strong{font-size:27px}.brand-text small{font-size:7px}.header-inner{gap:15px}.btn-header{padding:9px 11px}.hero-copy{width:55%}.hero h1{font-size:clamp(52px,6vw,78px)}.factory-copy{padding-right:25px}.benefits-grid{grid-template-columns:31% 69%;gap:10px}.photo-benefit{height:205px}.mineral-content{padding-left:34px;padding-right:30px}.products-content{padding-left:36px;padding-right:32px}}
+@media(max-width:1000px){.site-header{height:76px}.menu-toggle{display:grid;place-items:center}.nav{display:none;position:absolute;top:76px;left:0;right:0;background:#f9fcf8;box-shadow:0 12px 25px #00281920;padding:15px 28px 24px;flex-direction:column;align-items:stretch;gap:0}.nav.open{display:flex}.nav a{padding:12px 0;border-bottom:1px solid #e7eee9;font-size:13px}.hero{height:690px;min-height:690px}.hero-copy{width:61%}.hero h1{font-size:clamp(53px,7vw,79px)}.hero-benefits{width:170px;margin-right:0;gap:24px}.hero-benefit{font-size:11px}.circle-icon{width:45px;height:45px}.water-product-section{grid-template-columns:1fr}.mineral-content{max-width:unset;width:min(100% - 56px,900px);margin:0 auto;padding:55px 0}.mineral-panel .mineral-content h2{max-width:700px}.mineral-table{max-width:600px}.products-content{padding:60px 28px;margin:auto;max-width:980px}.partner-grid{grid-template-columns:1fr;gap:55px}.distributor-layout{grid-template-columns:1.5fr 1fr}.benefits-grid{grid-template-columns:1fr;gap:30px}.benefits-intro{padding-right:0;max-width:640px}.benefits-intro .copy{max-width:540px}.photo-benefit{height:245px}.footer-grid{gap:30px}}
+@media(max-width:680px){.shell{width:min(100% - 36px,1440px)}.site-header{height:72px}.header-inner{gap:8px}.brand{gap:5px}.brand-mark{width:37px;height:38px}.brand-text strong{font-size:24px}.brand-text small{font-size:6px}.btn-header{display:none}.language-button{font-size:11px}.header-actions{gap:5px}.nav{top:72px;padding:13px 20px 21px}.hero{height:auto;min-height:770px;background-position:57% bottom}.hero-scrim{background:linear-gradient(180deg,rgba(4,46,38,.82) 0%,rgba(4,46,38,.94) 16%,rgba(4,44,36,.89) 48%,rgba(3,35,29,.52) 69%,rgba(4,38,31,.92) 100%)}.hero-layout{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:35px;padding-top:123px;padding-bottom:87px}.hero-copy{width:100%;max-width:510px}.hero h1{font-size:clamp(49px,11vw,73px);margin-bottom:20px}.hero-copy p{font-size:15px;max-width:320px}.hero-buttons{gap:9px}.btn{min-height:48px;padding:13px 14px;font-size:11px;gap:9px}.hero-benefits{align-self:stretch;margin-top:auto;width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.hero-benefit{flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;font-size:10px;gap:8px;line-height:1.3}.hero-benefit br{display:none}.circle-icon{width:44px;height:44px}.hero-bottom-line{bottom:11px}.hero-bottom-line .line{height:15px}.factory-wrap{grid-template-columns:1fr}.factory-copy{padding:58px 0 45px}.factory-image-wrap{min-height:285px;border-radius:12px}.factory-features{margin-top:30px;gap:10px}.factory-features>div{font-size:10px}.feature-icon svg{width:32px;height:32px}.water-product-section{grid-template-columns:1fr}.mineral-content{width:min(100% - 36px,900px)}.products-content{padding:56px 18px 55px}.products-content h2{font-size:40px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:21px}.product-image{height:210px}.product-item>span:last-child{font-size:11px}.product-item strong{font-size:18px}.product-item:hover{transform:none}.product-grid{margin-top:30px}.partner-section{padding:57px 0}.partner-copy h2{font-size:43px}.distributor-layout{grid-template-columns:1fr;gap:12px}.map-wrap{min-height:190px}.distributor-card{padding:20px}.region-result{min-height:90px}.benefits-section{padding:57px 0}.benefit-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.photo-benefit{height:245px}.footer{padding:50px 0 20px}.footer-grid{grid-template-columns:repeat(2,1fr);gap:36px 20px;padding-bottom:38px}.footer-brand-col{grid-column:span 2}.footer-brand .brand-text strong{font-size:34px}.footer-brand-col p{margin-top:14px}.footer-contact{grid-column:span 2}.footer-base{align-items:flex-start;flex-direction:column;font-size:10px}.modal-dialog{padding:29px 21px}.modal-dialog h2{font-size:39px}.modal-product{flex-direction:column;align-items:center}.modal-product img{height:210px}}
+@media(max-width:390px){.brand-text strong{font-size:21px}.brand-mark{width:32px}.hero h1{font-size:47px}.hero-buttons .btn{padding:12px 10px;gap:5px}.hero-benefits{gap:3px}.hero-benefit{font-size:9px}.circle-icon{width:39px;height:39px}.photo-benefit{height:210px}.photo-benefit span{font-size:11px}.product-image{height:180px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+/* The original reference is a single screenshot. An opaque tint beneath editable HTML
+   ensures the underlying screenshot captions do not visually duplicate live text. */
+@media (min-width:681px){
+ .hero-scrim{background:linear-gradient(90deg,#052d27 0%,#052d27 39%,rgba(5,45,39,.99) 45%,rgba(5,45,39,.88) 51%,rgba(5,45,39,.13) 60%,rgba(4,35,30,.08) 76%,rgba(5,39,33,.90) 86%,#052d27 96%)}
+ .hero h1{font-size:clamp(54px,4.7vw,75px)}
+ .hero-copy{width:min(53%,640px)}
+}
+@media (max-width:680px){
+ .hero-scrim{background:linear-gradient(180deg,#052d27 0%,#052d27 46%,rgba(5,45,39,.96) 58%,rgba(5,45,39,.56) 72%,#052d27 100%)}
+}
+
+@media (min-width:681px){.hero-scrim{background:linear-gradient(90deg,#052d27 0%,#052d27 39%,rgba(5,45,39,.99) 45%,rgba(5,45,39,.88) 51%,rgba(5,45,39,.13) 60%,rgba(4,35,30,.20) 72%,rgba(5,39,33,.99) 82%,#052d27 89%)}}
+
+
+/* ХИЖАНСЬКА: original green-gradient label logotype, transparent on existing header backdrop */
+.brand.brand-original{display:inline-flex; flex-direction:column;justify-content:center;align-items:center;gap:4px;width:266px;min-width:266px;max-width:266px;line-height:1; flex-shrink:0;}
+.brand-original-logo{display:block;width:266px;height:auto;max-width:none;object-fit:contain;}
+.brand-original-sub{display:block;width:100%;font-family:'AGBengalyC',Georgia,'Times New Roman',serif;font-size:9.25px;line-height:1.12;white-space:nowrap;letter-spacing:-.016em;font-weight:500;text-transform:none;color:#478156;text-align:center;}
+.site-header .header-inner{gap:clamp(10px,1.5vw,22px)}
+.site-header .nav{gap:clamp(10px,1.1vw,20px)}
+@media (min-width:901px) and (max-width:1220px){
+  .brand.brand-original{width:242px;min-width:242px;max-width:242px}
+  .brand-original-logo{width:242px}
+  .brand-original-sub{font-size:8.35px}
+  .site-header .header-inner{gap:12px}
+  .site-header .nav{gap:10px}
+}
+
+/* v4: DESKTOP ONLY — tagline visually spans the exact width of the original logo. */
+@media (min-width: 901px){
+  .site-header .brand-original-sub{
+    width:100%;
+    font-family:'AGBengalyC',Georgia,'Times New Roman',serif;
+    font-size:9.25px;
+    line-height:1.12;
+    letter-spacing:0;
+    text-align:left;
+    white-space:nowrap;
+  }
+}
+
+/* v6 — fresh green gradient matched to the supplied original label swatch.
+   Only color-bearing buttons and little circular controls are retinted.
+   Layout, original logotype, AGBengalyC subtitle and other sections are unchanged. */
+:root {
+  --fresh-water-green: linear-gradient(180deg,
+    #B4D9B9 0%, #9FD2A8 14%, #78C58E 34%,
+    #4EB477 58%, #2BA162 80%, #229657 100%);
+  --fresh-water-green-hover: linear-gradient(180deg,
+    #A6D3AD 0%, #84CB98 17%, #54B97D 42%,
+    #28A266 72%, #17864E 100%);
+}
+.btn-green, .btn-dark {
+  background: var(--fresh-water-green);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,65,32,.48);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3);
+}
+.btn-green:hover, .btn-dark:hover,
+.btn-green:focus-visible, .btn-dark:focus-visible {
+  background: var(--fresh-water-green-hover);
+}
+.btn-outline:hover {
+  background: var(--fresh-water-green);
+  border-color: #35A868;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,65,32,.4);
+}
+/* Mini round play button, map marker and modal close button. */
+.play-small, .pin-dot, .modal-close {
+  background: var(--fresh-water-green);
+}
+.modal-close { color: #fff; }
+.modal-close:hover { background: var(--fresh-water-green-hover); }
+/* Photo tiles are buttons; update their image fallback without touching photos. */
+.photo-benefit { background: var(--fresh-water-green); }
+
+/* Version 7: match the footer background to the fresh green button gradient.
+   Keep the existing footer mountain artwork/pseudo-element untouched. */
+.footer {
+  background: var(--fresh-water-green);
+  color: #143C2B;
+}
+/* Maintain legibility on the light upper half of the green gradient. */
+.footer .footer-brand,
+.footer h3 { color: #123D2B; }
+.footer .footer-brand-col p,
+.footer .footer-links a,
+.footer .footer-contact p { color: #164A34; }
+.footer .footer-links a:hover { color: #07301D; }
+.footer .btn-footer {
+  color: #123D2B;
+  border-color: rgba(18,78,46,.52);
+  background: rgba(255,255,255,.13);
+}
+.footer .btn-footer:hover { color: #fff; border-color: #177947; background: #187A49; }
+.footer .footer-base {
+  color: #fff;
+  border-top-color: rgba(255,255,255,.42);
+  text-shadow: 0 1px 2px rgba(0,45,22,.45);
+}
+.footer .footer-base a { color: #fff; }
+
+
+
+/* v8: Footer wordmark is the exact supplied green lettering, with transparent background.
+   Green footer gradient, mountain graphic and all other blocks remain unchanged. */
+.footer-original-brand { display:inline-flex; align-items:center; max-width:100%; text-decoration:none; }
+.footer-original-logo { display:block; width:322px; max-width:100%; height:auto; filter:none; box-shadow:none; text-shadow:none; }
+.footer-logo-subtitle { width:322px; max-width:100%; margin:8px 0 0; color:#fff; text-align:left; font:600 16px/1.25 var(--serif); letter-spacing:.01em; white-space:nowrap; transform:none; }
+
+
+/* v9 — Original supplied Carpathian panorama, with the bottle and label baked into the photograph.
+   The original hero HTML content and header/nav/buttons are intentionally unchanged. */
+.hero {
+  background-position: center center;
+  background-size: cover;
+  background-color: #116f45;
+}
+.hero .hero-scrim {
+  background: linear-gradient(90deg,
+    rgba(0,37,22,.23) 0%,
+    rgba(0,37,22,.12) 30%,
+    rgba(0,37,22,0) 55%,
+    rgba(0,37,22,0) 76%,
+    rgba(0,37,22,.13) 100%);
+}
+.hero::after {
+  background: linear-gradient(0deg,rgba(0,29,19,.13), transparent 16%, transparent 90%);
+}
+@media (max-width:680px) {
+  .hero { background-position: 55% center; }
+  .hero-benefit br { display:block; }
+  .hero-benefit { overflow-wrap:anywhere; }
+  .hero .hero-scrim {
+    background: linear-gradient(180deg,
+      rgba(0,41,25,.74) 0%,
+      rgba(0,41,25,.66) 39%,
+      rgba(0,41,25,.15) 69%,
+      rgba(0,41,25,.47) 100%);
+  }
+}
+
+/* v10: updated user-provided panorama; move only the right hero benefits 40px
+   to the right on desktop so the icons and text sit over the green area. */
+@media (min-width:1001px) {
+  .hero .hero-benefits { transform: translateX(40px); }
+}
+
+/* Subtle non-destructive water and carbonation animation. 
+   Overlay shares the hero's exact background-image positioning; the underlying photograph and label stay intact. */
+.hero { isolation:isolate; }
+.hero-water-motion {
+  display:block;
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  z-index:0;
+  pointer-events:none;
+  user-select:none;
+  opacity:1;
+}
+.hero .hero-layout { z-index:2; }
+.hero .hero-bottom-line { z-index:3; }
+@media(prefers-reduced-motion:reduce) {
+ .hero-water-motion { display:none !important; }
+}
+
+/* v12 — framed, reduced factory photograph with comfortable breathing space below hero. */
+.factory-section {
+  padding-block: 42px 46px;
+}
+.factory-wrap {
+  align-items: center;
+  min-height: 0;
+}
+.factory-copy {
+  padding-block: 38px;
+}
+.factory-image-wrap {
+  box-sizing: border-box;
+  width: calc(100% - 76px);
+  max-width: 720px;
+  min-height: 0;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  margin: 0 auto;
+  border: 0;
+  border-radius: 20px;
+  box-shadow: none;
+}
+.factory-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+@media (max-width: 1000px) and (min-width: 681px) {
+  .factory-image-wrap { width: calc(100% - 36px); }
+  .factory-copy { padding: 34px 16px 34px 0; }
+}
+@media (max-width: 680px) {
+  .factory-section { padding: 0 0 34px; }
+  .factory-copy { padding: 52px 0 32px; }
+  .factory-image-wrap {
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    margin: 0 auto;
+    border: 0;
+    border-radius: 16px;
+    box-shadow: none;
+  }
+}
+
+
+/* Distributor map: transparent artwork, no frame, card, shadow or map caption. */
+.map-wrap { background: transparent; border: 0; box-shadow: none; overflow: visible; }
+.map-wrap img { display:block; width:100%; height:auto; max-height:350px; object-fit:contain; mix-blend-mode:normal; background:transparent; border:0; border-radius:0; box-shadow:none; }
+@media(max-width:680px){ .map-wrap{min-height:0;} .map-wrap img{max-height:350px;} }
+
+/* Product refresh: three supplied transparent packshots, no strokes or shadows. */
+#products .product-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2.2vw,30px);margin-top:35px;align-items:end}
+#products .product-item{background:transparent;border:0;box-shadow:none;transform:none;outline-offset:3px}
+#products .product-item:hover{transform:none;box-shadow:none}
+#products .product-image{height:275px;align-items:flex-end;justify-content:center}
+#products .product-image img{display:block;height:auto;width:auto;max-height:100%;max-width:100%;object-fit:contain;filter:none!important;box-shadow:none!important;border:0;outline:0;transition:none}
+#products .product-item:hover .product-image img{filter:none!important;box-shadow:none!important}
+@media(max-width:680px){
+  #products .product-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:28px}
+  #products .product-image{height:185px}
+  #products .product-item strong{font-size:17px;margin-top:9px}
+  #products .product-item>span:last-child{font-size:10px;min-height:44px}
+}
+@media(max-width:390px){#products .product-image{height:160px}#products .product-item strong{font-size:16px}}
+
+
+/* HERO PHOTO SAFE-FIT: entire bottle cap + base in view; no stretching or crop at top. */
+.hero {
+  --hero-safe-top: 88px;
+  background-size: auto calc(100% - var(--hero-safe-top)), cover;
+  background-position: center bottom, center center;
+  background-repeat: no-repeat, no-repeat;
+}
+@media (min-width: 681px) and (max-width: 1000px) {
+  .hero { background-position: 63% bottom, 63% center; }
+}
+@media (max-width: 680px) {
+  .hero { background-position: 65% bottom, 65% center; }
+}
+
+
+/* Footer update: dark-green gradient matched to the supplied #007B3D reference.
+   Keep the same layout, graphics, links, and all hero animations unchanged. */
+.footer {
+  background: linear-gradient(180deg,
+    #008348 0%,
+    #007B3D 32%,
+    #006F3A 67%,
+    #005D32 100%);
+  color: #F5FFF7;
+}
+.footer .footer-brand, .footer h3,
+.footer .footer-brand-col p,
+.footer .footer-links a,
+.footer .footer-contact p {
+  color: #EDF8F0;
+}
+.footer .footer-links a:hover { color: #FFFFFF; }
+.footer .btn-footer {
+  color: #FFFFFF;
+  border-color: rgba(255,255,255,.53);
+  background: rgba(255,255,255,.06);
+}
+.footer .footer-base {
+  color: #EAF6EC;
+  border-top-color: rgba(255,255,255,.32);
+  text-shadow: none;
+}
+.footer .footer-base a { color: #FFFFFF; }
+
+
+/* v13: HEADER ONLY — brand reference: dark forest green and luminous ivory lettering.
+   Keep existing header markup, nav behavior, hero, water bubbles, and footer untouched. */
+.site-header {
+  background: linear-gradient(180deg, #39804D 0%, #367C47 48%, #327341 100%);
+  border-bottom: 1px solid rgba(255,255,255,.22);
+  box-shadow: 0 4px 20px rgba(17,55,29,.18);
+}
+.site-header .brand-original-logo { filter: none; }
+.site-header .brand-original-sub {
+  color: #F1F8EC;
+  font-family: 'AGBengalyC', Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  font-size: 10.2px;
+  line-height: 1.15;
+  letter-spacing: -.018em;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(12,56,28,.17);
+}
+.site-header .nav a, .site-header .language-button, .site-header .menu-toggle {
+  color: #FFFFFF;
+}
+.site-header .nav a:hover, .site-header .nav a:focus-visible {
+  color: #E0F1DC;
+}
+.site-header .language-button:hover { color: #E0F1DC; }
+.site-header .menu-toggle:hover { color: #E0F1DC; }
+.site-header .btn-header {
+  background: #F8FBF6;
+  color: #2F7041;
+  border: 1px solid rgba(255,255,255,.92);
+  text-shadow: none;
+  box-shadow: 0 2px 8px rgba(0,38,17,.12);
+}
+.site-header .btn-header:hover, .site-header .btn-header:focus-visible {
+  background: #E9F3E8;
+  color: #275E38;
+  border-color: #F8FBF6;
+  text-shadow: none;
+}
+@media (max-width: 1000px) {
+  .site-header .nav {
+    background: linear-gradient(180deg, #367A49, #2F6D40);
+    box-shadow: 0 12px 25px rgba(0,33,13,.22);
+  }
+  .site-header .nav a { border-bottom-color: rgba(255,255,255,.18); }
+}
+@media (max-width: 680px) {
+  .site-header .brand-original-sub { font-size: 8.3px; }
+}
+
+/* Two-product composition. Original 1 L artwork is unchanged; glass packshot is inserted as supplied. */
+#products .products-content { max-width:960px; }
+#products .product-grid.two-bottle-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:end;
+  justify-items:center;
+  gap:clamp(34px,5.4vw,94px);
+  width:min(100%,750px);
+  margin:33px auto 28px;
+}
+#products .two-bottle-grid .product-item {
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding-bottom:7px;
+}
+#products .two-bottle-grid .product-image {
+  display:flex;
+  width:100%;
+  height:clamp(280px,26vw,365px);
+  align-items:flex-end;
+  justify-content:center;
+  overflow:visible;
+}
+#products .two-bottle-grid .product-image img {
+  display:block;
+  width:auto;
+  max-width:100%;
+  max-height:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center bottom;
+  border:0;
+  outline:0;
+  filter:none!important;
+  box-shadow:none!important;
+}
+#products .two-bottle-grid .product-item strong { font-size:22px; margin-top:17px; }
+#products .two-bottle-grid .product-item>span:last-child {
+  margin-top:5px; min-height:39px; font-size:13px; line-height:1.5;
+}
+@media (max-width:1000px) {
+  #products .product-grid.two-bottle-grid { width:min(100%,700px); gap:clamp(24px,5vw,72px); }
+  #products .two-bottle-grid .product-image {height:clamp(280px,39vw,360px);}
+}
+@media (max-width:680px) {
+  #products .product-grid.two-bottle-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:clamp(12px,4vw,28px);
+    margin:27px auto 25px;
+  }
+  #products .two-bottle-grid .product-image {height:clamp(205px,58vw,315px);}
+  #products .two-bottle-grid .product-item strong {font-size:20px;margin-top:13px;}
+  #products .two-bottle-grid .product-item>span:last-child {
+    font-size:12px;
+    min-height:39px;
+    margin-top:5px;
+  }
+}
+@media(max-width:390px){
+  #products .two-bottle-grid .product-image {height:clamp(185px,60vw,226px)}
+  #products .two-bottle-grid .product-item strong{font-size:18px}
+  #products .two-bottle-grid .product-item>span:last-child{font-size:11px}
+}
+
+</style>
+</head>
+<body>
+<svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+ <symbol id="i-mountain" viewBox="0 0 80 50"><path d="M3 39 23 18l10 10L48 5l29 34M35 21l12-16 8 18M13 29l9-5 8 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 46 42 28l16 11 9-7 10 9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+ <symbol id="i-play" viewBox="0 0 24 24"><path d="m9 6 10 6-10 6z" fill="currentColor" stroke="none"/></symbol>
+ <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 4C8 4 4 9 4 16a4 4 0 0 0 4 4c7 0 12-5 12-16ZM4 20 17 8"/></symbol>
+ <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 2c-3 4-8 9-8 14a8 8 0 0 0 16 0c0-5-5-10-8-14Z"/></symbol>
+ <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 8.6c0 5.5-8.8 11.1-8.8 11.1S3.2 14.1 3.2 8.6a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z"/></symbol>
+ <symbol id="i-factory" viewBox="0 0 24 24"><path d="M3 21V10l6 4v-4l6 4V3h5v18H3Zm5 0v-3m5 3v-3m5 3v-3"/></symbol>
+ <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 2 9 4v6c0 6-4 9-9 11-5-2-9-5-9-11V6l9-4Zm-5 10 3 3 7-7"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+ <symbol id="i-pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 12-7 12S5 15 5 10a7 7 0 1 1 14 0Zm-7-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></symbol>
+ <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2ZM10 18h4"/></symbol>
+ <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 7 9-7"/></symbol>
+ <symbol id="i-bars" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+ <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5 19 19M19 5 5 19"/></symbol>
+ <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.8 7.2L22 12l-7.2 2.8L12 22l-2.8-7.2L2 12l7.2-2.8L12 2Z"/></symbol>
+</svg>
+
+<header class="site-header" id="top">
+ <div class="header-inner shell">
+   <a href="#top" class="brand brand-original" aria-label="Хижанська — головна">
+     <img class="brand-original-logo" src="assets/khizhanska/visual-02.webp" alt="ХИЖАНСЬКА — вода мінеральна природна лікувально-столова" width="1830" height="334" />
+   </a>
+   <nav class="nav" id="mainNav" aria-label="Головна навігація">
+     <a href="#factory" data-i18n="navFactory">Про завод</a>
+     <a href="#mineral" data-i18n="navWater">Наша вода</a>
+     <a href="#products" data-i18n="navProducts">Продукція</a>
+     <a href="#partners" data-i18n="navPartners">Партнерам</a>
+     <a href="#distributors" data-i18n="navDistributors">Дистриб'юторам</a>
+     <a href="#benefits" data-i18n="navAboutWater">Про воду</a>
+     <a href="#contacts" data-i18n="navContacts">Контакти</a>
+   </nav>
+   <div class="header-actions">
+     <button class="language-button" id="languageButton" type="button" title="Змінити мову">UA <span aria-hidden="true">⌄</span></button>
+     <button class="btn btn-dark btn-header" type="button" data-open="partner" data-i18n="bePartner">Стати партнером</button>
+     <button class="menu-toggle" id="menuToggle" type="button" aria-controls="mainNav" aria-expanded="false" aria-label="Відкрити меню"><svg><use href="#i-bars"/></svg></button>
+   </div>
+ </div>
+</header>
+
+<main>
+<section class="hero" aria-labelledby="heroTitle">
+ <canvas class="hero-water-motion" id="heroWaterMotion" aria-hidden="true"></canvas>
+ <div class="hero-scrim"></div>
+ <div class="shell hero-layout">
+   <div class="hero-copy reveal">
+     <span class="overline overline-light" data-i18n="heroKicker">ПРИРОДНА ЕНЕРГІЯ ЗАКАРПАТТЯ</span>
+     <h1 id="heroTitle" data-i18n="heroTitle">Чиста сила<br>Закарпаття<br>для здорового<br>життя</h1>
+     <p data-i18n="heroDesc">Мінеральна столова вода природного походження з серця Закарпаття.</p>
+     <div class="hero-buttons">
+       <a class="btn btn-green" href="#products"><span data-i18n="ourProducts">Наша продукція</span><svg><use href="#i-arrow"/></svg></a>
+       <button class="btn btn-white" type="button" data-open="video"><span class="play-small"><svg><use href="#i-play"/></svg></span><span data-i18n="watchVideo">Дивитись відео</span></button>
+     </div>
+   </div>
+   <div class="hero-benefits" aria-label="Переваги">
+     <div class="hero-benefit"><span class="circle-icon"><svg><use href="#i-leaf"/></svg></span><span data-i18n="benefitNatural">Природне<br>походження</span></div>
+     <div class="hero-benefit"><span class="circle-icon"><svg><use href="#i-drop"/></svg></span><span data-i18n="benefitBalance">Збалансований<br>мінеральний склад</span></div>
+     <div class="hero-benefit"><span class="circle-icon"><svg><use href="#i-heart"/></svg></span><span data-i18n="benefitCare">Турбота<br>про здоров'я</span></div>
+   </div>
+ </div>
+ <div class="hero-bottom-line"><span data-i18n="scrollDown">ГОРТАЙТЕ ВНИЗ</span><span class="line"></span></div>
+</section>
+
+<section class="factory-section" id="factory">
+ <div class="factory-wrap shell">
+   <div class="factory-copy reveal">
+     <span class="overline" data-i18n="aboutFactory">ПРО ЗАВОД</span>
+     <h2 data-i18n="factoryTitle">Сучасне виробництво<br>з турботою про якість</h2>
+     <p class="copy" data-i18n="factoryDesc">Ми прагнемо поєднувати природне походження води, дбайливе ставлення до довкілля та сучасні підходи до виробництва.</p>
+     <div class="factory-features">
+       <div><span class="feature-icon"><svg><use href="#i-factory"/></svg></span><span data-i18n="factoryFeature1">Сучасне<br>обладнання</span></div>
+       <div><span class="feature-icon"><svg><use href="#i-shield"/></svg></span><span data-i18n="factoryFeature2">Контроль якості<br>на кожному етапі</span></div>
+       <div><span class="feature-icon"><svg><use href="#i-leaf"/></svg></span><span data-i18n="factoryFeature3">Екологічна<br>відповідальність</span></div>
+     </div>
+   </div>
+   <div class="factory-image-wrap reveal"><img src="assets/khizhanska/visual-03.webp" alt="Візуалізація сучасного підприємства серед гір"></div>
+ </div>
+</section>
+
+<section class="water-product-section" id="mineral">
+  <div class="mineral-panel">
+    <div class="mineral-content reveal">
+      <span class="overline" data-i18n="mineralKicker">СКЛАД ВОДИ</span>
+      <h2 data-i18n="mineralTitle">Ідеальний баланс<br>мінералів для вашого<br>здоров'я</h2>
+      <h3 class="composition-name" data-i18n="compositionName">Склад мінеральної води «Хижанська»</h3>
+      <p class="composition-label" data-i18n="mainIndicators">Основні показники (мг/л):</p>
+      <div class="mineral-table">
+        <div><span data-i18n="bicarbonates">Гідрокарбонати (HCO₃⁻)</span><b>1 700 – 3 000</b></div>
+        <div><span data-i18n="sulfates">Сульфати (SO₄²⁻)</span><b>&lt; 25</b></div>
+        <div><span data-i18n="chlorides">Хлориди (Cl⁻)</span><b>&lt; 150</b></div>
+        <div><span data-i18n="calcium">Кальцій (Ca²⁺)</span><b>&lt; 200</b></div>
+        <div><span data-i18n="magnesium">Магній (Mg²⁺)</span><b>&lt; 100</b></div>
+        <div><span data-i18n="sodiumPotassium">Натрій + Калій (Na⁺ + K⁺)</span><b>500 – 900</b></div>
+        <div><span data-i18n="boron">Бор (H₃BO₃)</span><b>35,0 – 100,0</b></div>
+        <div><span data-i18n="mineralTotal">Загальна мінералізація</span><b>2,5 – 4,0 г/л</b></div>
+        <div><span>pH</span><b>7,1 – 7,6</b></div>
+      </div>
+      <button type="button" class="btn btn-outline" data-open="minerals"><span data-i18n="detailedAnalysis">Детальний аналіз води</span><svg><use href="#i-arrow"/></svg></button>
+    </div>
+  </div>
+  <div class="products-panel" id="products">
+    <div class="products-content reveal">
+      <span class="overline" data-i18n="ourAssortment">НАША ПРОДУКЦІЯ</span>
+      <h2 data-i18n="productTitle">Ми випускаємо воду<br>для будь-яких потреб</h2>
+      <div class="product-grid two-bottle-grid">
+        <button type="button" class="product-item" data-product="0">
+          <span class="product-image"><img src="assets/khizhanska/visual-04.webp" alt="Пляшка води Хижанська 1 л"></span>
+          <strong>1 л</strong><span data-i18n="productDesc1">Для щоденного<br>використання</span>
+        </button>
+        <button type="button" class="product-item" data-product="1">
+          <span class="product-image"><img src="assets/khizhanska/visual-05.webp" alt="Скляна пляшка води Хижанська 0,5 л"></span>
+          <strong>0,5 л</strong><span data-i18n="productDesc2">Зручно брати<br>із собою</span>
+        </button>
+      </div><button type="button" class="btn btn-green products-button" data-open="catalog"><span data-i18n="allProducts">Вся продукція</span><svg><use href="#i-arrow"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<section class="partner-section" id="partners">
+  <div class="shell partner-grid">
+    <div class="partner-copy reveal">
+      <span class="overline" data-i18n="toPartners">ПАРТНЕРАМ</span>
+      <h2 data-i18n="partnerTitle">Співпраця, що приносить<br>взаємний успіх</h2>
+      <p class="copy" data-i18n="partnerDesc">Ми відкриті до довготривалого та вигідного партнерства. Пропонуємо гнучкі умови співпраці, стабільне постачання та підтримку на кожному етапі.</p>
+      <ul class="checklist">
+        <li><svg><use href="#i-check"/></svg><span data-i18n="partnerCheck1">Гнучкі умови співпраці</span></li>
+        <li><svg><use href="#i-check"/></svg><span data-i18n="partnerCheck2">Стабільні поставки по Україні</span></li>
+        <li><svg><use href="#i-check"/></svg><span data-i18n="partnerCheck3">Маркетингова підтримка</span></li>
+        <li><svg><use href="#i-check"/></svg><span data-i18n="partnerCheck4">Індивідуальний підхід</span></li>
+      </ul>
+      <button class="btn btn-green" type="button" data-open="partner"><span data-i18n="bePartner">Стати партнером</span><svg><use href="#i-arrow"/></svg></button>
+    </div>
+    <div class="distributors reveal" id="distributors">
+      <span class="overline" data-i18n="ourDistributors">НАШІ ДИСТРИБ'ЮТОРИ</span>
+      <div class="distributor-layout">
+        <div class="map-wrap" aria-label="Декоративна карта дистрибуції України">
+          <img src="assets/khizhanska/visual-06.webp" alt="Карта областей України та кількості дистриб’юторів">
+        </div>
+        <div class="distributor-card">
+          <label for="regionSelect" data-i18n="chooseRegion">Оберіть область</label>
+          <select id="regionSelect">
+            <option value="">Оберіть область</option>
+            <option value="kyiv">Київська область</option>
+            <option value="lviv">Львівська область</option>
+            <option value="zakarp">Закарпатська область</option>
+            <option value="ivano">Івано-Франківська область</option>
+            <option value="odesa">Одеська область</option>
+          </select>
+          <div class="region-result" id="regionResult">
+            <strong data-i18n="partnerInfo">Інформація про партнерів</strong>
+            <p data-i18n="regionHint">Оберіть область, щоб переглянути інформацію.</p>
+          </div>
+          <button type="button" class="btn btn-outline btn-full" data-open="partner"><span data-i18n="details">Детальніше</span><svg><use href="#i-arrow"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="benefits-section" id="benefits">
+ <div class="shell benefits-grid">
+   <div class="benefits-intro reveal">
+     <span class="overline" data-i18n="aboutWater">ПРО ВОДУ</span>
+     <h2 data-i18n="benefitsTitle">Вода — основа<br>здорового життя</h2>
+     <p class="copy" data-i18n="benefitsDesc">Щоденне вживання якісної води допомагає підтримувати водний баланс організму, хороше самопочуття та активність.</p>
+     <button type="button" class="btn btn-outline" data-open="health"><span data-i18n="moreBenefits">Більше про користь води</span><svg><use href="#i-arrow"/></svg></button>
+   </div>
+   <div class="benefit-photo-grid">
+     <button class="photo-benefit" type="button" data-open="health"><img src="assets/khizhanska/visual-07.webp" alt="Жінка п'є воду на природі"><span data-i18n="photo1">Підтримує<br>водний баланс</span></button>
+     <button class="photo-benefit" type="button" data-open="health"><img src="assets/khizhanska/visual-08.webp" alt="Гірська річка"><span data-i18n="photo2">Частина<br>здорових звичок</span></button>
+     <button class="photo-benefit" type="button" data-open="health"><img src="assets/khizhanska/visual-09.webp" alt="Дівчина на тлі гір"><span data-i18n="photo3">Підтримує<br>активний спосіб життя</span></button>
+     <button class="photo-benefit" type="button" data-open="health"><img src="assets/khizhanska/visual-10.webp" alt="Сім'я на прогулянці"><span data-i18n="photo4">Турбота про здоров'я<br>всієї родини</span></button>
+   </div>
+ </div>
+</section>
+</main>
+
+<footer class="footer" id="contacts">
+ <div class="shell footer-grid">
+   <div class="footer-brand-col">
+     <a href="#top" class="footer-original-brand" aria-label="Хижанська — на початок сторінки"><img class="footer-original-logo" src="assets/khizhanska/visual-11.webp" width="340" height="39" alt="ХИЖАНСЬКА" decoding="async"></a>
+     <div class="footer-logo-subtitle">Вода мінеральна, природна, лікувальна, столова</div>
+     <p data-i18n="footerSlogan">Чиста сила Закарпаття у кожній краплі.</p>
+   </div>
+   <div class="footer-links"><h3 data-i18n="footerNav">Навігація</h3><a href="#factory" data-i18n="navFactory">Про завод</a><a href="#mineral" data-i18n="navWater">Наша вода</a><a href="#products" data-i18n="navProducts">Продукція</a><a href="#partners" data-i18n="navPartners">Партнерам</a></div>
+   <div class="footer-links"><h3 data-i18n="footerInfo">Інформація</h3><a href="#distributors" data-i18n="navDistributors">Дистриб'юторам</a><a href="#benefits" data-i18n="navAboutWater">Про воду</a><a href="#contacts" data-i18n="navContacts">Контакти</a></div>
+   <div class="footer-contact"><h3 data-i18n="navContacts">Контакти</h3><p data-i18n="demoContacts">Контактні дані будуть додані після погодження.</p><button class="btn btn-footer" type="button" data-open="partner"><span data-i18n="contactUs">Зв'язатися з нами</span><svg><use href="#i-arrow"/></svg></button></div>
+ </div>
+ <div class="shell footer-base"><span>© <span id="year">2026</span> Хижанська. <span data-i18n="demoSite">Демонстраційний макет сайту.</span></span><a href="#top" data-i18n="backToTop">Нагору ↑</a></div>
+</footer>
+
+<div class="modal-backdrop" id="modal" aria-hidden="true">
+ <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <button type="button" class="modal-close" id="modalClose" aria-label="Закрити"><svg><use href="#i-close"/></svg></button>
+  <span class="overline" id="modalKicker">ХИЖАНСЬКА</span>
+  <h2 id="modalTitle">Інформація</h2>
+  <div id="modalBody"></div>
+ </div>
+</div>
+<script>
+/* ХИЖАНСЬКА — перша інтерактивна версія. Усі тексти можна редагувати тут і в index.html. */
+(() => {
+  'use strict';
+  let language = 'uk';
+  const modal = document.getElementById('modal');
+  const modalBody = document.getElementById('modalBody');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalKicker = document.getElementById('modalKicker');
+  const menu = document.getElementById('mainNav');
+  const menuToggle = document.getElementById('menuToggle');
+  const regionSelect = document.getElementById('regionSelect');
+  const regionResult = document.getElementById('regionResult');
+
+  const translations = {
+    brandSub:'MINERAL TABLE WATER',originalBrandSub:'Natural mineral water, medicinal and table',navFactory:'About the factory',navWater:'Our water',navProducts:'Products',navPartners:'Partners',navDistributors:'Distributors',navAboutWater:'About water',navContacts:'Contacts',bePartner:'Become a partner',
+    heroKicker:'THE NATURAL ENERGY OF THE CARPATHIANS',heroTitle:'The pure power<br>of the Carpathians<br>for a healthier life',heroDesc:'Natural mineral table water from the heart of the Carpathians.',ourProducts:'Explore products',watchVideo:'Watch video',benefitNatural:'Natural<br>origin',benefitBalance:'Balanced<br>minerals',benefitCare:'Care for<br>well-being',scrollDown:'SCROLL TO EXPLORE',
+    aboutFactory:'OUR FACTORY',factoryTitle:'Modern production<br>with care for quality',factoryDesc:'We aim to combine water of natural origin, environmental responsibility, and modern production methods.',factoryFeature1:'Modern<br>equipment',factoryFeature2:'Quality control<br>at every stage',factoryFeature3:'Environmental<br>responsibility',illustration:'Concept visualization',
+    mineralKicker:'MINERAL COMPOSITION',mineralTitle:'A well-balanced mix<br>of minerals for<br>your everyday life',compositionName:'Composition of Khizhanska mineral water',mainIndicators:'Key indicators (mg/L):',calcium:'Calcium (Ca²⁺)',magnesium:'Magnesium (Mg²⁺)',sodiumPotassium:'Sodium + Potassium (Na⁺ + K⁺)',boron:'Boron (H₃BO₃)',bicarbonates:'Bicarbonates (HCO₃⁻)',sulfates:'Sulfates (SO₄²⁻)',chlorides:'Chlorides (Cl⁻)',mineralTotal:'Total mineralization',detailedAnalysis:'Detailed water analysis',
+    ourAssortment:'OUR PRODUCTS',productTitle:'Water for<br>every occasion',productDesc1:'For everyday<br>use',productDesc2:'Easy to take<br>with you',productDesc3:'For water coolers<br>and offices',productDesc4:'For water coolers<br>and offices',allProducts:'All products',
+    toPartners:'PARTNERS',partnerTitle:'Partnerships built<br>for shared success',partnerDesc:'We are open to long-term cooperation, flexible partnerships, reliable deliveries and comprehensive support.',partnerCheck1:'Flexible cooperation terms',partnerCheck2:'Reliable deliveries across Ukraine',partnerCheck3:'Marketing support',partnerCheck4:'Individual approach',ourDistributors:'OUR DISTRIBUTORS',regionalPoints:'Partner regions',chooseRegion:'Choose a region',partnerInfo:'Distributor information',regionHint:'Select a region to see information.',details:'Learn more',
+    aboutWater:'ABOUT WATER',benefitsTitle:'Water is the foundation<br>of healthy living',benefitsDesc:'Drinking enough quality water supports normal hydration, everyday well-being and an active lifestyle.',moreBenefits:'Why hydration matters',photo1:'Supports<br>hydration',photo2:'Part of<br>healthy habits',photo3:'Supports an<br>active lifestyle',photo4:'Caring for<br>the whole family',
+    footerNav:'Navigation',footerInfo:'Information',footerSlogan:'The pure energy of the Carpathians in every drop.',demoContacts:'Contact details will be added after approval.',contactUs:'Get in touch',demoSite:'Website concept / demo.',backToTop:'Back to top ↑'
+  };
+  const regions = {
+    kyiv:['Київська область','Kyiv region'],
+    lviv:['Львівська область','Lviv region'],
+    zakarp:['Закарпатська область','Zakarpattia region'],
+    ivano:['Івано-Франківська область','Ivano-Frankivsk region'],
+    odesa:['Одеська область','Odesa region']
+  };
+  const products = [
+    {size:'1 л',en:'1 L',image:'assets/khizhanska/visual-04.webp',title:'Пляшка 1 л',enTitle:'1 L bottle',desc:'Практичний формат для щоденного використання.',enDesc:'A practical size for everyday use.'},
+    {size:'0,5 л',en:'0.5 L',image:'assets/khizhanska/visual-05.webp',title:'Скляна пляшка 0,5 л',enTitle:'0.5 L glass bottle',desc:'Зручно брати із собою на прогулянки, у дорогу та на щодень.',enDesc:'Convenient to take along on walks, trips and everyday outings.'}
+  ];
+  const say = (ua, en) => language === 'uk' ? ua : en;
+
+  function updateRegion() {
+    const key = regionSelect.value;
+    if (!key) {
+      regionResult.innerHTML = `<strong>${say('Інформація про партнерів','Distributor information')}</strong><p>${say('Оберіть область, щоб переглянути інформацію.','Select a region to see information.')}</p>`;
+      return;
+    }
+    const regionName = regions[key][language==='uk'?0:1];
+    // Do not invent real distributors: these details are intentionally placeholders.
+    regionResult.innerHTML = `<strong>${regionName}</strong><p>${say('Контакт дистриб’ютора буде додано після підтвердження інформації.','Distributor contact will be added once confirmed.')}</p>`;
+  }
+  regionSelect.addEventListener('change',updateRegion);
+
+  function applyLanguage() {
+    document.documentElement.lang=language;
+    document.getElementById('languageButton').innerHTML = (language==='uk'?'UA':'EN')+' <span aria-hidden="true">⌄</span>';
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key=el.dataset.i18n;
+      if (language==='en') {
+        if (translations[key]) {
+          if(!el.dataset.uaOriginal) el.dataset.uaOriginal=el.innerHTML;
+          el.innerHTML=translations[key];
+        }
+      } else if(el.dataset.uaOriginal){el.innerHTML=el.dataset.uaOriginal;}
+    });
+    regionSelect.options[0].textContent=say('Оберіть область','Select a region');
+    Object.entries(regions).forEach(([key,values])=>{
+      const opt=regionSelect.querySelector(`option[value="${key}"]`);
+      if(opt)opt.textContent=values[language==='uk'?0:1];
+    });
+    updateRegion();
+  }
+  document.getElementById('languageButton').addEventListener('click',()=>{
+    language=language==='uk'?'en':'uk';applyLanguage();
+  });
+
+  function setMenu(isOpen){
+    menu.classList.toggle('open',isOpen);
+    menuToggle.setAttribute('aria-expanded',String(isOpen));
+    menuToggle.innerHTML=isOpen?'<svg><use href="#i-close"/></svg>':'<svg><use href="#i-bars"/></svg>';
+  }
+  menuToggle.addEventListener('click',()=>setMenu(!menu.classList.contains('open')));
+  document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+
+  let previouslyFocused=null;
+  function openModal(kind,productIndex=0){
+    previouslyFocused=document.activeElement;
+    modalKicker.textContent=say('ХИЖАНСЬКА','KHIZHANSKA');
+    modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');
+    const buttonLabel=say('Зрозуміло','Got it');
+    if(kind==='partner'){
+      modalTitle.textContent=say('Стати партнером','Become a partner');
+      modalBody.innerHTML=`<p>${say('Залиште свої дані в формі. Наразі це демонстраційна версія: для реального надсилання заявок потрібно підключити пошту або CRM.','Fill out the form below. This is a demo: a real email or CRM integration is needed before requests can be delivered.')}</p>
+      <form class="modal-form" id="partnerForm">
+        <label>${say('Ваше ім’я','Your name')}<input name="name" type="text" maxlength="80" autocomplete="name" required placeholder="${say('Як до вас звертатися','Your name')}"></label>
+        <label>${say('Телефон або email','Phone or email')}<input name="contact" type="text" maxlength="100" required placeholder="+380… / email@example.com"></label>
+        <label>${say('Коментар','Message')}<textarea name="comment" rows="3" maxlength="1000" placeholder="${say('Ваше місто та пропозиція','Your city and proposal')}"></textarea></label>
+        <button class="btn btn-green" type="submit">${say('Підготувати заявку','Prepare request')}<svg><use href="#i-arrow"/></svg></button>
+      </form><p class="form-notice" id="formNotice" aria-live="polite">${say('Демо-режим: персональні дані нікуди не надсилаються.','Demo mode: personal information is not sent anywhere.')}</p>`;
+      modalBody.querySelector('form').addEventListener('submit',(e)=>{
+        e.preventDefault();
+        document.getElementById('formNotice').textContent=say('Форма перевірена. Щоб заявки надходили власнику сайту, пізніше підключимо спосіб надсилання. Дані зараз не відправлено.','Form validated. We can connect a delivery service later. No data has been sent.');
+      });
+    } else if(kind==='video'){
+      modalTitle.textContent=say('Відео про воду','Our water story');
+      modalBody.innerHTML=`<div style="border-radius:8px;min-height:210px;background:linear-gradient(135deg,#123d34a8,#123d3499),url('assets/khizhanska/visual-12.jpg') center/cover;display:grid;place-items:center;color:#fff;text-align:center;padding:20px"><div><svg style="width:55px;height:55px;margin:auto"><use href="#i-play"/></svg><p style="color:#fff;margin:10px 0">${say('Місце для презентаційного відео','Space for brand video')}</p></div></div><p style="margin-top:20px">${say('Сюди можна додати готовий рекламний ролик, відео з виробництва або презентацію бренду.','A promotional film, production video or brand presentation can be added here.')}</p>`;
+    } else if(kind==='minerals'){
+      modalTitle.textContent=say('Склад води','Mineral composition');
+      modalBody.innerHTML=`<p>${say('Основні показники складу мінеральної води «Хижанська» (мг/л, якщо не зазначено інакше):','Key indicators of Khizhanska mineral water (mg/L unless otherwise indicated):')}</p>
+      <table class="modal-table"><tbody>
+      ${Array.from(document.querySelectorAll('.mineral-table>div')).map(r=>`<tr><td>${r.children[0].textContent}</td><td>${r.children[1].textContent}</td></tr>`).join('')}
+      </tbody></table>`;
+    } else if(kind==='catalog'){
+      modalTitle.textContent=say('Наша продукція','Our products');
+      modalBody.innerHTML=`<p>${say('Оберіть формат пляшки. Ціни, наявність та спосіб замовлення можна додати на наступному етапі.','Choose a bottle format. Prices, stock status, and ordering can be added later.')}</p>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:520px;margin-inline:auto">${products.map((p,i)=>`<button type="button" class="product-item catalog-tile" data-catalog-index="${i}"><span class="product-image" style="height:140px"><img src="${p.image}" alt="${p.size}"></span><strong>${language==='uk'?p.size:p.en}</strong></button>`).join('')}</div>`;
+      modalBody.querySelectorAll('[data-catalog-index]').forEach(b=>b.addEventListener('click',()=>openModal('product',Number(b.dataset.catalogIndex))));
+    } else if(kind==='product'){
+      const p=products[productIndex];
+      modalTitle.textContent=language==='uk'?p.title:p.enTitle;
+      modalBody.innerHTML=`<div class="modal-product"><img src="${p.image}" alt="${p.size}"><div><p>${language==='uk'?p.desc:p.enDesc}</p><p>${say('Ціну, варіанти газованості й умови замовлення додамо після погодження.','Pricing, carbonation options, and ordering details will be added after approval.')}</p><button type="button" class="btn btn-green" id="catalogReturn">${say('Уся продукція','All products')}<svg><use href="#i-arrow"/></svg></button></div></div>`;
+      document.getElementById('catalogReturn').addEventListener('click',()=>openModal('catalog'));
+    } else if(kind==='health'){
+      modalTitle.textContent=say('Вода у щоденному житті','Water in everyday life');
+      modalBody.innerHTML=`<p>${say('Питна вода необхідна для нормальної роботи організму, терморегуляції та підтримання водного балансу. Індивідуальна потреба залежить від віку, активності та умов довкілля.','Drinking water is important for hydration, temperature regulation and normal body function. Individual requirements depend on age, activity and the environment.')}</p><p>${say('У цьому розділі ми зможемо розмістити корисні статті, поради та відповіді на часті запитання.','This section can later contain articles, tips and frequently asked questions.')}</p>`;
+    }
+    document.getElementById('modalClose').focus();
+  }
+  function closeModal(){
+    modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');
+    if(previouslyFocused&&typeof previouslyFocused.focus==='function')previouslyFocused.focus();
+  }
+  document.querySelectorAll('[data-open]').forEach(button=>button.addEventListener('click',()=>openModal(button.dataset.open)));
+  document.querySelectorAll('[data-product]').forEach(button=>button.addEventListener('click',()=>openModal('product',Number(button.dataset.product))));
+  document.getElementById('modalClose').addEventListener('click',closeModal);
+  modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&modal.classList.contains('open'))closeModal();
+    if(e.key==='Escape'&&menu.classList.contains('open'))setMenu(false);
+    if(e.key==='Tab'&&modal.classList.contains('open')){
+      const focusable=[...modal.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href]')];
+      if(!focusable.length)return;
+      if(e.shiftKey&&document.activeElement===focusable[0]){e.preventDefault();focusable[focusable.length-1].focus();}
+      else if(!e.shiftKey&&document.activeElement===focusable[focusable.length-1]){e.preventDefault();focusable[0].focus();}
+    }
+  });
+  document.getElementById('year').textContent=String(new Date().getFullYear());
+  updateRegion();
+})();
+
+</script>
+
+<script>
+/* Fit logo subtitle by distributing tracking uniformly across its letters.
+   The logo image and all other site sections stay unchanged. */
+(function () {
+  'use strict';
+  const brand = document.querySelector('.site-header .brand-original');
+  if (!brand) return;
+  const logo = brand.querySelector('.brand-original-logo');
+  const sub  = brand.querySelector('.brand-original-sub');
+  if (!logo || !sub) return;
+
+  function fitLogoSubtitle() {
+    if (window.innerWidth < 901) {
+      sub.style.letterSpacing = '';
+      sub.style.textAlign = '';
+      return;
+    }
+    sub.style.letterSpacing = '0px';
+    sub.style.textAlign = 'left';
+    const logoWidth = logo.getBoundingClientRect().width;
+    const characters = Array.from(sub.textContent.trim());
+    if (!logoWidth || characters.length < 2) return;
+    const range = document.createRange();
+    range.selectNodeContents(sub);
+    const normalWidth = range.getBoundingClientRect().width;
+    if (!normalWidth) return;
+    // Adjust against actual rendered glyph bounds rather than a guessed font width.
+    let spacing = (logoWidth - normalWidth) / characters.length;
+    for (let pass = 0; pass < 4; pass++) {
+      sub.style.letterSpacing = `${spacing}px`;
+      const actualWidth = range.getBoundingClientRect().width;
+      if (Math.abs(logoWidth - actualWidth) < 0.06) break;
+      spacing += (logoWidth - actualWidth) / characters.length;
+    }
+    sub.style.letterSpacing = `${spacing.toFixed(3)}px`;
+  }
+  // Redo the spacing when the site's existing UA/EN language switch changes the text.
+  new MutationObserver(fitLogoSubtitle).observe(sub,{childList:true,subtree:true,characterData:true});
+  if ('ResizeObserver' in window) new ResizeObserver(fitLogoSubtitle).observe(logo);
+  window.addEventListener('resize',fitLogoSubtitle,{passive:true});
+  window.addEventListener('load',fitLogoSubtitle);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitLogoSubtitle);
+  fitLogoSubtitle();
+})();
+</script>
+
+<script>
+/* Footer caption: fit by REAL font size, without horizontal stretching or distortion.
+   The logo and every other element are left unchanged. */
+(function () {
+  const logo = document.querySelector('.footer-original-logo');
+  const caption = document.querySelector('.footer-logo-subtitle');
+  if (!logo || !caption) return;
+  function fitCaptionProportionally() {
+    const targetWidth = logo.getBoundingClientRect().width;
+    if (!targetWidth) return;
+    const range = document.createRange();
+    range.selectNodeContents(caption);
+    // Measure a known font size, then scale font-size (NOT the element or letter shapes).
+    caption.style.fontSize = '16px';
+    caption.style.transform = 'none';
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const actualWidth = range.getBoundingClientRect().width;
+      if (!actualWidth || !Number.isFinite(actualWidth)) break;
+      const currentSize = parseFloat(getComputedStyle(caption).fontSize);
+      const nextSize = currentSize * targetWidth / actualWidth;
+      if (!Number.isFinite(nextSize) || nextSize <= 0) break;
+      caption.style.fontSize = nextSize.toFixed(3) + 'px';
+      if (Math.abs(actualWidth - targetWidth) < 0.15) break;
+    }
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCaptionProportionally);
+  window.addEventListener('resize', fitCaptionProportionally, {passive:true});
+  window.addEventListener('load', fitCaptionProportionally);
+  if (logo.complete) fitCaptionProportionally();
+  else logo.addEventListener('load', fitCaptionProportionally);
+})();
+</script>
+
+<script id="hero-water-animation">
+/* Nature-driven animation, no image/video downloads: the single existing panorama
+   supplies the optical flow texture, which we re-sample gently ONLY in the creek.
+   All coordinates are in the original 2048×740 panorama coordinate system. */
+(()=>{
+  'use strict';
+  const hero=document.querySelector('.hero');
+  const canvas=document.getElementById('heroWaterMotion');
+  if(!hero || !canvas) return;
+  const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(motion.matches) return;
+  const ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
+  if(!ctx) return;
+  const photo=new Image();
+  const bg=getComputedStyle(hero).backgroundImage;
+  const match=bg.match(/url\(["']?(data:image\/(?:jpeg|jpg|png);base64,[^"')]+)["']?\)/);
+  if(!match) return;
+  photo.src=match[1];
+  const creekMask=new Image();
+  creekMask.src='assets/khizhanska/visual-13.webp';
+  const SRC_W=2048, SRC_H=740;
+  const reducedData=navigator.connection?.saveData===true;
+  const DPR_LIMIT=reducedData?1:Math.min(window.devicePixelRatio||1,1.5);
+  let w=0,h=0,dpr=1,scale=1,ox=0,oy=0,seen=true,raf=0;
+
+  function makePath(coords){const p=new Path2D();p.moveTo(coords[0],coords[1]);for(let i=2;i<coords.length;i+=2)p.lineTo(coords[i],coords[i+1]);p.closePath();return p;}
+  // Stream regions on the NEW background, deliberately away from the bottle.
+  const streams=[
+    {poly:[970,493,1080,484,1218,493,1218,524,1090,545,954,552,868,538],box:[868,484,1218,552],speed:.95,alpha:.28},
+    {poly:[565,539,659,534,732,548,820,540,904,558,1014,553,1130,563,1223,557,1225,601,1080,624,961,612,833,630,714,612,624,627,521,598],box:[521,534,1225,632],speed:1.1,alpha:.26},
+    {poly:[1428,486,1510,490,1566,495,1645,512,1753,521,1702,552,1591,564,1509,583,1431,594],box:[1428,486,1753,594],speed:1.1,alpha:.27},
+    {poly:[665,625,757,602,816,619,929,613,1031,612,1017,654,933,665,821,652,727,681,643,682],box:[643,602,1031,682],speed:1.22,alpha:.25}
+  ];
+  streams.forEach(s=>s.path=makePath(s.poly));
+  let bubbles=[], gleams=[];
+  let seed=32719;
+  const rand=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+  // Tiny dissolved carbon dioxide bubbles in the transparent liquid ABOVE the label.
+  const bubblesN=reducedData?33:67;
+  for(let i=0;i<bubblesN;i++) bubbles.push({
+    x:rand()*1.8-0.9, start:180+rand()*209, speed:13+rand()*18,
+    phase:rand()*12, r:.45+rand()*1.35, wobble:2+rand()*3.5,
+    a:.30+rand()*.35,period:5+rand()*8
+  });
+  // Water sparkle paths: each source/destination lies on the running water, not on rocks.
+  const lanes=[
+    [[1030,502],[1095,541]],[[1122,501],[1190,556]],
+    [[670,560],[739,614]],[[762,558],[842,618]],
+    [[905,566],[985,613]],[[998,560],[1092,604]],
+    [[1501,501],[1535,562]],[[1603,516],[1652,558]],
+    [[754,611],[795,668]],[[839,625],[907,659]]
+  ];
+  for(let i=0;i<(reducedData?48:115);i++) gleams.push({
+    lane:Math.floor(rand()*lanes.length), phase:rand(), size:.4+rand()*1.7,
+    speed:.10+rand()*.18, alpha:.09+rand()*.18, drift:(rand()-.5)*13
+  });
+
+  function parsePosition(val,available){
+    val=val.trim();
+    if(val.endsWith('%')) return available*parseFloat(val)/100;
+    if(val==='center')return available*.5;
+    if(val==='right'||val==='bottom')return available;
+    if(val==='left'||val==='top')return 0;
+    if(val.endsWith('px'))return parseFloat(val);
+    return available*.5;
+  }
+  function resize(){
+    const rect=hero.getBoundingClientRect();
+    w=Math.max(1,rect.width);h=Math.max(1,rect.height);
+    dpr=DPR_LIMIT;
+    canvas.width=Math.max(1,Math.round(w*dpr));
+    canvas.height=Math.max(1,Math.round(h*dpr));
+    const styles=getComputedStyle(hero);
+    const safeTop=parseFloat(styles.getPropertyValue('--hero-safe-top'))||88;
+    // Must match CSS: background-size auto calc(100% - safeTop).
+    scale=Math.max(.01,(h-safeTop)/SRC_H);
+    const firstPosition=styles.backgroundPosition.split(',')[0].trim().split(/\s+/);
+    ox=parsePosition(firstPosition[0]||'50%',w-SRC_W*scale);
+    oy=h-SRC_H*scale; // background-position: bottom
+  }
+
+  function movingCreek(t){
+    // Re-sample slender slices of the ORIGINAL creek imagery with micro-refraction.
+    // Keeping opacity low prevents a pasted-on texture or fake water effect.
+    for(let k=0;k<streams.length;k++){
+      const s=streams[k], [x0,y0,x1,y1]=s.box;
+      ctx.save();ctx.clip(s.path);
+      const step=19;ctx.globalAlpha=s.alpha;
+      for(let y=y0;y<y1;y+=step){
+        const sy=Math.min(y,y1-2);
+        const drift=Math.sin(sy*.062 + t*.0018*s.speed +k*2.3)*1.55 +
+                    Math.sin(sy*.029-t*.0011*s.speed)*.8;
+        const fall= Math.sin(sy*.043-t*.0020*s.speed +k)*.8;
+        ctx.drawImage(photo,x0,sy,x1-x0,Math.min(step+1,y1-sy),
+          x0+drift,sy+fall,x1-x0,Math.min(step+1,y1-sy));
+      }
+      ctx.restore();
+    }
+    // Glints follow individual current paths: no large synthetic waves or white streaks.
+    ctx.save();ctx.globalCompositeOperation='screen';
+    gleams.forEach(g=>{
+      const lane=lanes[g.lane];
+      const q=(g.phase+t*.00015*g.speed)%1;
+      const x=lane[0][0]+(lane[1][0]-lane[0][0])*q+g.drift;
+      const y=lane[0][1]+(lane[1][1]-lane[0][1])*q;
+      const fade=Math.sin(Math.PI*q);
+      ctx.globalAlpha=g.alpha*fade;
+      ctx.strokeStyle='rgba(246,255,255,0.62)';
+      ctx.lineWidth=g.size*.52;
+      ctx.lineCap='round';
+      ctx.beginPath();ctx.moveTo(x-.35,y-1.7*g.size);ctx.lineTo(x+1.4*g.size,y+1.6*g.size);ctx.stroke();
+      if(g.size>1.2){ctx.fillStyle='rgba(245,255,255,.22)';ctx.fillRect(x,y,1.2,1.2);}
+    });
+    ctx.restore();
+  }
+  const bottleLiquidPath=makePath([
+    1302,163,1359,163,1369,195,1387,248,
+    1404,310,1418,383,1417,394,
+    1245,394,1245,382,1256,317,1272,255,1291,196
+  ]);
+  function carbonation(t){
+    ctx.save();
+    ctx.clip(bottleLiquidPath);
+    ctx.globalCompositeOperation='screen';
+    // The bottle center is x~1331 in the new 2048x740 image.
+    // All y values are restricted to transparent green glass (never the label).
+    for(const b of bubbles){
+      const span=210;
+      const travelled=((t*.001*b.speed+b.phase*b.speed)%span);
+      const y=389-travelled;
+      const halfWidth=25+Math.max(0,y-179)*.27;
+      const drift=Math.sin(t*.0017+b.phase)*Math.min(2.0,b.wobble);
+      const x=1331+b.x*halfWidth+drift;
+      const fade=Math.max(0,Math.min(1,(389-y)/22,(y-180)/22));
+      if(fade<=0)continue;
+      ctx.globalAlpha=fade*b.a;
+      ctx.lineWidth=.50;
+      ctx.strokeStyle='rgba(245,255,245,.95)';
+      ctx.beginPath();ctx.ellipse(x,y,b.r,b.r*1.10,0,0,Math.PI*2);ctx.stroke();
+      ctx.globalAlpha=fade*b.a*.44;
+      ctx.fillStyle='rgba(245,255,249,.7)';
+      ctx.beginPath();ctx.arc(x-b.r*.24,y-b.r*.25,Math.max(.35,b.r*.32),0,Math.PI*2);ctx.fill();
+    }
+    ctx.restore();
+  }
+  let last=0;
+  function draw(t){
+    if(!seen || motion.matches || document.hidden){raf=0;return;}
+    raf=requestAnimationFrame(draw);
+    if(t-last<(reducedData?75:42)) return; // 18-30fps, low cost
+    last=t;
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    if(!photo.complete || !photo.naturalWidth || !creekMask.complete || !creekMask.naturalWidth) return;
+    ctx.setTransform(dpr*scale,0,0,dpr*scale,dpr*ox,dpr*oy);
+    movingCreek(t);
+    // Photo-derived opacity mask means moving pixels appear on running water,
+    // not on the still rocks, foliage, landscape or bottle label.
+    ctx.save();
+    ctx.globalCompositeOperation='destination-in';
+    ctx.drawImage(creekMask,0,0,SRC_W,SRC_H);
+    ctx.restore();
+    carbonation(t);
+  }
+  function start(){if(!raf && !motion.matches && !document.hidden && seen)raf=requestAnimationFrame(draw);}
+  function stop(){if(raf){cancelAnimationFrame(raf);raf=0;}}
+  photo.onload=()=>{resize();start();};
+  if(photo.complete && photo.naturalWidth){resize();start();}
+  new ResizeObserver(()=>resize()).observe(hero);
+  new IntersectionObserver(entries=>{seen=entries[0]?.isIntersecting??true;seen?start():stop();},{threshold:0}).observe(hero);
+  document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
+  motion.addEventListener?.('change',()=>motion.matches?stop():start());
+  // Viewable debug state (not a visible UI element), useful during future design edits.
+  hero.dataset.waterMotion='bubbles-and-creek';
+})();
+</script>
+</body>
+</html>

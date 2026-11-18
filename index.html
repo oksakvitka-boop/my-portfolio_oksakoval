@@ -157,6 +157,11 @@
     .landing-page-showcase{width:min(100%,1400px);margin:28px auto 0}
     .landing-page-showcase img{display:block;width:100%;height:auto;object-fit:contain}
     .landing-loading{min-height:160px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;text-align:center}
+    .landing-live-preview{display:block;width:100%;height:75vh;min-height:560px;border:1px solid var(--border);border-radius:4px;background:#f3f6f2}
+    .landing-open-link{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:4px;background:#365a4a;color:white;font-size:13px;font-weight:700;transition:background .2s}
+    .landing-open-link:hover{background:#244337}
+    @media(max-width:650px){.landing-live-preview{min-height:420px;height:70vh}}
+
     .embroidery-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:38px;align-items:start}
     .embroidery-gallery .embroidery-photo{margin:0;min-width:0;background:#f8f5f4}
     .embroidery-gallery .embroidery-photo:first-child{grid-column:1/-1;max-width:790px;justify-self:center;width:100%}
@@ -303,7 +308,7 @@
     /* ЗМІНА ВМІСТУ: у майбутньому тут будуть реальні роботи та посилання на файли.
        Усі поточні композиції — оригінальні CSS-макети, жодних запозичених зображень. */
     const projects=[
-      {name:"Хижанська — лендінг",category:"Дизайн сайту · Landing Page",slot:"landing",coverTitle:"ХИЖАНСЬКА",coverCaption:"LANDING PAGE / WEB DESIGN",landingFilePending:true},
+      {name:"Хижанська — лендінг",category:"Дизайн сайту · Landing Page",type:"photo",image:"assets/khizhanska/cover.webp",landingPageUrl:"khizhanska-landing.html"},
       {name:"Новий проєкт 01",category:"Місце для нового кейсу",slot:"empty",coverTitle:"Проєкт 01",coverCaption:"COMING NEXT",pendingSlot:true},
       {name:"Новий проєкт 02",category:"Місце для нового кейсу",slot:"empty",coverTitle:"Проєкт 02",coverCaption:"COMING NEXT",pendingSlot:true},
       {name:"Новий проєкт 03",category:"Місце для нового кейсу",slot:"empty",coverTitle:"Проєкт 03",coverCaption:"COMING NEXT",pendingSlot:true},
@@ -374,8 +379,8 @@
       if(previousFocus&&previousFocus.focus)previousFocus.focus();
     }
     function openProject(item,group,i){
-      if(item.landingFilePending){
-        modalContent.innerHTML='<div class="eyebrow">WEB DESIGN / LANDING PAGE</div><h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+'</h2><p class="print-case-lead">Дизайн лендінгу для мінеральної води «Хижанська»</p><div class="beauty-source-note"><p>Місце для повного інтерактивного лендінгу підготовлено. Для його публікації потрібен файл <strong>khizhanska-landing-two-bottles.html</strong>: шлях file:///C:/ на іншому комп’ютері не відкривається. Також очікується квадратна обкладинка проєкту.</p></div>';
+      if(item.landingPageUrl){
+        modalContent.innerHTML='<div class="eyebrow">WEB DESIGN / LANDING PAGE</div><h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+'</h2><p class="print-case-lead">Дизайн інтерактивного лендінгу для мінеральної води «Хижанська»</p><p><a class="landing-open-link" href="'+esc(item.landingPageUrl)+'" target="_blank" rel="noopener noreferrer">Відкрити сайт на весь екран ↗</a></p><iframe class="landing-live-preview" title="Хижанська — інтерактивний лендінг" src="'+esc(item.landingPageUrl)+'" loading="lazy"></iframe>';
         showModal();return;
       }
       if(item.pendingSlot){
