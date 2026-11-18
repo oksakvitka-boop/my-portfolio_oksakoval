@@ -56,6 +56,16 @@
     .art.photo-art{background:#fff}
     .art.photo-art:before{display:none}
     .art.photo-art img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
+    /* Additional four portfolio positions, placed before the existing work. */
+    .art.portfolio-slot{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:26px}
+    .art.portfolio-slot:before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 73% 20%,#ffffff50,transparent 40%),radial-gradient(circle at 15% 88%,#ffffff40,transparent 37%)}
+    .portfolio-slot .portfolio-slot-kicker{position:absolute;top:10%;left:9%;right:9%;font-size:9px;letter-spacing:.20em;text-transform:uppercase;z-index:1}
+    .portfolio-slot .portfolio-slot-word{position:relative;z-index:1;font:400 clamp(20px,2.25vw,34px)/1.06 Georgia,serif;letter-spacing:-.04em;max-width:100%;overflow-wrap:anywhere}
+    .portfolio-slot .portfolio-slot-caption{position:absolute;bottom:10%;left:9%;right:9%;z-index:1;font-size:9px;letter-spacing:.13em;text-transform:uppercase}
+    .art.portfolio-slot-landing{color:#ecf9ed;background:linear-gradient(155deg,#173e39,#3a8274 60%,#a6c7b4)}
+    .art.portfolio-slot-landing .portfolio-slot-word{font-size:clamp(19px,2.2vw,31px);letter-spacing:.05em}
+    .art.portfolio-slot-empty{color:#806b75;background:linear-gradient(155deg,#f4e5e7,#e5d9e3 60%,#e2d0d6)}
+    .art.portfolio-slot-empty .portfolio-slot-word{font-style:italic;color:#987586}
     .project-card:hover .art,.three-card:hover .art{transform:scale(1.055)}
     .project-meta{display:flex;justify-content:space-between;align-items:start;gap:15px;margin-top:15px}
     .project-meta h3{font-size:17px;font-weight:500;letter-spacing:-.025em;margin:0 0 5px}
@@ -293,6 +303,10 @@
     /* ЗМІНА ВМІСТУ: у майбутньому тут будуть реальні роботи та посилання на файли.
        Усі поточні композиції — оригінальні CSS-макети, жодних запозичених зображень. */
     const projects=[
+      {name:"Хижанська — лендінг",category:"Дизайн сайту · Landing Page",slot:"landing",coverTitle:"ХИЖАНСЬКА",coverCaption:"LANDING PAGE / WEB DESIGN",landingFilePending:true},
+      {name:"Новий проєкт 01",category:"Місце для нового кейсу",slot:"empty",coverTitle:"Проєкт 01",coverCaption:"COMING NEXT",pendingSlot:true},
+      {name:"Новий проєкт 02",category:"Місце для нового кейсу",slot:"empty",coverTitle:"Проєкт 02",coverCaption:"COMING NEXT",pendingSlot:true},
+      {name:"Новий проєкт 03",category:"Місце для нового кейсу",slot:"empty",coverTitle:"Проєкт 03",coverCaption:"COMING NEXT",pendingSlot:true},
       {name:"Zlato Epic Sale",category:"Landing Page Design",label:"",type:"photo",image:"assets/zlato-epic-sale-cover.jpg",fullPageParts:["assets/zlato-parts/part-01.bin","assets/zlato-parts/part-02.bin","assets/zlato-parts/part-03.bin","assets/zlato-parts/part-04.bin","assets/zlato-parts/part-05.bin","assets/zlato-parts/part-06.bin","assets/zlato-parts/part-07.bin","assets/zlato-parts/part-08.bin","assets/zlato-parts/part-09.bin","assets/zlato-parts/part-10.bin"],hideCaption:false},
       {name:"Предметна фотографія",category:"Парфумерія · Косметика",type:"photo",image:"assets/product-photography/cover-square.jpg?v=20261117-photos",photographyGallery:[{"src":"assets/product-photography/01.jpg","alt":"Antonio Banderas Her Secret — предметна фотографія парфумів на рожевому фоні"},{"src":"assets/product-photography/02.jpg","alt":"Pomellato NUDO — предметна фотографія парфумів у ніжній композиції"},{"src":"assets/product-photography/03.jpg","alt":"Beauty photography — косметичні пензлі та аксесуари"},{"src":"assets/product-photography/04.jpg","alt":"Lancôme La Vie Est Belle — рекламна предметна фотографія парфумів"},{"src":"assets/product-photography/05.jpg","alt":"Beauty flat lay — добірка косметичних і доглядових засобів"},{"src":"assets/product-photography/06.jpg","alt":"Tony Moly Banana Hand Milk — яскрава предметна фотографія косметики"},{"src":"assets/product-photography/07.jpg","alt":"Ungaro — рекламна предметна фотографія чоловічої парфумерії"}]},
       {name:"Логотипи",category:"Розробка логотипів",type:"photo",image:"assets/logos/01-komod-cup.jpg?v=logos-20261117",logosGallery:[{"src":"assets/logos/01-komod-cup.jpg","alt":"КОМОД — логотип на кавовому стаканчику"},{"src":"assets/logos/02-komod-packaging.jpg","alt":"КОМОД — фірмове пакування та бірка"},{"src":"assets/logos/03-survival-academy.jpg","alt":"Survival Academy — логотип на футболці"},{"src":"assets/logos/04-faini-maliata.jpg","alt":"Файні малята — логотип на дитячій футболці"},{"src":"assets/logos/05-bw-coffee.jpg","alt":"BW & coffe — логотип у кав’ярні"},{"src":"assets/logos/06-favorite-food.jpg","alt":"Favorite Food — логотип на стіні закладу"},{"src":"assets/logos/07-grand-event.jpg","alt":"Grand Event Decor — логотип на папері"},{"src":"assets/logos/08-happy-day.jpg","alt":"Happy Day studio — логотип на поліграфії"},{"src":"assets/logos/09-luxury-comfort.jpg","alt":"Luxury Comfort — логотип на темній поверхні"},{"src":"assets/logos/10-rainbow-color.jpg","alt":"Rainbow Color — логотип на пакуванні"},{"src":"assets/logos/11-intime.jpg","alt":"InTime — логотип на пакеті"},{"src":"assets/logos/12-twinkle-story.jpg","alt":"Twinkle Story — логотип на листівці"},{"src":"assets/logos/13-ukrednist.jpg","alt":"UKRednist — логотип на футболці"},{"src":"assets/logos/14-cupcakery.png","alt":"Chmura Cukru — логотип на пакуванні десертів"},{"src":"assets/logos/15-natural-farm.webp","alt":"Natural Farm — логотип у вишивці та на папері"},{"src":"assets/logos/16-komod-brandbook.webp","alt":"КОМОД — презентація логотипа в кількох кольорових варіантах"}]},
@@ -319,6 +333,10 @@
     ];
     function esc(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;")}
     function artHTML(item,variant=0){
+      if(item.slot){
+        const isLanding=item.slot==="landing";
+        return '<div class="art portfolio-slot '+(isLanding?'portfolio-slot-landing':'portfolio-slot-empty')+'"><span class="portfolio-slot-kicker">'+(isLanding?'WEB DESIGN / 2026':'SELECTED WORKS / NEXT')+'</span><span class="portfolio-slot-word">'+esc(item.coverTitle)+'</span><span class="portfolio-slot-caption">'+esc(item.coverCaption)+'</span></div>';
+      }
       if(item.externalUrl)return '<div class="art beauty-placeholder"><span class="beauty-ring"></span><span class="beauty-float"></span><span class="beauty-mark">Beauty</span><span class="beauty-label">Cosmetics · Banner design</span></div>';
       if(item.image)return '<div class="art photo-art"><img src="'+esc(item.image)+'" alt="" loading="lazy" decoding="async"'+(item.coverContain?' style="object-fit:contain;background:#dedbda"':'')+'></div>';
       return '<div class="art '+item.type+' variant-'+variant+'" style="--a:'+item.a+';--b:'+item.b+';--txt:'+item.text+'"><div class="shine"></div><div class="art-word">'+esc(item.label)+'</div><div class="object"></div><div class="art-sub">A creative visual study / '+String(variant+1).padStart(2,'0')+'</div></div>';
@@ -356,6 +374,14 @@
       if(previousFocus&&previousFocus.focus)previousFocus.focus();
     }
     function openProject(item,group,i){
+      if(item.landingFilePending){
+        modalContent.innerHTML='<div class="eyebrow">WEB DESIGN / LANDING PAGE</div><h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+'</h2><p class="print-case-lead">Дизайн лендінгу для мінеральної води «Хижанська»</p><div class="beauty-source-note"><p>Місце для повного інтерактивного лендінгу підготовлено. Для його публікації потрібен файл <strong>khizhanska-landing-two-bottles.html</strong>: шлях file:///C:/ на іншому комп’ютері не відкривається. Також очікується квадратна обкладинка проєкту.</p></div>';
+        showModal();return;
+      }
+      if(item.pendingSlot){
+        modalContent.innerHTML='<div class="eyebrow">UPCOMING / PORTFOLIO</div><h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+'</h2><p class="modal-lead">Місце для наступного проєкту. Картка готова до додавання обкладинки та матеріалів.</p>';
+        showModal();return;
+      }
       if(item.photographyGallery&&item.photographyGallery.length){
         const photos=item.photographyGallery.map((work,n)=>'<figure class="print-case-photo"><img src="'+esc(work.src)+'" alt="'+esc(work.alt)+'" loading="'+(n===0?'eager':'lazy')+'" decoding="async"></figure>').join('');
         modalContent.innerHTML='<div class="eyebrow">PHOTOGRAPHY / CASE '+String(i+1).padStart(2,'0')+'</div><h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+'</h2><p class="print-case-lead">Предметна зйомка · Парфумерія, косметика та beauty-продукти</p><div class="print-case-gallery">'+photos+'</div>';
