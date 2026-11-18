@@ -373,7 +373,7 @@
       {name:"Машинна вишивка",category:"Розробка дизайнів",label:"",type:"photo",image:"assets/machine-embroidery.webp?v=cover-20261117",hideCaption:false,gallery:["assets/embroidery-gallery-01.webp","assets/embroidery-gallery-02.webp","assets/embroidery-gallery-03.webp","assets/embroidery-gallery-04.webp","assets/embroidery-gallery-05.webp"]}
     ];
     const videos=[
-      {name:"Golden Orchard",category:"AI Jewelry · Product film",poster:"assets/ai-video/golden-orchard.jpg",video:"assets/ai-video/golden-orchard.mp4",page:"golden-orchard.html"},
+      {name:"Golden Orchard",category:"AI Jewelry · Product film",video:"assets/ai-video/golden-orchard.mp4",page:"golden-orchard.html"},
       {name:"Dreamscape",category:"AI cinematic",a:"#d8a8d3",b:"#414173",c:"#f7c9e8",d:"#482b61"},
       {name:"Beyond nature",category:"AI nature",a:"#a9d3d3",b:"#558c9b",c:"#ccebdc",d:"#3d7e8e"},
       {name:"Soft surrealism",category:"AI fashion",a:"#f3b9ba",b:"#b66a99",c:"#fff0d8",d:"#824268"},
@@ -408,8 +408,8 @@
       b.addEventListener("click",()=>openProject(item,"graphic",i));projectGrid.appendChild(b);
     });
     function videoArtHTML(item,i){
-      if(item.poster){
-        return '<div class="video-frame"><div class="video-art" style="--va:#d9b6a3;--vb:#7a5a54;--vc:#fff4e0;--vd:#543d47"><div class="planet"></div><div class="horizon"></div><span class="v-title">'+esc(item.name)+'</span></div><img class="ai-video-poster" src="'+esc(item.poster)+'" alt="" loading="lazy" decoding="async"><div class="play" aria-hidden="true">▶</div></div>';
+      if(item.page==="golden-orchard.html" || item.poster){
+        return '<div class="video-frame"><div class="video-art" style="--va:#d9b6a3;--vb:#7a5a54;--vc:#fff4e0;--vd:#543d47"><div class="planet"></div><div class="horizon"></div><span class="v-title">'+esc(item.name)+'</span></div>'+(item.poster?'<img class="ai-video-poster" src="'+esc(item.poster)+'" alt="" loading="lazy" decoding="async">':'')+'<div class="play" aria-hidden="true">▶</div></div>';
       }
       return '<div class="video-frame"><div class="video-art" style="--va:'+item.a+';--vb:'+item.b+';--vc:'+item.c+';--vd:'+item.d+'"><div class="v-ornament"></div><div class="planet"></div><div class="horizon"></div><span class="v-num">AI / '+String(i+1).padStart(2,'0')+'</span><span class="v-title">'+esc(item.name)+'</span></div><div class="play" aria-hidden="true">▶</div></div>';
     }
