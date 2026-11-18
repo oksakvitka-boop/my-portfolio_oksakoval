@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f7dddd">
+  <meta name="theme-color" content="#8b4965">
   <meta name="description" content="Креативне портфоліо: графічний дизайн, AI-відео та 3D-рендери у Blender.">
   <title>Portfolio — Оксана Ковальчук</title>
   <style>
@@ -17,14 +17,14 @@
     ::selection{background:#e9acb6}
     .container{width:min(calc(100% - 100px),var(--max));margin:auto}
     .eyebrow{font-size:11px;letter-spacing:.21em;font-weight:700;text-transform:uppercase}
-    .site-header{z-index:20;position:sticky;top:0;background:rgba(252,238,238,.91);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+    .site-header{z-index:20;position:sticky;top:0;background:#8b4965;color:#fff9fb;backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,245,250,.18)}
     .header-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:25px}
     .brand{font-weight:800;font-size:19px;letter-spacing:-.065em;white-space:nowrap}
     .brand span{color:#b76d80}
     .nav{display:flex;align-items:center;gap:34px}
     .nav a{font-size:12px;text-transform:uppercase;letter-spacing:.08em;transition:opacity .2s}
     .nav a:hover{opacity:.55}
-    .header-label{font-size:10px;text-transform:uppercase;letter-spacing:.12em;border:1px solid var(--ink);border-radius:99px;padding:9px 13px}
+    .header-label{font-size:10px;text-transform:uppercase;letter-spacing:.12em;border:1px solid rgba(255,249,251,.75);border-radius:99px;padding:9px 13px}
     .hero{padding:80px 0 92px;overflow:hidden}
     .hero-grid{display:grid;grid-template-columns:1fr .9fr;align-items:center;gap:7vw}
     .hero h1{font-family:Georgia, 'Times New Roman',serif;font-weight:400;font-size:clamp(76px,10vw,162px);line-height:.79;letter-spacing:-.09em;margin:27px 0 35px}
@@ -187,12 +187,12 @@
     @media(max-width:720px){.container{width:calc(100% - 34px)}.header-inner{height:67px}.brand{font-size:16px}.header-label{display:none}.nav{gap:14px}.nav a{font-size:10px}.hero{padding:55px 0 65px}.hero-grid{grid-template-columns:1fr;gap:35px}.hero h1{font-size:clamp(70px,20vw,115px);margin:24px 0}.hero-side{height:400px;max-width:510px;width:100%;margin:auto}.hero-composition{inset:0 8% 0 8%}.hero-sticker{right:4%;width:120px;height:120px;font-size:18px}.section{padding:67px 0 80px}.section-head{align-items:start;flex-direction:column;gap:17px;margin-bottom:28px}.section-head h2{font-size:clamp(54px,12vw,78px)}.project-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 12px}.project-meta h3{font-size:14px}.videos-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}.three-grid{grid-template-columns:1fr 1fr;gap:18px 12px}.gallery{gap:10px}.modal-content{padding-top:42px}.modal-heading{font-size:clamp(48px,12vw,75px)}}
     @media(max-width:430px){.nav{gap:10px}.nav a{font-size:9px}.hero-side{height:310px}.hero-form{border-width:22px}.hero h1{font-size:74px}.project-grid{gap:20px 10px}.art .art-word{font-size:23px}.project-meta p{font-size:11px}.videos-grid{gap:22px 10px}.three-grid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.gallery-card,.gallery-card:first-child{grid-column:auto;aspect-ratio:1.05}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
-    /* New floral hero: put portfolio_header_flower.webp next to index.html. */
+    /* Soft pink floral hero — original user-provided photo, no desktop tint. */
     .hero.hero-floral{
       min-height:clamp(420px,36vw,620px);
       display:flex;align-items:center;overflow:hidden;
       background-color:#f6dce2;
-      background-image:linear-gradient(90deg,rgba(252,235,240,.31) 0%,rgba(252,235,240,.15) 39%,rgba(252,235,240,0) 62%),url("portfolio_header_flower.webp");
+      background-image:url("portfolio_header_soft_pink.jpg");
       background-repeat:no-repeat;
       background-size:cover;
       background-position:center center;
@@ -208,7 +208,7 @@
     .site-header .header-label{grid-column:3;justify-self:end}
     .hero.hero-floral .hero-name{display:block;font-size:clamp(29px,3.1vw,46px);font-weight:400;letter-spacing:-.04em;line-height:1.15;margin-top:13px}
     @media(max-width:720px){
-      .hero.hero-floral{min-height:540px;padding:60px 0;background-position:61% center;background-image:linear-gradient(90deg,rgba(251,231,236,.84),rgba(251,231,236,.28) 75%),url("portfolio_header_flower.webp")}
+      .hero.hero-floral{min-height:540px;padding:60px 0;background-position:61% center;background-image:linear-gradient(90deg,rgba(253,236,242,.82),rgba(253,236,242,.23) 82%),url("portfolio_header_soft_pink.jpg")}
       .hero.hero-floral h1{font-size:clamp(58px,12vw,86px)}
       .hero.hero-floral .hero-desc{font-size:15px;max-width:320px}
       .hero.hero-floral .hero-name{font-size:clamp(26px,5.7vw,39px);margin-top:12px}
