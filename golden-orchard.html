@@ -62,8 +62,17 @@
     document.addEventListener('keydown',(e)=>{
       if(e.key==='Escape'){window.location.href='index.html#ai'}
     });
-    // Some browsers block autoplay with sound; native controls remain visible for manual playback.
-    window.addEventListener('load',()=>{const attempt=film.play();if(attempt&&attempt.catch)attempt.catch(()=>{})});
+    async function startFilm() {
+      try {
+        await film.play();
+      } catch (error) {
+        if (error.name === 'NotAllowedError') {
+          film.muted = true;
+          film.play().catch(() => {}); // Native controls also allow manual playback.
+        }
+      }
+    }
+    startFilm();
   </script>
 </body>
 </html>
