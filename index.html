@@ -243,6 +243,29 @@
     .print-case-photo{width:100%;padding:0;margin:0}
     .print-case-photo img{display:block;width:100%;height:auto;object-fit:contain}
     @media(max-width:650px){.print-case-gallery{gap:16px}.print-case-lead{margin-bottom:20px}}
+
+
+    /* Blender 3D: vertical 9:16 video gallery, matching AI Video card styling. */
+    .blender-videos-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:17px}
+    .blender-video-cover{position:absolute;inset:0;overflow:hidden}
+    .blender-video-cover>.art{width:100%;height:100%}
+    .blender-video-cover .art .art-word{font-size:clamp(19px,2vw,29px)}
+    .blender-video-cover .art .art-sub{font-size:7px;letter-spacing:.1em;max-width:83%;line-height:1.5}
+    .blender-video-poster{width:100%;height:100%;display:block;object-fit:cover}
+    .blender-video-modal{display:none;position:fixed;z-index:100;inset:0;padding:12px;align-items:center;justify-content:center;background:rgba(13,11,15,.97)}
+    .blender-video-modal[aria-hidden="false"]{display:flex}
+    .blender-video-close{position:absolute;top:14px;right:18px;z-index:3;width:44px;height:44px;border:1px solid #ffffff80;border-radius:50%;background:#241d23;color:#fff;font-size:29px;line-height:1;display:grid;place-items:center}
+    .blender-video-close:hover{background:#523b48}
+    .blender-video-stage{width:min(calc(100vw - 36px),calc((100dvh - 44px)*.5625));max-height:calc(100dvh - 44px);aspect-ratio:9/16;position:relative;background:#0b0a0c;overflow:hidden;box-shadow:0 12px 48px #0008}
+    .blender-video-stage video{width:100%;height:100%;display:block;object-fit:contain;background:#000}
+    .blender-video-stage [hidden]{display:none!important}
+    .blender-video-empty{position:absolute;inset:0;background:#211b25}
+    .blender-video-empty .blender-video-cover{opacity:.86}
+    .blender-video-empty-message{position:absolute;bottom:18px;left:14px;right:14px;padding:15px 17px;background:rgba(18,14,20,.85);color:#fff;border-radius:4px;text-align:center;line-height:1.45;font-size:13px;z-index:2}
+    .blender-video-empty-message strong{display:block;font-size:14px;margin-bottom:5px}
+    @media(max-width:1100px){.blender-videos-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:720px){.blender-videos-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}}
+    @media(max-width:430px){.blender-video-close{top:8px;right:8px;width:38px;height:38px;font-size:25px}}
   </style>
 </head>
 <body>
@@ -305,7 +328,7 @@
 
 
         </div>
-        <div id="threeGrid" class="three-grid"></div>
+        <div id="threeGrid" class="videos-grid blender-videos-grid"></div>
 
 
       </div>
@@ -318,6 +341,18 @@
     <div class="modal-bar"><div class="container modal-bar-in"><button id="backToPortfolio" class="modal-back" type="button"><span class="back-arrow" aria-hidden="true">←</span> Назад до портфоліо</button><button id="closeModal" class="close-btn" type="button" aria-label="Закрити">×</button></div></div>
     <div class="container modal-content" id="modalContent"></div>
   </div>
+
+  <div id="blenderVideoModal" class="blender-video-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Перегляд відео Blender 3D">
+    <button id="closeBlenderVideo" class="blender-video-close" type="button" aria-label="Закрити відео">×</button>
+    <div class="blender-video-stage">
+      <video id="blenderVideoPlayer" controls playsinline preload="metadata" hidden></video>
+      <div id="blenderVideoEmpty" class="blender-video-empty" hidden>
+        <div id="blenderVideoEmptyArt" class="blender-video-cover"></div>
+        <div class="blender-video-empty-message"><strong id="blenderVideoEmptyTitle"></strong><span id="blenderVideoEmptyText">Відео ще не додано. Тут відкриватиметься вертикальний ролик 9:16.</span></div>
+      </div>
+    </div>
+  </div>
+
 
   <script>
     /* ЗМІНА ВМІСТУ: у майбутньому тут будуть реальні роботи та посилання на файли.
@@ -378,10 +413,15 @@
       b.innerHTML=videoArtHTML(item,i)+'<div class="project-meta"><div><h3>'+esc(item.name)+'</h3><p>'+esc(item.category)+'</p><span class="format-pill">9:16 · vertical</span></div><span class="arrow" aria-hidden="true">↗</span></div>';
       b.addEventListener("click",()=>openVideo(item,i));videoGrid.appendChild(b);
     });
+    // Set item.video to an MP4/WebM URL (and optionally item.poster) when files are added.
+    function blenderVideoCoverHTML(item,i){
+      const cover=item.poster?'<img class="blender-video-poster" src="'+esc(item.poster)+'" alt="" loading="lazy" decoding="async">':artHTML(item,i);
+      return '<div class="video-frame"><div class="blender-video-cover">'+cover+'</div><span class="play" aria-hidden="true">▶</span></div>';
+    }
     three.forEach((item,i)=>{
-      const b=document.createElement("button");b.className="three-card reveal";b.type="button";b.setAttribute("aria-label","Відкрити Blender-проєкт "+item.name);
-      b.innerHTML='<div class="art-wrap">'+artHTML(item)+'</div><div class="project-meta"><div><h3>'+esc(item.name)+'</h3><p>'+esc(item.category)+'</p></div><span class="arrow" aria-hidden="true">↗</span></div>';
-      b.addEventListener("click",()=>openProject(item,"blender",i));threeGrid.appendChild(b);
+      const b=document.createElement("button");b.className="video-card blender-video-card reveal";b.type="button";b.setAttribute("aria-label","Відкрити Blender-відео "+item.name);
+      b.innerHTML=blenderVideoCoverHTML(item,i)+'<div class="project-meta"><div><h3>'+esc(item.name)+'</h3><p>'+esc(item.category)+'</p><span class="format-pill">9:16 · vertical</span></div><span class="arrow" aria-hidden="true">↗</span></div>';
+      b.addEventListener("click",()=>openBlenderVideo(item,i));threeGrid.appendChild(b);
     });
     const modal=document.getElementById("modal"),modalContent=document.getElementById("modalContent"),closeBtn=document.getElementById("closeModal"),backBtn=document.getElementById("backToPortfolio");
     let previousFocus=null;
@@ -493,6 +533,67 @@
       modalContent.innerHTML='<div class="eyebrow">AI VIDEO / VERTICAL 9:16</div><h2 class="modal-heading" id="modalTitle">'+esc(item.name)+'</h2><p class="modal-lead">Окрема сторінка AI-відео. Вертикальний формат збережеться без обрізання — готова зона для Instagram Reels та інших роликів 9:16.</p><div class="vertical-preview">'+videoArtHTML(item,i)+'</div><p class="video-placeholder-note"><span class="demo-label">Поки демо-обкладинка</span><br><br>Тут з’явиться справжній відеоплеєр, коли ти надішлеш свій MP4 або посилання на відео. Зараз відеофайл не підключений.</p>';
       showModal();
     }
+
+    const blenderVideoModal=document.getElementById("blenderVideoModal");
+    const blenderVideoPlayer=document.getElementById("blenderVideoPlayer");
+    const blenderVideoEmpty=document.getElementById("blenderVideoEmpty");
+    const blenderVideoEmptyArt=document.getElementById("blenderVideoEmptyArt");
+    const blenderVideoEmptyTitle=document.getElementById("blenderVideoEmptyTitle");
+    const blenderVideoEmptyText=document.getElementById("blenderVideoEmptyText");
+    const closeBlenderVideoBtn=document.getElementById("closeBlenderVideo");
+    let blenderPreviousFocus=null,activeBlenderItem=null,activeBlenderIndex=0;
+    function showBlenderEmpty(item,i,message){
+      blenderVideoPlayer.hidden=true;
+      blenderVideoEmpty.hidden=false;
+      blenderVideoEmptyArt.innerHTML=artHTML(item,i);
+      blenderVideoEmptyTitle.textContent=item.name;
+      blenderVideoEmptyText.textContent=message;
+    }
+    function openBlenderVideo(item,i){
+      blenderPreviousFocus=document.activeElement;
+      activeBlenderItem=item;activeBlenderIndex=i;
+      blenderVideoModal.setAttribute("aria-hidden","false");
+      document.body.style.overflow="hidden";
+      if(item.video&&typeof item.video==="string"){
+        blenderVideoEmpty.hidden=true;
+        blenderVideoPlayer.hidden=false;
+        if(item.poster)blenderVideoPlayer.poster=item.poster;
+        blenderVideoPlayer.src=item.video;
+        blenderVideoPlayer.load();
+        const attempt=blenderVideoPlayer.play();
+        if(attempt&&typeof attempt.catch==="function")attempt.catch(()=>{});
+      }else{
+        showBlenderEmpty(item,i,"Відео ще не додано. Тут відкриватиметься вертикальний ролик 9:16.");
+      }
+      closeBlenderVideoBtn.focus();
+    }
+    function closeBlenderVideo(){
+      blenderVideoPlayer.pause();
+      blenderVideoPlayer.removeAttribute("src");
+      blenderVideoPlayer.removeAttribute("poster");
+      blenderVideoPlayer.load();
+      blenderVideoModal.setAttribute("aria-hidden","true");
+      blenderVideoEmptyArt.innerHTML="";
+      document.body.style.overflow="";
+      activeBlenderItem=null;
+      if(blenderPreviousFocus&&blenderPreviousFocus.focus)blenderPreviousFocus.focus();
+    }
+    blenderVideoPlayer.addEventListener("error",()=>{
+      if(activeBlenderItem&&blenderVideoModal.getAttribute("aria-hidden")==="false"){
+        showBlenderEmpty(activeBlenderItem,activeBlenderIndex,"Не вдалося відкрити відео. Перевірте посилання на файл.");
+      }
+    });
+    closeBlenderVideoBtn.addEventListener("click",closeBlenderVideo);
+    blenderVideoModal.addEventListener("click",(e)=>{if(e.target===blenderVideoModal)closeBlenderVideo()});
+    document.addEventListener("keydown",(e)=>{
+      if(blenderVideoModal.getAttribute("aria-hidden")!=="false")return;
+      if(e.key==="Escape"){e.preventDefault();closeBlenderVideo()}
+      else if(e.key==="Tab"){
+        const first=closeBlenderVideoBtn,last=blenderVideoPlayer.hidden?first:blenderVideoPlayer;
+        if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+        else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+      }
+    });
     closeBtn.addEventListener("click",closeModal);
     backBtn.addEventListener("click",closeModal);
     document.addEventListener("keydown",(e)=>{if(e.key==="Escape"&&modal.getAttribute("aria-hidden")==="false")closeModal();if(e.key==="Tab"&&modal.getAttribute("aria-hidden")==="false"){const focusables=[...modal.querySelectorAll('button,a,[tabindex]:not([tabindex="-1"])')].filter(el=>!el.disabled);if(focusables.length){const first=focusables[0],last=focusables[focusables.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}}});
