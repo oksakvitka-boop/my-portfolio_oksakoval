@@ -16,22 +16,18 @@
     .back:hover{background:#965365}
     .back:focus-visible{outline:3px solid #ffd0dd;outline-offset:3px}
     .viewer-kicker{font-size:10px;letter-spacing:.16em;font-weight:700;text-transform:uppercase;color:#e9b3c3;text-align:right}
-    .viewer-main{width:100%;flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,calc((100svh - 154px)*.5625)) minmax(0,1fr);align-items:center;justify-items:center;column-gap:clamp(12px,2.4vw,34px);padding:14px 16px 24px}
-    .viewer-player{grid-column:2;width:100%;aspect-ratio:9 / 16;max-height:calc(100svh - 154px);position:relative;overflow:hidden;background:linear-gradient(155deg,#9d798a,#261c28 75%);box-shadow:0 12px 46px rgba(0,0,0,.4)}
+    .viewer-main{width:100%;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:14px 16px 20px}
+    .viewer-player{width:min(100%,480px,calc((100svh - 125px)*.5625));aspect-ratio:9 / 16;max-height:calc(100svh - 125px);position:relative;overflow:hidden;background:linear-gradient(155deg,#9d798a,#261c28 75%);box-shadow:0 12px 46px rgba(0,0,0,.4)}
     video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
     .viewer-player .media-error{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:32px;text-align:center;background:#201b23;font-size:14px;line-height:1.7;color:#f3e6e9}
     .viewer-player.is-error video{display:none}
     .viewer-player.is-error .media-error{display:flex}
-    .caption{grid-column:3;justify-self:start;text-align:left;max-width:200px;margin:0;align-self:center}
-    .description{color:#cbb7c1;font-size:12px;letter-spacing:.08em;line-height:1.8;text-transform:uppercase;margin:0}
     @media(max-width:600px){
       .viewer-top{padding:9px 14px}
       .back{padding:9px 13px;font-size:12px}
       .viewer-kicker{font-size:9px}
-      .viewer-main{grid-template-columns:minmax(0,1fr) minmax(0,115px);column-gap:12px;padding:10px 12px 18px}
-      .viewer-player{grid-column:1;justify-self:end;width:min(100%,calc((100svh - 138px)*.5625));max-height:calc(100svh - 138px)}
-      .caption{grid-column:2;max-width:115px}
-      .description{font-size:10px;letter-spacing:.06em;line-height:1.65}
+      .viewer-main{padding:10px 12px 14px}
+      .viewer-player{width:min(100%,480px,calc((100svh - 108px)*.5625));max-height:calc(100svh - 108px)}
     }
   </style>
 </head>
@@ -48,9 +44,6 @@
       <div class="media-error" role="status">
         Відео поки недоступне на сайті. Після завантаження відеофайлу в портфоліо ролик відтворюватиметься тут.
       </div>
-    </div>
-    <div class="caption">
-      <p class="description">Jewelry visualization</p>
     </div>
   </main>
   <script>
