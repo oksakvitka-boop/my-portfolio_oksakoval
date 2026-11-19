@@ -105,7 +105,7 @@ h1,h2,h3,p{margin-top:0}h1,h2{font-family:var(--serif);font-weight:600;letter-sp
 .product-item strong{font-size:20px;margin:11px 0 1px;line-height:1.1}.product-item>span:last-child{color:#677069;font-size:12px;line-height:1.5;min-height:39px}
 .products-button{min-width:197px}
 .partner-section{background:#fff;padding:77px 0 75px}
-.partner-grid{display:grid;grid-template-columns:37% 63%;gap:28px}
+.partner-grid{display:grid;grid-template-columns:minmax(0,37fr) minmax(0,63fr);gap:28px}
 .partner-copy{padding-right:20px}
 .partner-copy h2{font-size:clamp(36px,3.4vw,56px);margin-bottom:24px}
 .partner-copy .copy{max-width:425px}
@@ -122,7 +122,7 @@ h1,h2,h3,p{margin-top:0}h1,h2{font-family:var(--serif);font-weight:600;letter-sp
 .region-result{min-height:122px;border-bottom:1px solid #dde3dd;margin:20px 0 19px}.region-result strong{font-size:12px}.region-result p{font-size:12px;color:var(--muted);line-height:1.65;margin-top:7px}
 .btn-full{width:100%}
 .benefits-section{background:#eef1e8;padding:65px 0 70px}
-.benefits-grid{display:grid;grid-template-columns:28% 72%;gap:22px;align-items:center}
+.benefits-grid{display:grid;grid-template-columns:minmax(0,28fr) minmax(0,72fr);gap:22px;align-items:center}
 .benefits-intro{padding-right:30px}.benefits-intro h2{font-size:clamp(35px,3.3vw,54px);line-height:.99;margin-bottom:20px}.benefits-intro .copy{font-size:13px;line-height:1.8;margin-bottom:23px}.benefits-intro .btn{font-size:12px;padding-inline:14px}
 .benefit-photo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}
 .photo-benefit{height:245px;border:0;border-radius:8px;padding:0;overflow:hidden;position:relative;text-align:left;color:#fff;background:#6b7f6d;transition:transform .25s}
@@ -556,6 +556,58 @@ body.modal-open{overflow:hidden}
   #products .two-bottle-grid .product-image {height:clamp(185px,60vw,226px)}
   #products .two-bottle-grid .product-item strong{font-size:18px}
   #products .two-bottle-grid .product-item>span:last-child{font-size:11px}
+}
+
+
+/* Responsive layout reliability: prevent narrow screens and embedded views
+   from creating a desktop-width canvas. Original imagery is unchanged. */
+html,body{max-width:100%;overflow-x:clip}
+main,section,.shell,.header-inner,.factory-wrap,.water-product-section,
+.partner-grid,.distributor-layout,.benefits-grid,.footer-grid{min-width:0}
+@media (min-width:681px) and (max-width:900px){
+  .footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}
+  .footer-brand-col{grid-column:1/-1}
+  .footer-contact{grid-column:auto}
+}
+@media (max-width:680px){
+  .shell{width:calc(100% - 32px)}
+  .site-header .header-inner{min-width:0;gap:8px}
+  .site-header .brand.brand-original{
+    width:min(52vw,205px);max-width:205px;min-width:0;
+    flex:0 1 auto;
+  }
+  .site-header .brand-original-logo{display:block;width:100%;height:auto;max-width:100%}
+  .site-header .header-actions{margin-left:auto;gap:5px;min-width:max-content}
+  .site-header .nav.open{
+    width:100%;max-height:calc(100dvh - 72px);
+    overflow-y:auto;overscroll-behavior:contain;
+  }
+  .hero{--hero-safe-top:310px;background-position:69% bottom,center center}
+  .hero-layout{min-width:0}
+  .hero-copy{min-width:0}
+  .hero h1{font-size:clamp(40px,10.2vw,60px)}
+  .hero-buttons{width:100%;gap:8px}
+  .hero-buttons .btn{flex:1 1 130px;min-width:0;white-space:normal;text-align:center}
+  .hero-benefits{min-width:0}
+  .hero-benefit{min-width:0}
+  .hero-benefit span:last-child{overflow-wrap:anywhere}
+  .factory-copy h2,.partner-copy h2,.benefits-intro h2,
+  .products-content h2,.mineral-content h2{overflow-wrap:break-word}
+  .partner-copy h2{font-size:clamp(32px,8.7vw,43px)}
+  .mineral-table>div{gap:9px;align-items:baseline}
+  .mineral-table>div span{min-width:0;overflow-wrap:anywhere}
+  .mineral-table>div b{flex-shrink:0}
+  .product-grid,.product-item,.product-image{min-width:0}
+  .footer-logo-subtitle{white-space:normal;overflow-wrap:break-word}
+  .modal-backdrop{padding:12px}
+  .modal-dialog{max-height:calc(100dvh - 24px);min-width:0}
+  .modal-dialog h2{font-size:clamp(29px,8vw,39px);overflow-wrap:anywhere}
+}
+@media (max-width:390px){
+  .hero{--hero-safe-top:295px}
+  .site-header .brand.brand-original{width:min(51vw,185px)}
+  .hero-buttons .btn{font-size:10px;padding:11px 8px}
+  .mineral-table>div{font-size:11px}
 }
 
 </style>
