@@ -610,6 +610,26 @@ main,section,.shell,.header-inner,.factory-wrap,.water-product-section,
   .mineral-table>div{font-size:11px}
 }
 
+
+/* Stable hero photo: keep the complete original panorama as a real rendered image.
+   The transparent canvas animates ONLY the river and bubbles above the photo.
+   The backdrop is never painted into/cleared by the animation. */
+.hero{position:relative;isolation:isolate;overflow:hidden}
+.hero .hero-scene-image{
+  position:absolute;z-index:0;left:50%;bottom:0;
+  width:auto;height:calc(100% - var(--hero-safe-top,88px));
+  max-width:none;object-fit:contain;transform:translateX(-50%);
+  pointer-events:none;user-select:none;
+}
+.hero .hero-scrim{z-index:1;pointer-events:none}
+.hero::after{z-index:1}
+.hero .hero-water-motion{z-index:2}
+.hero .hero-layout{z-index:3}
+.hero .hero-bottom-line{z-index:4}
+@media(max-width:680px){
+  .hero .hero-scene-image{left:69%;transform:translateX(-69%)}
+}
+
 </style>
 </head>
 <body>
@@ -655,7 +675,8 @@ main,section,.shell,.header-inner,.factory-wrap,.water-product-section,
 
 <main>
 <section class="hero" aria-labelledby="heroTitle">
- <canvas class="hero-water-motion" id="heroWaterMotion" aria-hidden="true"></canvas>
+ <img class="hero-scene-image" src="assets/khizhanska/visual-01.webp" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
+  <canvas class="hero-water-motion" id="heroWaterMotion" aria-hidden="true"></canvas>
  <div class="hero-scrim"></div>
  <div class="shell hero-layout">
    <div class="hero-copy reveal">
@@ -1052,16 +1073,16 @@ main,section,.shell,.header-inner,.factory-wrap,.water-product-section,
   if(motion.matches) return;
   const ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
   if(!ctx) return;
-  const photo=new Image();
-  const bg=getComputedStyle(hero).backgroundImage;
-  const match=bg.match(/url\(\s*["']?([^"')]+)["']?\s*\)/);
-  if(!match) return;
-  photo.src=match[1];
+  // Read the same visible image used by the page; never derive photo URLs from CSS.
+  const photo=hero.querySelector('.hero-scene-image');
+  if(!photo) return;
   const creekMask=new Image();
   creekMask.src='assets/khizhanska/visual-13.webp';
   const SRC_W=2048, SRC_H=740;
   const reducedData=navigator.connection?.saveData===true;
-  const DPR_LIMIT=reducedData?1:Math.min(window.devicePixelRatio||1,1.5);
+  const isEmbedded=window.self!==window.top;
+  const isNarrow=window.matchMedia('(max-width:680px)').matches;
+  const DPR_LIMIT=(reducedData||isEmbedded||isNarrow)?1:Math.min(window.devicePixelRatio||1,1.25);
   let w=0,h=0,dpr=1,scale=1,ox=0,oy=0,seen=true,raf=0;
 
   function makePath(coords){const p=new Path2D();p.moveTo(coords[0],coords[1]);for(let i=2;i<coords.length;i+=2)p.lineTo(coords[i],coords[i+1]);p.closePath();return p;}
@@ -1111,13 +1132,11 @@ main,section,.shell,.header-inner,.factory-wrap,.water-product-section,
     dpr=DPR_LIMIT;
     canvas.width=Math.max(1,Math.round(w*dpr));
     canvas.height=Math.max(1,Math.round(h*dpr));
-    const styles=getComputedStyle(hero);
-    const safeTop=parseFloat(styles.getPropertyValue('--hero-safe-top'))||88;
-    // Must match CSS: background-size auto calc(100% - safeTop).
-    scale=Math.max(.01,(h-safeTop)/SRC_H);
-    const firstPosition=styles.backgroundPosition.split(',')[0].trim().split(/\s+/);
-    ox=parsePosition(firstPosition[0]||'50%',w-SRC_W*scale);
-    oy=h-SRC_H*scale; // background-position: bottom
+    // Exact image bounds ensure bubbles stay inside the same bottle in all viewports.
+    const photoRect=photo.getBoundingClientRect();
+    scale=Math.max(.01,photoRect.height/SRC_H);
+    ox=photoRect.left-rect.left;
+    oy=photoRect.top-rect.top;
   }
 
   function movingCreek(t){
@@ -1188,7 +1207,7 @@ main,section,.shell,.header-inner,.factory-wrap,.water-product-section,
   function draw(t){
     if(!seen || motion.matches || document.hidden){raf=0;return;}
     raf=requestAnimationFrame(draw);
-    if(t-last<(reducedData?75:42)) return; // 18-30fps, low cost
+    if(t-last<(reducedData?90:(isEmbedded||isNarrow?55:42))) return; // cap compositing cost
     last=t;
     ctx.setTransform(1,0,0,1,0,0);
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -1208,7 +1227,11 @@ main,section,.shell,.header-inner,.factory-wrap,.water-product-section,
   function stop(){if(raf){cancelAnimationFrame(raf);raf=0;}}
   photo.onload=()=>{resize();start();};
   if(photo.complete && photo.naturalWidth){resize();start();}
-  new ResizeObserver(()=>resize()).observe(hero);
+  if('ResizeObserver' in window){
+    const ro=new ResizeObserver(()=>resize());
+    ro.observe(hero);
+    ro.observe(photo);
+  } else window.addEventListener('resize',resize,{passive:true});
   new IntersectionObserver(entries=>{seen=entries[0]?.isIntersecting??true;seen?start():stop();},{threshold:0}).observe(hero);
   document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
   motion.addEventListener?.('change',()=>motion.matches?stop():start());
