@@ -267,6 +267,23 @@
     @media(max-width:1100px){.blender-videos-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
     @media(max-width:720px){.blender-videos-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}}
     @media(max-width:430px){.blender-video-close{top:8px;right:8px;width:38px;height:38px;font-size:25px}}
+
+    /* Mobile audit: allow cards and long case titles to shrink within the viewport. */
+    .project-card,.video-card,.three-card,.project-meta{min-width:0}
+    .project-meta h3,.modal-heading,.modal-lead{overflow-wrap:anywhere}
+    .modal{overscroll-behavior:contain}
+    @media(max-width:720px){
+      .modal-content{min-width:0;padding-bottom:70px}
+      .landing-page-showcase{margin-top:16px}
+      .section-head h2{overflow-wrap:break-word}
+      .video-card .project-meta{gap:5px}
+    }
+    @media(max-width:390px){
+      .site-header .nav{gap:8px}
+      .site-header .nav a{letter-spacing:0;font-size:9px}
+      .hero.hero-floral .hero-title-word{font-size:clamp(52px,14vw,68px)}
+      .project-meta h3,.video-card .project-meta h3{font-size:12px}
+    }
   </style>
 </head>
 <body>
@@ -443,6 +460,11 @@
     }
     function openProject(item,group,i){
       if(item.landingPageUrl){
+        // A nested scrolling iframe is unusable on phones; open the full responsive page.
+        if(window.matchMedia('(max-width:720px)').matches){
+          window.location.assign(item.landingPageUrl);
+          return;
+        }
         modalContent.innerHTML='<div class="eyebrow">WEB DESIGN / LANDING PAGE</div><h2 class="modal-heading modal-heading-small" id="modalTitle">'+esc(item.name)+'</h2><p class="print-case-lead">Дизайн інтерактивного лендінгу для мінеральної води «Хижанська»</p><p><a class="landing-open-link" href="'+esc(item.landingPageUrl)+'" target="_blank" rel="noopener noreferrer">Відкрити сайт на весь екран ↗</a></p><iframe class="landing-live-preview" title="Хижанська — інтерактивний лендінг" src="'+esc(item.landingPageUrl)+'" loading="lazy"></iframe>';
         showModal();return;
       }
