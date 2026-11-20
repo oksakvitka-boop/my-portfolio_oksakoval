@@ -1,0 +1,43 @@
+name: Assemble Ruby Heart video
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/ai-video/.ruby-heart-parts/**'
+      - '.github/workflows/assemble-ruby-heart.yml'
+permissions:
+  contents: write
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reconstruct and verify MP4
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          base = Path("assets/ai-video/.ruby-heart-parts")
+          parts = sorted(base.glob("part-*.bin"))
+          if len(parts) != 29:
+              raise SystemExit(f"Expected 29 video parts, found {len(parts)}")
+          target = Path("assets/ai-video/ruby-heart.mp4")
+          with target.open("wb") as out:
+              for part in parts:
+                  out.write(part.read_bytes())
+          actual = hashlib.sha256(target.read_bytes()).hexdigest()
+          expected = "97ccf57236f8805014980f3d0e8ff49ea1e3836ad6054f6f903bfdc616b570ac"
+          if target.stat().st_size != 5253205 or actual != expected:
+              raise SystemExit(f"Video verification failed: {actual}")
+          print("Verified Ruby Heart MP4")
+          PY
+      - name: Publish assembled video
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/ai-video/ruby-heart.mp4
+          git rm -r assets/ai-video/.ruby-heart-parts
+          git commit -m 'Publish verified Ruby Heart video'
+          git push origin HEAD:main
