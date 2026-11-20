@@ -247,7 +247,7 @@
 
 
     /* Blender 3D: vertical 9:16 video gallery, matching AI Video card styling. */
-    .blender-videos-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:17px}
+    /* Blender uses the shared .videos-grid columns, gaps and responsive breakpoints. */
     .blender-video-cover{position:absolute;inset:0;overflow:hidden}
     .blender-video-cover>.art{width:100%;height:100%}
     .blender-video-cover .art .art-word{font-size:clamp(19px,2vw,29px)}
@@ -255,8 +255,8 @@
     .blender-video-poster{width:100%;height:100%;display:block;object-fit:cover}
     .blender-video-modal{display:none;position:fixed;z-index:100;inset:0;padding:12px;align-items:center;justify-content:center;background:rgba(13,11,15,.97)}
     .blender-video-modal[aria-hidden="false"]{display:flex}
-    .blender-video-close{position:absolute;top:14px;right:18px;z-index:3;width:44px;height:44px;border:1px solid #ffffff80;border-radius:50%;background:#241d23;color:#fff;font-size:29px;line-height:1;display:grid;place-items:center}
-    .blender-video-close:hover{background:#523b48}
+    .blender-video-back{position:absolute;top:14px;left:18px;z-index:3;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:11px 18px;border:1px solid #e4b9c0;border-radius:100px;background:#b76d80;color:#fff;font-size:13px;font-weight:700}
+    .blender-video-back:hover{background:#965365}
     .blender-video-stage{width:min(calc(100vw - 36px),calc((100dvh - 44px)*.5625));max-height:calc(100dvh - 44px);aspect-ratio:9/16;position:relative;background:#0b0a0c;overflow:hidden;box-shadow:0 12px 48px #0008}
     .blender-video-stage video{width:100%;height:100%;display:block;object-fit:contain;background:#000}
     .blender-video-stage [hidden]{display:none!important}
@@ -264,9 +264,7 @@
     .blender-video-empty .blender-video-cover{opacity:.86}
     .blender-video-empty-message{position:absolute;bottom:18px;left:14px;right:14px;padding:15px 17px;background:rgba(18,14,20,.85);color:#fff;border-radius:4px;text-align:center;line-height:1.45;font-size:13px;z-index:2}
     .blender-video-empty-message strong{display:block;font-size:14px;margin-bottom:5px}
-    @media(max-width:1100px){.blender-videos-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-    @media(max-width:720px){.blender-videos-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}}
-    @media(max-width:430px){.blender-video-close{top:8px;right:8px;width:38px;height:38px;font-size:25px}}
+    @media(max-width:430px){.blender-video-back{top:8px;left:8px;min-height:40px;padding:9px 13px;font-size:12px}}
 
     /* Mobile audit: allow cards and long case titles to shrink within the viewport. */
     .project-card,.video-card,.three-card,.project-meta{min-width:0}
@@ -361,7 +359,7 @@
   </div>
 
   <div id="blenderVideoModal" class="blender-video-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Перегляд вертикального відео">
-    <button id="closeBlenderVideo" class="blender-video-close" type="button" aria-label="Закрити відео">×</button>
+    <button id="closeBlenderVideo" class="blender-video-back" type="button" aria-label="Назад до портфоліо">← Назад до портфоліо</button>
     <div class="blender-video-stage">
       <video id="blenderVideoPlayer" controls playsinline preload="metadata" hidden></video>
       <div id="blenderVideoEmpty" class="blender-video-empty" hidden>
@@ -443,7 +441,7 @@
     }
     three.forEach((item,i)=>{
       const b=document.createElement("button");b.className="video-card blender-video-card reveal";b.type="button";b.setAttribute("aria-label","Відкрити Blender-відео "+item.name);
-      b.innerHTML=blenderVideoCoverHTML(item,i)+'<div class="project-meta"><div><h3>'+esc(item.name)+'</h3><p>'+esc(item.category)+'</p><span class="format-pill">9:16 · vertical</span></div><span class="arrow" aria-hidden="true">↗</span></div>';
+      b.innerHTML=blenderVideoCoverHTML(item,i)+'<div class="project-meta"><div><h3>'+esc(item.name)+'</h3></div><span class="arrow" aria-hidden="true">↗</span></div>';
       b.addEventListener("click",()=>openBlenderVideo(item,i));threeGrid.appendChild(b);
     });
     const modal=document.getElementById("modal"),modalContent=document.getElementById("modalContent"),closeBtn=document.getElementById("closeModal"),backBtn=document.getElementById("backToPortfolio");
