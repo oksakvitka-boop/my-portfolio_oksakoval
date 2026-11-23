@@ -1,0 +1,49 @@
+name: Publish Pastel Dreams clean cover
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-pastel-dreams-cover.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish-cover:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out portfolio
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Extract the original moonlit video frame without overlaid text
+        shell: bash
+        run: |
+          set -euo pipefail
+          input="assets/ai-video/pastel-dreams-original.mp4"
+          poster="assets/ai-video/pastel-dreams-cover.webp"
+          test -s "$input"
+          ffmpeg -hide_banner -loglevel error -y \
+            -ss 37.166667 -i "$input" -frames:v 1 \
+            -c:v libwebp -quality 95 -compression_level 6 "$poster"
+          test -s "$poster"
+          width=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 "$poster")
+          height=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0 "$poster")
+          test "$width" = 1080 && test "$height" = 1920
+          echo "Clean 1080x1920 poster generated from the original film."
+
+      - name: Commit and publish cover
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/ai-video/pastel-dreams-cover.webp
+          if git diff --cached --quiet; then
+            echo "Poster is already current."
+          else
+            git commit -m "Publish clean moonlit Pastel Dreams cover"
+            git push origin HEAD:main
+          fi
