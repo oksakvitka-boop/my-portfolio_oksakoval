@@ -1,0 +1,60 @@
+name: Publish original Pastel Dreams video
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/ai-video/.pastel-original-parts/**'
+
+permissions:
+  contents: write
+
+jobs:
+  assemble-original:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out portfolio repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Assemble and verify original uncompressed transfer
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          import hashlib
+
+          parts_dir = Path("assets/ai-video/.pastel-original-parts")
+          parts = sorted(parts_dir.glob("part-*.b64"))
+          if len(parts) != 34:
+              raise SystemExit(f"Missing video transfer parts: found {len(parts)}, expected 34")
+
+          encoded = "".join(p.read_text(encoding="ascii").replace("\n", "").replace("\r", "") for p in parts)
+          original = base64.b64decode(encoded, validate=True)
+          digest = hashlib.sha256(original).hexdigest()
+          expected_sha256 = "b951d887adb78a86f1c02d885ef9153a84080df66cbfe896ebffa479ada6bb4a"
+          if len(original) != 65972344 or digest != expected_sha256:
+              raise SystemExit(f"Original video does not match source: bytes={len(original)} SHA256={digest}")
+
+          video = Path("assets/ai-video/pastel-dreams-original.mp4")
+          video.write_bytes(original)
+          print(f"Verified and restored full-quality MP4: {len(original)} bytes; SHA256={digest}")
+
+          poster = Path("assets/ai-video/pastel-dreams-cover.jpg")
+          cover_sha256 = hashlib.sha256(poster.read_bytes()).hexdigest()
+          if cover_sha256 != "c6f4e47f095351a1ea06f56520c0fd72fd88914c485b03e88521632ced6fab34":
+              raise SystemExit(f"Poster checksum mismatch: {cover_sha256}")
+          print("Poster verified")
+          PY
+
+      - name: Publish original MP4 and remove transfer parts
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f assets/ai-video/pastel-dreams-original.mp4
+          git rm -r assets/ai-video/.pastel-original-parts
+          git commit -m "Publish uncompressed original Pastel Dreams video and verified poster"
+          git push origin HEAD:main
