@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#201c21">
-  <meta name="description" content="Summer Vibes — AI Video, вертикальний формат 9:16. Літня атмосфера — AI-відео у форматі 9:16.">
+  <meta name="description" content="Summer Vibes — AI Video, вертикальний формат 9:16. Літнє натхнення та тепла атмосфера — AI-відео у форматі 9:16.">
   <title>Summer Vibes | Portfolio</title>
   <style>
     :root{color-scheme:dark;--pink:#b76d80;--ink:#f7f0f2}
@@ -37,11 +37,12 @@
   </header>
   <main class="viewer-main">
     <div class="viewer-player" id="playerArea">
-      <video id="film" controls playsinline autoplay preload="auto" poster="assets/ai-video/summer-vibes-cover.webp" aria-label="Summer Vibes — AI-відео 9:16">
+      <video id="film" controls playsinline autoplay preload="auto" poster="assets/ai-video/summer-vibes-cover.webp?v=20261123" aria-label="Summer Vibes — AI-відео 9:16">
+        <source src="assets/ai-video/summer.mp4?v=20261123" type="video/mp4">
         Ваш браузер не підтримує відео HTML5.
       </video>
       <div class="media-error" role="status">
-        Відео Summer Vibes тимчасово недоступне. Перевірте, чи завантажено файл summer.mp4 до папки assets/ai-video/.
+        Не вдалося завантажити відео. Онови сторінку та спробуй ще раз.
       </div>
     </div>
   </main>
@@ -55,47 +56,16 @@
     document.addEventListener('keydown',(e)=>{
       if(e.key==='Escape'){window.location.href='index.html#ai'}
     });
-    // Play the normal MP4 when available. Until the upload is assembled by
-    // GitHub Actions, load the original MP4 from its ordered lossless parts.
-    let temporaryVideoUrl = null;
     async function startFilm() {
       try {
-        const directUrl = 'assets/ai-video/summer.mp4';
-        let directAvailable = false;
-        try {
-          const check = await fetch(directUrl, { method: 'HEAD', cache: 'no-store' });
-          directAvailable = check.ok;
-        } catch (_) {}
-        if (directAvailable) {
-          film.src = directUrl;
-        } else {
-          const partUrls = Array.from({ length: 13 }, (_, index) =>
-            'assets/ai-video/summer-vibes-parts/part-' + String(index).padStart(2, '0') + '.bin');
-          const videoParts = await Promise.all(partUrls.map(async (url) => {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error('Video part unavailable: ' + url);
-            return response.blob();
-          }));
-          temporaryVideoUrl = URL.createObjectURL(new Blob(videoParts, { type: 'video/mp4' }));
-          film.src = temporaryVideoUrl;
-        }
-        film.load();
-        try {
-          await film.play();
-        } catch (error) {
-          if (error.name === 'NotAllowedError') {
-            film.muted = true;
-            await film.play();
-          } else throw error;
-        }
+        await film.play();
       } catch (error) {
-        console.error('Summer Vibes playback unavailable:', error);
-        playerArea.classList.add('is-error');
+        if (error.name === 'NotAllowedError') {
+          film.muted = true;
+          film.play().catch(() => {}); // Native controls also allow manual playback.
+        }
       }
     }
-    window.addEventListener('pagehide', () => {
-      if (temporaryVideoUrl) URL.revokeObjectURL(temporaryVideoUrl);
-    });
     startFilm();
   </script>
 </body>
