@@ -1,0 +1,37 @@
+name: Publish Summer Vibes MP4
+
+on:
+  push:
+    paths:
+      - 'assets/ai-video/summer-vibes-parts/**'
+      - '.github/workflows/assemble-summer-vibes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  assemble-video:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out portfolio
+        uses: actions/checkout@v4
+
+      - name: Reassemble the original high-quality MP4
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat assets/ai-video/summer-vibes-parts/part-{00..12}.bin > assets/ai-video/summer.mp4
+          test "$(wc -c < assets/ai-video/summer.mp4)" -eq 20394652
+          echo "ef7f652611e132449f455b9f3a69f73bf3defbd787210c0acd7fb8f6044b961a  assets/ai-video/summer.mp4" | sha256sum -c -
+
+      - name: Publish full video and remove transfer pieces
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/ai-video/summer.mp4
+          git rm -r assets/ai-video/summer-vibes-parts
+          git commit -m "Publish Summer Vibes MP4"
+          git push
