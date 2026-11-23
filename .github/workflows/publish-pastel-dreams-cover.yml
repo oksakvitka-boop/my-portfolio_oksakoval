@@ -18,6 +18,12 @@ jobs:
         with:
           persist-credentials: true
 
+      - name: Install FFmpeg on GitHub runner
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg
+
       - name: Extract the original moonlit video frame without overlaid text
         shell: bash
         run: |
