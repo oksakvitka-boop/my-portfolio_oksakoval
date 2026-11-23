@@ -400,12 +400,12 @@
       {name:"Coming Soon 10",category:"",page:"coming-soon-10.html",a:"#e9d7e7",b:"#9286b4",c:"#f5d6ea",d:"#9a79ac"}
     ];
     const three=[
-      {name:"Jewelry / CGI",category:"Blender • Jewelry render",label:"Lumière",type:"ring",a:"#f5e7d9",b:"#deb8b5",text:"#6e4b55"},
-      {name:"Organic forms",category:"Blender • Material study",label:"Morph",type:"orb",a:"#e9d2ea",b:"#b8accf",text:"#554872"},
-      {name:"Product visualization",category:"Blender • Product render",label:"Atelier",type:"bottle",a:"#c8d8d4",b:"#f1ded2",text:"#526761"},
-      {name:"Glass & light",category:"Blender • Lighting",label:"Glass",type:"arch",a:"#d6e7ea",b:"#d2c0df",text:"#57717d"},
-      {name:"Chrome reflections",category:"Blender • Objects",label:"Reflect",type:"ribbon",a:"#dad5e5",b:"#b9cbda",text:"#4c5b75"},
-      {name:"Beauty objects",category:"Blender • CGI",label:"Studio 03",type:"tube",a:"#eacac4",b:"#f6e1e1",text:"#805866"}
+      {name:"Jewelry / CGI",page:"blender-jewelry-cgi.html",category:"Blender • Jewelry render",label:"Lumière",type:"ring",a:"#f5e7d9",b:"#deb8b5",text:"#6e4b55"},
+      {name:"Organic forms",page:"blender-organic-forms.html",category:"Blender • Material study",label:"Morph",type:"orb",a:"#e9d2ea",b:"#b8accf",text:"#554872"},
+      {name:"Product visualization",page:"blender-product-visualization.html",category:"Blender • Product render",label:"Atelier",type:"bottle",a:"#c8d8d4",b:"#f1ded2",text:"#526761"},
+      {name:"Glass & light",page:"blender-glass-light.html",category:"Blender • Lighting",label:"Glass",type:"arch",a:"#d6e7ea",b:"#d2c0df",text:"#57717d"},
+      {name:"Chrome reflections",page:"blender-chrome-reflections.html",category:"Blender • Objects",label:"Reflect",type:"ribbon",a:"#dad5e5",b:"#b9cbda",text:"#4c5b75"},
+      {name:"Beauty objects",page:"blender-beauty-objects.html",category:"Blender • CGI",label:"Studio 03",type:"tube",a:"#eacac4",b:"#f6e1e1",text:"#805866"}
     ];
     function esc(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;")}
     function artHTML(item,variant=0){
@@ -447,7 +447,7 @@
     three.forEach((item,i)=>{
       const b=document.createElement("button");b.className="video-card blender-video-card reveal";b.type="button";b.setAttribute("aria-label","Відкрити Blender-відео "+item.name);
       b.innerHTML=blenderVideoCoverHTML(item,i)+'<div class="project-meta"><div><h3>'+esc(item.name)+'</h3></div><span class="arrow" aria-hidden="true">↗</span></div>';
-      b.addEventListener("click",()=>openBlenderVideo(item,i));threeGrid.appendChild(b);
+      b.addEventListener("click",()=>item.page?window.location.assign(item.page):openBlenderVideo(item,i));threeGrid.appendChild(b);
     });
     const modal=document.getElementById("modal"),modalContent=document.getElementById("modalContent"),closeBtn=document.getElementById("closeModal"),backBtn=document.getElementById("backToPortfolio");
     let previousFocus=null;
