@@ -1,0 +1,65 @@
+name: Publish original Watermelon Royale video
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/ai-video/.watermelon-royale-parts/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  assemble-original:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out portfolio
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Assemble MP4 without changing quality and verify original
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import base64
+          import hashlib
+          from pathlib import Path
+          folder = Path("assets/ai-video/.watermelon-royale-parts")
+          target = Path("assets/ai-video/watermelon-royale-original.mp4")
+          parts = sorted(folder.glob("part-*.b64"))
+          if not parts and target.exists():
+              print("Original already assembled")
+              raise SystemExit(0)
+          if len(parts) != 56:
+              raise SystemExit(f"Expected 56 segments, found {len(parts)}")
+          digest = hashlib.sha256()
+          total = 0
+          with target.open("wb") as out:
+              for part in parts:
+                  chunk = base64.b64decode(part.read_text(encoding="ascii").strip(), validate=True)
+                  out.write(chunk)
+                  digest.update(chunk)
+                  total += len(chunk)
+          expected = "eb2a7b7d9263b84b6d6f47ca821ae5adea226ffa2675f0ba3c6c18946ce50dd7"
+          if total != 17087766 or digest.hexdigest() != expected:
+              target.unlink(missing_ok=True)
+              raise SystemExit(f"Source verification failed: bytes={total}, sha256={digest.hexdigest()}")
+          print(f"Verified original untouched MP4: {total} bytes, SHA256 {expected}")
+          PY
+
+      - name: Commit original and remove temporary transport segments
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f assets/ai-video/watermelon-royale-original.mp4
+          if [ -d assets/ai-video/.watermelon-royale-parts ]; then
+            git rm -r assets/ai-video/.watermelon-royale-parts
+          fi
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish full-quality original Watermelon Royale video"
+            git push origin HEAD:main
+          fi
