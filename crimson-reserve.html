@@ -37,7 +37,10 @@
   </header>
   <main class="viewer-main">
     <div class="viewer-player" id="playerArea">
-      <video id="film" controls playsinline preload="none" poster="assets/blender-video/crimson-reserve-cover.webp?v=20261124" aria-label="Crimson Reserve — 3D product visualization">Your browser does not support HTML5 video.</video>
+      <video id="film" controls playsinline preload="metadata" poster="assets/blender-video/crimson-reserve-cover.webp?v=20261124" aria-label="Crimson Reserve — 3D product visualization">
+        <source src="assets/blender-video/crimson-reserve.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
       <div class="media-error" role="status">
         This video is temporarily unavailable.
       </div>
@@ -46,39 +49,15 @@
   <script>
     const film = document.getElementById('film');
     const playerArea = document.getElementById('playerArea');
-    const partURLs = Array.from({length:54}, (_, i) =>
-      'assets/blender-video/crimson-reserve.part' + String(i).padStart(2, '0')
-    );
-    let videoObjectURL = null;
-    async function loadFilm() {
-      const buffers = new Array(partURLs.length);
-      for(let start=0; start<partURLs.length; start+=8) {
-        await Promise.all(partURLs.slice(start, start+8).map(async (url, offset) => {
-          const response = await fetch(url, {cache:'force-cache'});
-          if (!response.ok) throw new Error('Missing video segment: ' + url);
-          buffers[start+offset] = await response.arrayBuffer();
-        }));
-      }
-      const totalSize = buffers.reduce((total, part) => total + part.byteLength, 0);
-      if(totalSize !== 28076460) throw new Error('Incomplete video');
-      videoObjectURL = URL.createObjectURL(new Blob(buffers, {type:'video/mp4'}));
-      film.src = videoObjectURL;
-      film.load();
-      try { await film.play(); }
-      catch(e) {
-        if(e.name === 'NotAllowedError') {
-          film.muted = true;
-          film.play().catch(()=>{});
-        }
-      }
-    }
-    film.addEventListener('error', () => playerArea.classList.add('is-error'));
-    film.addEventListener('playing', () => playerArea.classList.remove('is-error'));
-    document.addEventListener('keydown', e => {if(e.key==='Escape') window.location.href='index.html#blender';});
-    window.addEventListener('pagehide', () => {if(videoObjectURL) URL.revokeObjectURL(videoObjectURL);});
-    loadFilm().catch(error => {
-      console.error(error);
+    const source = film.querySelector('source');
+    function videoFailed() {
       playerArea.classList.add('is-error');
+    }
+    film.addEventListener('error', videoFailed);
+    source.addEventListener('error', videoFailed);
+    film.addEventListener('playing', () => playerArea.classList.remove('is-error'));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') window.location.href = 'index.html#blender';
     });
   </script>
 </body>
