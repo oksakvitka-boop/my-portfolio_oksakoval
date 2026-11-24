@@ -46,7 +46,7 @@
   <script>
     const film = document.getElementById('film');
     const playerArea = document.getElementById('playerArea');
-    const partURLs = Array.from({length:182}, (_, i) =>
+    const partURLs = Array.from({length:54}, (_, i) =>
       'assets/blender-video/crimson-reserve.part' + String(i).padStart(2, '0')
     );
     let videoObjectURL = null;
@@ -60,7 +60,7 @@
         }));
       }
       const totalSize = buffers.reduce((total, part) => total + part.byteLength, 0);
-      if(totalSize !== 95394531) throw new Error('Incomplete video');
+      if(totalSize !== 28076460) throw new Error('Incomplete video');
       videoObjectURL = URL.createObjectURL(new Blob(buffers, {type:'video/mp4'}));
       film.src = videoObjectURL;
       film.load();
