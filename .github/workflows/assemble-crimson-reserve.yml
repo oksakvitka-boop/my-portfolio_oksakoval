@@ -1,0 +1,56 @@
+name: Publish Crimson Reserve MP4
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/assemble-crimson-reserve.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  assemble-crimson-reserve:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out portfolio
+        uses: actions/checkout@v4
+
+      - name: Reconstruct and verify full fast-start MP4
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          root = Path("assets/blender-video")
+          parts = [root / f"crimson-reserve.part{i:02d}" for i in range(54)]
+          missing = [str(p) for p in parts if not p.is_file()]
+          if missing:
+              raise SystemExit(f"Missing video segments: {missing}")
+          target = root / "crimson-reserve.mp4"
+          digest = hashlib.sha256()
+          size = 0
+          with target.open("wb") as out:
+              for part in parts:
+                  chunk = part.read_bytes()
+                  out.write(chunk)
+                  digest.update(chunk)
+                  size += len(chunk)
+          expected = "e3176695eba0f0afc3f01bdaab59aaf6e49b2589ffe38c576a309932ee9414b4"
+          if size != 28076460 or digest.hexdigest() != expected:
+              target.unlink(missing_ok=True)
+              raise SystemExit(f"Verification failed: size={size}, sha={digest.hexdigest()}")
+          print("Crimson Reserve original MP4 verified:", size, "bytes")
+          PY
+
+      - name: Publish one directly playable MP4
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/blender-video/crimson-reserve.mp4
+          git rm -f assets/blender-video/crimson-reserve.part{00..53}
+          git commit -m "Publish Crimson Reserve as a directly playable MP4"
+          git push origin HEAD:main
