@@ -37,8 +37,8 @@
   </header>
   <main class="viewer-main">
     <div class="viewer-player" id="playerArea">
-      <video id="film" controls playsinline autoplay preload="metadata" poster="assets/ai-video/where-the-light-leads-cover.webp" aria-label="Where the Light Leads — cinematic AI film">
-        <source src="assets/ai-video/where-the-light-leads.mp4" type="video/mp4">
+      <video id="film" controls playsinline autoplay preload="none" poster="assets/ai-video/where-the-light-leads-cover.webp" aria-label="Where the Light Leads — cinematic AI film">
+        
         Your browser does not support HTML5 video.
       </video>
       <div class="media-error" role="status">
@@ -46,27 +46,46 @@
       </div>
     </div>
   </main>
+  
   <script>
-    const film=document.getElementById('film');
-    const playerArea=document.getElementById('playerArea');
-    film.addEventListener('error',()=>playerArea.classList.add('is-error'));
-    // Some browsers report a missing video file only on its <source> element.
-    film.querySelector('source')?.addEventListener('error',()=>playerArea.classList.add('is-error'));
-    film.addEventListener('playing',()=>playerArea.classList.remove('is-error'));
-    document.addEventListener('keydown',(e)=>{
-      if(e.key==='Escape'){window.location.href='index.html#ai'}
-    });
-    async function startFilm() {
+    const film = document.getElementById('film');
+    const playerArea = document.getElementById('playerArea');
+    const filenames = Array.from({length:40}, (_, i) =>
+      'assets/ai-video/where-the-light-leads.part' + String(i).padStart(2, '0')
+    );
+    let videoBlobUrl = null;
+
+    async function loadVideo() {
+      const pieces = new Array(filenames.length);
+      for (let start = 0; start < filenames.length; start += 8) {
+        await Promise.all(filenames.slice(start, start + 8).map(async (url, offset) => {
+          const response = await fetch(url, {cache: 'force-cache'});
+          if (!response.ok) throw new Error('Video part unavailable: ' + url);
+          pieces[start + offset] = await response.arrayBuffer();
+        }));
+      }
+      videoBlobUrl = URL.createObjectURL(new Blob(pieces, {type: 'video/mp4'}));
+      film.src = videoBlobUrl;
+      film.load();
       try {
         await film.play();
       } catch (error) {
         if (error.name === 'NotAllowedError') {
           film.muted = true;
-          film.play().catch(() => {}); // Native controls also allow manual playback.
+          film.play().catch(() => {});
         }
       }
     }
-    startFilm();
+
+    film.addEventListener('error', () => playerArea.classList.add('is-error'));
+    film.addEventListener('playing', () => playerArea.classList.remove('is-error'));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') window.location.href = 'index.html#ai';
+    });
+    window.addEventListener('pagehide', () => {
+      if (videoBlobUrl) URL.revokeObjectURL(videoBlobUrl);
+    });
+    loadVideo().catch(() => playerArea.classList.add('is-error'));
   </script>
 </body>
 </html>
