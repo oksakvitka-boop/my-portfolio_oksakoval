@@ -1,7 +1,7 @@
-/* Inactive until the owner's real GA4 ID is set. */
+/* Portfolio GA4 analytics: starts only after visitor consent. */
 (() => {
 "use strict";
-const ID = ""; // Actual G-... measurement ID
+const ID = "G-6FSS6Z6XRL";
 if (!/^G-[A-Z0-9]+$/.test(ID) || window.top !== window.self) return;
 const key="my-portfolio_oksakoval:analytics-consent:v1", flag="ga-disable-"+ID;
 let active=false, loaded=false, project="";
