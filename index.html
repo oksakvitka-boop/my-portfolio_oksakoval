@@ -295,6 +295,14 @@
     @media(max-width:720px){.hero.hero-floral .hero-bottom{gap:14px}.hero-socials{right:17px;bottom:18px;gap:0}.hero-socials a{width:42px;height:42px}.hero-socials svg{width:23px;height:23px}}
   </style>
   <style>#portfolio-privacy-control,#portfolio-privacy-panel{display:none!important;visibility:hidden!important}</style>
+  <script>
+    // Retire the legacy privacy interface, including any delayed cached-script injection.
+    (() => {
+      const removeLegacyControls = () => document.querySelectorAll('#portfolio-privacy-control,#portfolio-privacy-panel').forEach(node => node.remove());
+      new MutationObserver(removeLegacyControls).observe(document.documentElement,{childList:true,subtree:true});
+      document.addEventListener('DOMContentLoaded',removeLegacyControls,{once:true});
+    })();
+  </script>
 </head>
 <body>
   <header class="site-header">
