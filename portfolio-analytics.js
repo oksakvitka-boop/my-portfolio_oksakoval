@@ -32,12 +32,13 @@ function disable(){
 const css=document.createElement("style");css.textContent="#portfolio-privacy-control{position:fixed;bottom:12px;right:12px;z-index:2147483000;font:12px Arial,sans-serif;color:#39252c;background:#fff8fa;border:1px solid #c7a4ae;border-radius:7px;padding:8px 12px;cursor:pointer} #portfolio-privacy-panel{position:fixed;right:12px;bottom:53px;z-index:2147483001;width:min(360px,calc(100vw - 24px));box-sizing:border-box;background:#fff8fa;color:#39252c;padding:17px;border:1px solid #c7a4ae;border-radius:10px;box-shadow:0 6px 24px #0002;font:14px/1.45 Arial,sans-serif;text-align:left} #portfolio-privacy-panel[hidden]{display:none!important} #portfolio-privacy-panel p{margin:8px 0 12px} #portfolio-privacy-panel button{font:inherit;padding:8px 11px;border:1px solid #a16b7b;border-radius:5px;background:#fff;color:#39252c;cursor:pointer;margin:4px 5px 0 0} #portfolio-privacy-panel a{color:#70354b;text-decoration:underline}";document.head.append(css);
 const button=document.createElement("button");button.id="portfolio-privacy-control";button.type="button";button.textContent="Налаштування приватності";button.setAttribute("aria-controls","portfolio-privacy-panel");
 const panel=document.createElement("section");panel.id="portfolio-privacy-panel";panel.setAttribute("aria-label","Налаштування аналітики");panel.innerHTML='<strong>Аналітика відвідувань</strong><p>За вашою згодою Google Analytics вимірює перегляди, дії на сайті, приблизне місто й країну, тип пристрою та джерело переходу. Рекламні cookies не використовуються. Відмова не обмежує доступ до портфоліо. Згоду можна змінити будь-коли.</p><p><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Політика конфіденційності Google</a></p><button type="button" data-choice="yes">Дозволити</button><button type="button" data-choice="no">Відмовитися</button>';
+panel.hidden=true;
 document.body.append(button,panel);
 function show(v){panel.hidden=!v;button.setAttribute("aria-expanded",String(v))}
 button.addEventListener("click",()=>show(panel.hidden));
 panel.addEventListener("click",e=>{const b=e.target.closest("button[data-choice]");if(!b)return;set(b.dataset.choice);b.dataset.choice==="yes"?enable():disable();show(false);button.focus()});
-const consent=get();show(consent!=="yes"&&consent!=="no");consent==="yes"?enable():disable();
-window.addEventListener("storage",e=>{if(e.key===key){e.newValue==="yes"?enable():disable();show(e.newValue===null)}});
+const consent=get();show(false);consent==="yes"?enable():disable();
+window.addEventListener("storage",e=>{if(e.key===key){e.newValue==="yes"?enable():disable();show(false)}});
 document.addEventListener("click",e=>{
  if(!(e.target instanceof Element))return;
  const card=e.target.closest(".project-card,.video-card");
